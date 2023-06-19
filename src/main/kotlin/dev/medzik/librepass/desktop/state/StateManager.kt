@@ -2,9 +2,7 @@ package dev.medzik.librepass.desktop.state
 
 import dev.medzik.librepass.desktop.gui.Controller
 import javafx.scene.Scene
-import java.io.IOException
 import java.util.*
-
 
 object StateManager {
     private var scene: Scene? = null

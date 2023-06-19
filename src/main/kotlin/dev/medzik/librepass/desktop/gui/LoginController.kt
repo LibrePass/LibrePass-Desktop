@@ -15,7 +15,7 @@ import javafx.scene.control.TextField
 import java.io.IOException
 import java.util.concurrent.CompletableFuture
 
-class LoginController {
+class LoginController : Controller {
 
     @FXML
     private lateinit var email: TextField
@@ -76,41 +76,10 @@ class LoginController {
 
             login.isDisable = false
         }
+    }
 
-
-//        try {
-//
-//
-////            // insert credentials into local database
-////            credentialsDao.insert(
-////                Credentials(
-////                    userId = credentials.userId,
-////                    email = email,
-////                    apiKey = credentials.apiKey,
-////                    publicKey = credentials.publicKey,
-////                    // Argon2id parameters
-////                    memory = argon2idParameters.memory,
-////                    iterations = argon2idParameters.iterations,
-////                    parallelism = argon2idParameters.parallelism,
-////                    version = argon2idParameters.version
-////                )
-////            )
-//
-////            // navigate to dashboard
-////            scope.launch(Dispatchers.Main) {
-////                navController.navigate(
-////                    screen = Screen.Dashboard,
-////                    arguments = listOf(
-////                        Argument.SecretKey to credentials.secretKey,
-////                        Argument.PrivateKey to credentials.privateKey
-////                    ),
-////                    disableBack = true
-////                )
-////            }
-//        } catch (e: Exception) {
-////            loading = false
-////
-////            e.handle(context, snackbarHostState)
-//        }
+    override fun onStart() {
+        email.clear()
+        password.clear()
     }
 }
