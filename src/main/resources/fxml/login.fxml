@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.LoginController">
+   <children>
+      <Label text="%login.title">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" prefHeight="24.0" prefWidth="231.0" promptText="%email" />
+      <PasswordField fx:id="password" prefHeight="24.0" prefWidth="231.0" promptText="%password" />
+      <Button fx:id="login" defaultButton="true" mnemonicParsing="false" onAction="#onLogin" prefHeight="30.0" prefWidth="111.0" text="%login" />
+      <Button mnemonicParsing="false" onAction="#onBack" prefHeight="32.0" prefWidth="111.0" text="%back" />
+   </children>
+</VBox>
