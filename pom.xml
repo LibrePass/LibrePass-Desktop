@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.medzik.librepass</groupId>
+    <artifactId>desktop</artifactId>
+    <version>1.0.0-alpha1</version>
+    <name>desktop</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.9.1</junit.version>
+
+        <javafx.version>17.0.2</javafx.version>
+        <librepass.api.version>0.1.0-SNAPSHOT-02</librepass.api.version>
+        <kotlin.version>1.8.22</kotlin.version>
+
+        <jmods.dir>${project.build.directory}/modules</jmods.dir>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>medzik</id>
+            <name>Medzik's Maven Repository</name>
+            <url>https://maven.medzik.dev/snapshots</url>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.medzik.librepass</groupId>
+            <artifactId>client</artifactId>
+            <version>${librepass.api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>17</jvmTarget>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <outputDirectory>${jmods.dir}</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jar</id>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeScope>runtime</includeScope>
+                            <outputDirectory>${jmods.dir}</outputDirectory>
+                            <excludeArtifactIds>
+                                password4j,
+                                commons-codec,
+<!--                                curve25519-java,-->
+                                kotlin-stdlib-common,
+                                annotations,
+                                okio-jvm,
+                                okhttp-jvm
+                            </excludeArtifactIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.moditect</groupId>
+                <artifactId>moditect-maven-plugin</artifactId>
+                <version>1.0.0.Final</version>
+                <executions>
+                    <execution>
+                        <id>add-module-infos</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-module-info</goal>
+                        </goals>
+                        <configuration>
+                            <overwriteExistingFiles>true</overwriteExistingFiles>
+                            <outputDirectory>${jmods.dir}</outputDirectory>
+                            <modules>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.password4j</groupId>
+                                        <artifactId>password4j</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module password4j {
+                                            requires org.slf4j;
+
+                                            exports com.password4j;
+                                            exports com.password4j.types;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>commons-codec</groupId>
+                                        <artifactId>commons-codec</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module org.apache.commons.codec {
+                                            exports org.apache.commons.codec;
+                                            exports org.apache.commons.codec.binary;
+                                            exports org.apache.commons.codec.cli;
+                                            exports org.apache.commons.codec.digest;
+                                            exports org.apache.commons.codec.language;
+                                            exports org.apache.commons.codec.net;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+<!--                                <module>-->
+<!--                                    <artifact>-->
+<!--                                        <groupId>org.whispersystems</groupId>-->
+<!--                                        <artifactId>curve25519-java</artifactId>-->
+<!--                                    </artifact>-->
+<!--                                    <moduleInfoSource>-->
+<!--                                        open module curve25519.java {-->
+<!--                                            exports org.whispersystems.curve25519;-->
+<!--                                            exports org.whispersystems.curve25519.java;-->
+<!--                                        }-->
+<!--                                    </moduleInfoSource>-->
+<!--                                </module>-->
+                                <module>
+                                    <artifact>
+                                        <groupId>com.squareup.okio</groupId>
+                                        <artifactId>okio-jvm</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module okio {
+                                            requires kotlin.stdlib;
+                                            requires java.logging;
+
+                                            exports okio;
+                                            exports okio.internal;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.squareup.okhttp3</groupId>
+                                        <artifactId>okhttp-jvm</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module okhttp3 {
+                                            requires kotlin.stdlib;
+                                            requires java.logging;
+                                            requires okio;
+
+                                            exports okhttp3;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>org.jetbrains</groupId>
+                                        <artifactId>annotations</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module org.jetbrains.annotations {
+                                            exports org.intellij.lang.annotations;
+                                            exports org.jetbrains.annotations;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                            </modules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <!-- Execution for Linux-->
+                    <execution>
+                        <id>jpackage-linux</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jpackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <name>LibrePass</name>
+                    <appVersion>${project.version}</appVersion>
+                    <vendor>LibrePass Team</vendor>
+                    <destination>target/dist</destination>
+                    <module>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App</module>
+                    <type>APP_IMAGE</type>
+
+                    <modulePaths>
+                        <modulePath>${jmods.dir}</modulePath>
+                    </modulePaths>
+
+                    <addModules>
+                        <module>dev.medzik.librepass.desktop</module>
+                    </addModules>
+
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <executions>
+                    <execution>
+                        <!-- Default configuration for running with: mvn clean javafx:run -->
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App
+                            </mainClass>
+                            <launcher>app</launcher>
+                            <jlinkZipName>app</jlinkZipName>
+                            <jlinkImageName>app</jlinkImageName>
+                            <noManPages>true</noManPages>
+                            <stripDebug>true</stripDebug>
+                            <noHeaderFiles>true</noHeaderFiles>
+
+                            <jmodsPath>${jmods.dir}</jmodsPath>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

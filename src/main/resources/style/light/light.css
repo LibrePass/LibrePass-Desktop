@@ -1,0 +1,44 @@
+.root {
+    -fx-accent: #9a4500;
+    -fx-focus-color: -fx-accent;
+}
+
+/*Button*/
+.button {
+    -fx-background-color: #d9d9d9;
+    -fx-background-radius: 8px;
+    -fx-background-insets: 0px 0px 0px 0px;
+}
+
+.button:hover {
+    -fx-background-color: #BBBBBB;
+}
+
+.button:pressed {
+    -fx-background-color: #999999;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+}
+.button:default:hover:pressed {
+    -fx-background-color: derive(-fx-accent,-10%);
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-accent,20%);
+}
+
+/*Textfield*/
+.text-field {
+    -fx-background-color: #fff;
+    -fx-border-color: #d7d7d7;
+    -fx-border-radius: 3px;
+}
+
+.text-field:focused {
+    -fx-border-color: -fx-accent;
+    -fx-border-radius: 3px;
+}

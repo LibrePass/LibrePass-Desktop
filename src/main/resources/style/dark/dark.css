@@ -1,0 +1,54 @@
+.root {
+    -fx-accent: #fdb58c;
+    -fx-focus-color: -fx-accent;
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: white;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+/*Button*/
+.button {
+    -fx-background-color: #343434;
+    -fx-background-radius: 8px;
+    -fx-background-insets: 0px 0px 0px 0px;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #5b5b5b;
+}
+
+.button:pressed {
+    -fx-background-color: #464646;
+    -fx-text-fill: #e1e1e1;
+}
+
+.button:default {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: #000000;
+}
+.button:default:hover:pressed {
+    -fx-background-color: derive(-fx-accent,-10%);
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-accent,20%);
+}
+
+/*Textfield*/
+.text-field {
+    -fx-background-color: #464646;
+    -fx-border-color: #5d5d5d;
+    -fx-border-radius: 3px;
+
+    -fx-text-fill: white; /* Kolor tekstu */
+    -fx-caret-color: white; /* Kolor kursora */
+}
+
+.text-field:focused {
+    -fx-border-color: -fx-accent;
+    -fx-border-radius: 3px;
+}
