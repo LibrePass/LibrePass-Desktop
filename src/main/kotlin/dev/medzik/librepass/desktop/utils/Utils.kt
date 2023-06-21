@@ -4,7 +4,6 @@ import javafx.application.Platform
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
 
-
 object Utils {
     fun dialog(title: String?, text: String?, type: AlertType?) {
         Platform.runLater {
