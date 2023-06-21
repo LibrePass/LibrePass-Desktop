@@ -5,7 +5,6 @@ import dev.medzik.librepass.client.utils.Cryptography.computePasswordHash
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
-
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
@@ -45,12 +44,11 @@ class LoginController : Controller {
 
     @FXML
     fun onLogin() {
-        submit(email.text,password.text)
+        submit(email.text, password.text)
     }
 
     private fun submit(email: String, password: String) {
         CompletableFuture.runAsync {
-
             login.isDisable = true
             try {
                 // get argon2id parameters
@@ -69,9 +67,9 @@ class LoginController : Controller {
                     passwordHash = passwordHash
                 )
 
-                Utils.dialog("Logged in!",credentials.userId.toString(),Alert.AlertType.INFORMATION)
+                Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION)
             } catch (e: IOException) {
-                Utils.dialog("Error!",e.message,Alert.AlertType.ERROR)
+                Utils.dialog("Error!", e.message, Alert.AlertType.ERROR)
             }
 
             login.isDisable = false

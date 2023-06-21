@@ -8,7 +8,7 @@ object StateManager {
     private var scene: Scene? = null
     private var currentState: State? = null
 
-    fun init(scene: Scene?,resources: ResourceBundle) {
+    fun init(scene: Scene?, resources: ResourceBundle) {
         StateManager.scene = scene
         for (state in State.values())
             state.load(resources)
