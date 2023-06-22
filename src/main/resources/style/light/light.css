@@ -42,3 +42,28 @@
     -fx-border-color: -fx-accent;
     -fx-border-radius: 3px;
 }
+
+/** Switch */
+.toggle-switch .thumb {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 10px;
+}
+
+.toggle-switch:selected .thumb-area {
+    -fx-background-color: -fx-accent;
+}
+
+.toggle-switch .track {
+    -fx-background-color: #eeeeee;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 10px;
+}
+
+.toggle-switch .track:selected {
+    -fx-background-color: derive(-fx-accent, 20%);
+}
+
+.toggle-switch .thumb .thumb-text {
+    -fx-text-fill: black;
+}

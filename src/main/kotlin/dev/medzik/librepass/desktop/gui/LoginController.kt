@@ -1,20 +1,21 @@
 package dev.medzik.librepass.desktop.gui
 
 import dev.medzik.librepass.client.api.v1.AuthClient
+import dev.medzik.librepass.client.errors.ApiException
 import dev.medzik.librepass.client.utils.Cryptography.computePasswordHash
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
+import javafx.application.Platform
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
-import java.io.IOException
 import java.util.concurrent.CompletableFuture
 
-class LoginController : Controller {
+class LoginController : Controller() {
 
     @FXML
     private lateinit var email: TextField
@@ -28,7 +29,7 @@ class LoginController : Controller {
     private val authClient = AuthClient()
 
     @FXML
-    fun initialize() {
+    private fun initialize() {
         val listener = ChangeListener<String> { _, _, _ ->
             login.isDisable = !email.text.contains("@") || password.text.isEmpty()
         }
@@ -40,6 +41,9 @@ class LoginController : Controller {
     @FXML
     fun onBack() {
         StateManager.setState(State.WELCOME)
+
+        email.clear()
+        password.clear()
     }
 
     @FXML
@@ -67,17 +71,12 @@ class LoginController : Controller {
                     passwordHash = passwordHash
                 )
 
-                Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION)
-            } catch (e: IOException) {
-                Utils.dialog("Error!", e.message, Alert.AlertType.ERROR)
+                Platform.runLater { Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION) }
+            } catch (e: ApiException) {
+                Platform.runLater { Utils.dialog("Error!", e.message, Alert.AlertType.ERROR) }
             }
 
             login.isDisable = false
         }
-    }
-
-    override fun onStart() {
-        email.clear()
-        password.clear()
     }
 }

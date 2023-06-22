@@ -5,10 +5,10 @@ import javafx.scene.Scene
 import java.util.*
 
 object StateManager {
-    private var scene: Scene? = null
-    private var currentState: State? = null
+    private lateinit var scene: Scene
+    private lateinit var currentState: State
 
-    fun init(scene: Scene?, resources: ResourceBundle) {
+    fun init(scene: Scene, resources: ResourceBundle) {
         StateManager.scene = scene
         for (state in State.values())
             state.load(resources)
@@ -20,7 +20,7 @@ object StateManager {
 
     fun applyState(state: State) {
         currentState = state
-        scene!!.root = state.rootPane
+        scene.root = state.rootPane
 
         val controller = state.getController<Any>()
         if (controller is Controller)
@@ -31,7 +31,7 @@ object StateManager {
         applyState(getState(state))
     }
 
-    fun getCurrentState(): State? {
+    fun getCurrentState(): State {
         return currentState
     }
 }
