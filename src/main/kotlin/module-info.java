@@ -5,6 +5,7 @@ module dev.medzik.librepass.desktop {
     requires kotlin.stdlib;
     requires dev.medzik.librepass.types;
     requires dev.medzik.libcrypto;
+    requires org.controlsfx.controls;
 
     exports dev.medzik.librepass.desktop;
     exports dev.medzik.librepass.desktop.gui;

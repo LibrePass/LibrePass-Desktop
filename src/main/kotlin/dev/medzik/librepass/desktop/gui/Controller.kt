@@ -1,5 +1,6 @@
 package dev.medzik.librepass.desktop.gui
 
-interface Controller {
-    fun onStart()
+open class Controller {
+    open fun onStart() {}
+    open fun onStop() {}
 }
