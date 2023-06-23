@@ -132,7 +132,25 @@
                                 kotlin-stdlib-common,
                                 annotations,
                                 okio-jvm,
-                                okhttp-jvm
+                                okhttp-jvm,
+
+                                error_prone_annotations,
+                                listenablefuture,
+                                grpc-context,
+                                joda-time,
+                                httpclient,
+                                httpcore,
+                                commons-logging,
+                                protobuf-java,
+                                j2objc-annotations,
+                                opencensus-api,
+                                opencensus-contrib-http-util,
+                                jsr305,
+                                checker-compat-qual,
+                                tink,
+                                google-http-client,
+                                guava,
+                                failureaccess
                             </excludeArtifactIds>
                         </configuration>
                     </execution>
@@ -238,6 +256,333 @@
                                         }
                                     </moduleInfoSource>
                                 </module>
+                                <module>
+                                    <artifact>
+                                    <groupId>com.google.errorprone</groupId>
+                                    <artifactId>error_prone_annotations</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module com.google.errorprone.annotations {
+                                            requires java.compiler;
+
+                                            exports com.google.errorprone.annotations;
+                                            exports com.google.errorprone.annotations.concurrent;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.guava</groupId>
+                                        <artifactId>listenablefuture</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        module listenablefuture { }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>io.grpc</groupId>
+                                        <artifactId>grpc-context</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module grpc.context {
+                                            requires java.logging;
+
+                                            exports io.grpc;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>joda-time</groupId>
+                                        <artifactId>joda-time</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module org.joda.time {
+                                            exports org.joda.time;
+                                            exports org.joda.time.base;
+                                            exports org.joda.time.chrono;
+                                            exports org.joda.time.convert;
+                                            exports org.joda.time.field;
+                                            exports org.joda.time.format;
+                                            exports org.joda.time.tz;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>org.apache.httpcomponents</groupId>
+                                        <artifactId>httpclient</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module org.apache.httpcomponents.httpclient {
+                                            requires commons.logging;
+                                            requires java.naming;
+                                            requires java.security.jgss;
+                                            requires org.apache.commons.codec;
+                                            requires org.apache.httpcomponents.httpcore;
+
+                                            exports org.apache.http.auth;
+                                            exports org.apache.http.client;
+                                            exports org.apache.http.conn;
+                                            exports org.apache.http.cookie;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>org.apache.httpcomponents</groupId>
+                                        <artifactId>httpcore</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module org.apache.httpcomponents.httpcore {
+                                            exports org.apache.http.annotation;
+                                            exports org.apache.http.concurrent;
+                                            exports org.apache.http.config;
+                                            exports org.apache.http.entity;
+                                            exports org.apache.http.impl;
+                                            exports org.apache.http.io;
+                                            exports org.apache.http.message;
+                                            exports org.apache.http.params;
+                                            exports org.apache.http.pool;
+                                            exports org.apache.http.protocol;
+                                            exports org.apache.http.ssl;
+                                            exports org.apache.http.util;
+                                            exports org.apache.http;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>commons-logging</groupId>
+                                        <artifactId>commons-logging</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module commons.logging {
+                                            requires java.logging;
+
+                                            exports org.apache.commons.logging;
+                                            exports org.apache.commons.logging.impl;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.protobuf</groupId>
+                                        <artifactId>protobuf-java</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module com.google.protobuf {
+                                            requires java.logging;
+                                            requires jdk.unsupported;
+
+                                            exports com.google.protobuf;
+                                            exports com.google.protobuf.compiler;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.j2objc</groupId>
+                                        <artifactId>j2objc-annotations</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module j2objc.annotations {
+                                            exports com.google.j2objc.annotations;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.j2objc</groupId>
+                                        <artifactId>j2objc-annotations</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module j2objc.annotations {
+                                            exports com.google.j2objc.annotations;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>io.opencensus</groupId>
+                                        <artifactId>opencensus-api</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module opencensus.api {
+                                            requires grpc.context;
+                                            requires java.logging;
+                                            requires jsr305;
+
+                                            exports io.opencensus.common;
+                                            exports io.opencensus.internal;
+                                            exports io.opencensus.metrics;
+                                            exports io.opencensus.resource;
+                                            exports io.opencensus.stats;
+                                            exports io.opencensus.tags;
+                                            exports io.opencensus.trace;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>io.opencensus</groupId>
+                                        <artifactId>opencensus-contrib-http-util</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module opencensus.contrib.http.util {
+                                            requires com.google.common;
+                                            requires jsr305;
+                                            requires opencensus.api;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>org.checkerframework</groupId>
+                                        <artifactId>checker-compat-qual</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module org.checkerframework.checker.qual {
+                                        exports org.checkerframework.checker.nullness.compatqual;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.code.findbugs</groupId>
+                                        <artifactId>jsr305</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module jsr305 {
+                                            exports javax.annotation;
+                                            exports javax.annotation.concurrent;
+                                            exports javax.annotation.meta;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>org.checkerframework</groupId>
+                                        <artifactId>checker-compat-qual</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module org.checkerframework.checker.qual {
+                                            exports org.checkerframework.checker.nullness.compatqual;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.crypto.tink</groupId>
+                                        <artifactId>tink</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module com.google.crypto.tink {
+                                            requires com.google.api.client;
+                                            requires com.google.errorprone.annotations;
+                                            requires com.google.gson;
+                                            requires com.google.protobuf;
+                                            requires java.logging;
+                                            requires jsr305;
+                                            requires org.joda.time;
+
+                                            exports com.google.crypto.tink;
+                                            exports com.google.crypto.tink.aead;
+                                            exports com.google.crypto.tink.annotations;
+                                            exports com.google.crypto.tink.config;
+                                            exports com.google.crypto.tink.daead;
+                                            exports com.google.crypto.tink.hybrid;
+                                            exports com.google.crypto.tink.internal;
+                                            exports com.google.crypto.tink.jwt;
+                                            exports com.google.crypto.tink.mac;
+                                            exports com.google.crypto.tink.monitoring;
+                                            exports com.google.crypto.tink.prf;
+                                            exports com.google.crypto.tink.proto;
+                                            exports com.google.crypto.tink.signature;
+                                            exports com.google.crypto.tink.streamingaead;
+                                            exports com.google.crypto.tink.subtle;
+                                            exports com.google.crypto.tink.tinkkey;
+                                            exports com.google.crypto.tink.util;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.http-client</groupId>
+                                        <artifactId>google-http-client</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module com.google.api.client{
+                                            requires com.google.common;
+                                            requires j2objc.annotations;
+                                            requires java.logging;
+                                            requires jsr305;
+                                            requires opencensus.api;
+                                            requires opencensus.contrib.http.util;
+                                            requires org.apache.httpcomponents.httpclient;
+                                            requires org.apache.httpcomponents.httpcore;
+
+                                            exports com.google.api.client.http;
+                                            exports com.google.api.client.http.apache;
+                                            exports com.google.api.client.http.javanet;
+                                            exports com.google.api.client.http.json;
+                                            exports com.google.api.client.json;
+                                            exports com.google.api.client.json.rpc2;
+                                            exports com.google.api.client.json.webtoken;
+                                            exports com.google.api.client.util;
+                                            exports com.google.api.client.util.escape;
+                                            exports com.google.api.client.util.store;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.guava</groupId>
+                                        <artifactId>guava</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module com.google.common {
+                                            requires com.google.errorprone.annotations;
+                                            requires failureaccess;
+                                            requires j2objc.annotations;
+                                            requires java.logging;
+                                            requires jdk.unsupported;
+                                            requires jsr305;
+                                            requires org.checkerframework.checker.qual;
+
+                                            exports com.google.common.annotations;
+                                            exports com.google.common.base;
+                                            exports com.google.common.base.internal;
+                                            exports com.google.common.cache;
+                                            exports com.google.common.collect;
+                                            exports com.google.common.escape;
+                                            exports com.google.common.eventbus;
+                                            exports com.google.common.graph;
+                                            exports com.google.common.hash;
+                                            exports com.google.common.html;
+                                            exports com.google.common.io;
+                                            exports com.google.common.math;
+                                            exports com.google.common.net;
+                                            exports com.google.common.primitives;
+                                            exports com.google.common.reflect;
+                                            exports com.google.common.util.concurrent;
+                                            exports com.google.common.xml;
+                                            exports com.google.thirdparty.publicsuffix;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>com.google.guava</groupId>
+                                        <artifactId>failureaccess</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module failureaccess {
+                                            exports com.google.common.util.concurrent.internal;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
                             </modules>
                         </configuration>
                     </execution>
@@ -291,12 +636,19 @@
                         <configuration>
                             <mainClass>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App
                             </mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <launcher>librepass</launcher>
+                            <jlinkZipName>librepass-${project.version}</jlinkZipName>
+                            <jlinkImageName>librepass</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
+                            <options>
+                                <option>-Xmx200M</option>
+                                <option>-XX:MaxRAM=500M</option>
+                                <option>-Xms50M</option>
+                                <option>-XX:+UseCompressedOops</option>
+                                <option>-XX:+UseG1GC</option>
+                            </options>
 
                             <jmodsPath>${jmods.dir}</jmodsPath>
                         </configuration>

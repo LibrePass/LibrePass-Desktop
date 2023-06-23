@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.WelcomeController">
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="671.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -21,7 +20,7 @@
                <Font size="15.0" />
             </font>
          </Label>
-         <Button fx:id="register" defaultButton="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" text="%register" />
+         <Button fx:id="register" defaultButton="true" mnemonicParsing="false" onAction="#onRegister" prefHeight="30.0" prefWidth="115.0" text="%register" />
          <Button fx:id="login" mnemonicParsing="false" onAction="#onLogin" prefHeight="32.0" prefWidth="115.0" text="%login" />
       </VBox>
       <ToggleSwitch fx:id="themeSwitch" text="%light" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
