@@ -44,4 +44,9 @@ class WelcomeController : Controller(), Initializable {
     fun onLogin() {
         StateManager.setState(State.LOGIN)
     }
+
+    @FXML
+    fun onRegister() {
+        StateManager.setState(State.REGISTER)
+    }
 }

@@ -7,6 +7,10 @@ module dev.medzik.librepass.desktop {
     requires dev.medzik.libcrypto;
     requires org.controlsfx.controls;
 
+    //fix ssl handshake error
+    requires jdk.crypto.ec;
+    requires jdk.crypto.cryptoki;
+
     exports dev.medzik.librepass.desktop;
     exports dev.medzik.librepass.desktop.gui;
 
