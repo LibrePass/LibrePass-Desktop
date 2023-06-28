@@ -13,6 +13,7 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
+import java.util.concurrent.CompletableFuture
 
 class LoginController : Controller() {
 
@@ -51,33 +52,32 @@ class LoginController : Controller() {
     }
 
     private fun submit(email: String, password: String) {
-        // CompletableFuture.runAsync {
-        login.isDisable = true
-        try {
-            // get argon2id parameters
-            val argon2idParameters = authClient.getUserArgon2idParameters(email)
+        CompletableFuture.runAsync {
+            login.isDisable = true
+            try {
+                val preLogin = authClient.preLogin(email)
 
-            // compute base password hash
-            val passwordHash = computePasswordHash(
-                password = password,
-                email = email,
-                parameters = argon2idParameters
-            )
+                // compute base password hash
+                val passwordHash = computePasswordHash(
+                    password = password,
+                    email = email,
+                    argon2Function = preLogin.toArgon2()
+                )
 
-            // authenticate user and get credentials
-            val credentials = authClient.login(
-                email = email,
-                passwordHash = passwordHash
-            )
+                // authenticate user and get credentials
+                val credentials = authClient.login(
+                    email = email,
+                    passwordHash = passwordHash
+                )
 
-            Platform.runLater { Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION) }
-        } catch (e: ApiException) {
-            Platform.runLater { Utils.dialog("Error!", e.message, Alert.AlertType.ERROR) }
-        } catch (e: Exception) {
-            e.printStackTrace()
+                Platform.runLater { Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION) }
+            } catch (e: ApiException) {
+                Platform.runLater { Utils.dialog("Error!", e.message, Alert.AlertType.ERROR) }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            login.isDisable = false
         }
-
-        login.isDisable = false
-        // }
     }
 }

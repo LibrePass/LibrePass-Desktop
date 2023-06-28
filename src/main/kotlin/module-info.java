@@ -3,7 +3,7 @@ module dev.medzik.librepass.desktop {
     requires javafx.fxml;
     requires dev.medzik.librepass.client;
     requires kotlin.stdlib;
-    requires dev.medzik.librepass.types;
+    requires dev.medzik.librepass.shared;
     requires dev.medzik.libcrypto;
     requires org.controlsfx.controls;
 
