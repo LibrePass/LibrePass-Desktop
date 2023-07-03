@@ -128,29 +128,11 @@
                             <excludeArtifactIds>
                                 password4j,
                                 commons-codec,
-<!--                                curve25519-java,-->
+                                x25519,
                                 kotlin-stdlib-common,
                                 annotations,
                                 okio-jvm,
                                 okhttp-jvm,
-
-                                error_prone_annotations,
-                                listenablefuture,
-                                grpc-context,
-                                joda-time,
-                                httpclient,
-                                httpcore,
-                                commons-logging,
-                                protobuf-java,
-                                j2objc-annotations,
-                                opencensus-api,
-                                opencensus-contrib-http-util,
-                                jsr305,
-                                checker-compat-qual,
-                                tink,
-                                google-http-client,
-                                guava,
-                                failureaccess
                             </excludeArtifactIds>
                         </configuration>
                     </execution>
