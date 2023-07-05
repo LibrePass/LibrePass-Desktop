@@ -73,8 +73,6 @@ class LoginController : Controller() {
                 Platform.runLater { Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION) }
             } catch (e: ApiException) {
                 Platform.runLater { Utils.dialog("Error!", e.message, Alert.AlertType.ERROR) }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
 
             login.isDisable = false
