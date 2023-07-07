@@ -14,7 +14,7 @@
         <junit.version>5.9.1</junit.version>
 
         <javafx.version>17.0.2</javafx.version>
-        <librepass.api.version>0.1.0-SNAPSHOT-03</librepass.api.version>
+        <librepass.api.version>0.1.0-SNAPSHOT-04</librepass.api.version>
         <kotlin.version>1.8.22</kotlin.version>
 
         <jmods.dir>${project.build.directory}/modules</jmods.dir>
