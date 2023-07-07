@@ -1,12 +1,17 @@
 package dev.medzik.librepass.desktop.gui
 
+import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
+import dev.medzik.librepass.desktop.utils.Utils
+import javafx.application.Platform
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
+import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
+import java.util.concurrent.CompletableFuture
 
 class RegisterController {
 
@@ -24,6 +29,8 @@ class RegisterController {
 
     @FXML
     private lateinit var retypePassword: PasswordField
+
+    private val authClient = AuthClient()
 
     @FXML
     private fun initialize() {
@@ -46,7 +53,15 @@ class RegisterController {
         hint.clear()
     }
 
+    private fun submit(email: String, password: String) {
+        CompletableFuture.runAsync {
+            authClient.register(email, password)
+            Platform.runLater { Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION) }
+        }
+    }
+
     @FXML
     fun onRegister() {
+        submit(email.text, password.text)
     }
 }

@@ -1,6 +1,6 @@
 package dev.medzik.librepass.desktop.gui
 
-import dev.medzik.librepass.client.api.v1.AuthClient
+import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.client.errors.ApiException
 import dev.medzik.librepass.client.utils.Cryptography.computePasswordHash
 import dev.medzik.librepass.desktop.state.State
