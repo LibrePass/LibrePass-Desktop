@@ -53,15 +53,15 @@ class RegisterController {
         hint.clear()
     }
 
-    private fun submit(email: String, password: String) {
+    private fun submit(email: String, password: String, passwordHint: String) {
         CompletableFuture.runAsync {
-            authClient.register(email, password)
+            authClient.register(email, password, passwordHint)
             Platform.runLater { Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION) }
         }
     }
 
     @FXML
     fun onRegister() {
-        submit(email.text, password.text)
+        submit(email.text, password.text, hint.text)
     }
 }
