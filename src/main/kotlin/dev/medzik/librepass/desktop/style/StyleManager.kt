@@ -38,8 +38,4 @@ object StyleManager {
     fun reloadStyle() {
         for (scene in trackedScenes) loadStyle(scene)
     }
-
-    fun getStyle(): Style {
-        return style
-    }
 }
