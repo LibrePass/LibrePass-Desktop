@@ -4,7 +4,6 @@ import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
-import javafx.application.Platform
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
@@ -56,7 +55,7 @@ class RegisterController {
     private fun submit(email: String, password: String, passwordHint: String) {
         CompletableFuture.runAsync {
             authClient.register(email, password, passwordHint)
-            Platform.runLater { Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION) }
+            Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION)
         }
     }
 

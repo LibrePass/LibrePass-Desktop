@@ -14,7 +14,7 @@ class App : Application() {
     override fun start(stage: Stage) {
         val scene = Scene(Pane(), 640.0, 480.0)
 
-        stage.title = "LibrePass"t co
+        stage.title = "LibrePass"
         stage.scene = scene
         stage.icons.add(Image(App::class.java.getResourceAsStream("/img/logo.png")))
 
