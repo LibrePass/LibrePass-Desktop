@@ -6,7 +6,6 @@ import dev.medzik.librepass.client.utils.Cryptography.computePasswordHash
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
-import javafx.application.Platform
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
@@ -70,9 +69,9 @@ class LoginController : Controller() {
                     passwordHash = passwordHash
                 )
 
-                Platform.runLater { Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION) }
+                Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION)
             } catch (e: ApiException) {
-                Platform.runLater { Utils.dialog("Error!", e.message, Alert.AlertType.ERROR) }
+                Utils.dialog("Error!", e.message, Alert.AlertType.ERROR)
             }
 
             login.isDisable = false
