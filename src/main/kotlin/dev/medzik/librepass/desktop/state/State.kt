@@ -6,8 +6,9 @@ import java.util.*
 
 enum class State(private val fxml: String) {
     WELCOME("/fxml/welcome.fxml"),
-    LOGIN("/fxml/login.fxml"),
-    REGISTER("/fxml/register.fxml");
+    LOGIN("/fxml/auth/login.fxml"),
+    REGISTER("/fxml/auth/register.fxml"),
+    DASHBOARD("/fxml/dashboard/dashboard.fxml");
 
     private lateinit var fxmlLoader: FXMLLoader
     lateinit var rootPane: Pane

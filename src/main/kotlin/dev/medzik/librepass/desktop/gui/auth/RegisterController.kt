@@ -1,4 +1,4 @@
-package dev.medzik.librepass.desktop.gui
+package dev.medzik.librepass.desktop.gui.auth
 
 import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.desktop.state.State
