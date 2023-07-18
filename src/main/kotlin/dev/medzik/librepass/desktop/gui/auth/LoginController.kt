@@ -1,8 +1,10 @@
-package dev.medzik.librepass.desktop.gui
+package dev.medzik.librepass.desktop.gui.auth
 
 import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.client.errors.ApiException
 import dev.medzik.librepass.client.utils.Cryptography.computePasswordHash
+import dev.medzik.librepass.desktop.gui.Controller
+import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
@@ -50,31 +52,33 @@ class LoginController : Controller() {
         submit(email.text, password.text)
     }
 
-    private fun submit(email: String, password: String) {
-        CompletableFuture.runAsync {
-            login.isDisable = true
-            try {
-                val preLogin = authClient.preLogin(email)
+    private fun submit(email: String, password: String) = CompletableFuture.runAsync {
+        login.isDisable = true
+        try {
+            val preLogin = authClient.preLogin(email)
 
-                // compute base password hash
-                val passwordHash = computePasswordHash(
-                    password = password,
-                    email = email,
-                    argon2Function = preLogin.toArgon2()
-                )
+            // compute base password hash
+            val passwordHash = computePasswordHash(
+                password = password,
+                email = email,
+                argon2Function = preLogin.toArgon2()
+            )
 
-                // authenticate user and get credentials
-                val credentials = authClient.login(
-                    email = email,
-                    passwordHash = passwordHash
-                )
+            // authenticate user and get credentials
+            val credentials = authClient.login(
+                email = email,
+                passwordHash = passwordHash
+            )
 
-                Utils.dialog("Logged in!", credentials.userId.toString(), Alert.AlertType.INFORMATION)
-            } catch (e: ApiException) {
-                Utils.dialog("Error!", e.message, Alert.AlertType.ERROR)
-            }
+            val state = StateManager.getState(State.DASHBOARD)
+            val controller = state.getController<DashboardController>();
+            controller.credentials = credentials
+            StateManager.applyState(state);
 
-            login.isDisable = false
+        } catch (e: ApiException) {
+            Utils.dialog("Error!", e.message, Alert.AlertType.ERROR)
         }
+
+        login.isDisable = false
     }
 }

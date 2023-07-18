@@ -12,7 +12,7 @@ import java.util.*
 
 class App : Application() {
     override fun start(stage: Stage) {
-        val scene = Scene(Pane(), 640.0, 480.0)
+        val scene = Scene(Pane(), 1024.0, 576.0)
 
         stage.title = "LibrePass"
         stage.scene = scene
