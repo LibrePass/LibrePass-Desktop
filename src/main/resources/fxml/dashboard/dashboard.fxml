@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
+   <top>
+      <fx:include source="menu.fxml" />
+   </top>
    <left>
-      <ListView fx:id="cipherList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <GridPane BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints fillHeight="false" maxHeight="39.0" minHeight="10.0" prefHeight="39.0" />
+         </rowConstraints>
+         <children>
+            <ListView fx:id="cipherList" cacheShape="false" centerShape="false" prefHeight="445.0" prefWidth="250.0" scaleShape="false" />
+            <HBox spacing="5.0" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+               <children>
+                  <Button lineSpacing="1.0" mnemonicParsing="false" text="Add Cipher" />
+                  <Button mnemonicParsing="false" text="Delete Cipher" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
    </left>
    <center>
-      <VBox fx:id="mainPanel" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+      <VBox fx:id="mainPanel" prefHeight="455.0" prefWidth="509.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

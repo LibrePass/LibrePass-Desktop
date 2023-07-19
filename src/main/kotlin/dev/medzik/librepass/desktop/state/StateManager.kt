@@ -1,12 +1,13 @@
 package dev.medzik.librepass.desktop.state
 
 import dev.medzik.librepass.desktop.gui.Controller
+import javafx.application.Platform
 import javafx.scene.Scene
 import java.util.*
 
 object StateManager {
     private lateinit var scene: Scene
-    private lateinit var currentState: State
+    private var currentState: State? = null
 
     fun init(scene: Scene, resources: ResourceBundle) {
         StateManager.scene = scene
@@ -18,7 +19,13 @@ object StateManager {
         return state
     }
 
-    fun applyState(state: State) {
+    fun applyState(state: State) = Platform.runLater {
+        if (currentState != null) {
+            val currentController = currentState!!.getController<Any>()
+            if (currentController is Controller)
+                currentController.onStop()
+        }
+
         currentState = state
         scene.root = state.rootPane
 
@@ -32,6 +39,6 @@ object StateManager {
     }
 
     fun getCurrentState(): State {
-        return currentState
+        return currentState!!
     }
 }

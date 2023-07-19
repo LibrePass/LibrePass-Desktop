@@ -42,9 +42,6 @@ class LoginController : Controller() {
     @FXML
     fun onBack() {
         StateManager.setState(State.WELCOME)
-
-        email.clear()
-        password.clear()
     }
 
     @FXML
@@ -71,14 +68,18 @@ class LoginController : Controller() {
             )
 
             val state = StateManager.getState(State.DASHBOARD)
-            val controller = state.getController<DashboardController>();
+            val controller = state.getController<DashboardController>()
             controller.credentials = credentials
-            StateManager.applyState(state);
-
+            StateManager.applyState(state)
         } catch (e: ApiException) {
             Utils.dialog("Error!", e.message, Alert.AlertType.ERROR)
         }
 
         login.isDisable = false
+    }
+
+    override fun onStop() {
+        email.clear()
+        password.clear()
     }
 }
