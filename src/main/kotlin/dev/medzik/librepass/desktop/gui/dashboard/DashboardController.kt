@@ -3,35 +3,30 @@ package dev.medzik.librepass.desktop.gui.dashboard
 import dev.medzik.librepass.client.api.CipherClient
 import dev.medzik.librepass.client.api.UserCredentials
 import dev.medzik.librepass.desktop.gui.Controller
-import dev.medzik.librepass.desktop.gui.components.CipherCard
+import dev.medzik.librepass.desktop.gui.components.CipherListItem
 import dev.medzik.librepass.types.cipher.Cipher
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
-import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.VBox
 
-open class DashboardController : Controller() {
+class DashboardController : Controller() {
 
     lateinit var credentials: UserCredentials
 
     private lateinit var cipherClient: CipherClient
 
     @FXML
-    private lateinit var cipherList: ListView<AnchorPane>
+    lateinit var cipherList: ListView<CipherListItem>
 
     @FXML
-    private lateinit var mainPanel: VBox
+    lateinit var mainPanel: VBox
+
+    private val list = FXCollections.observableArrayList<CipherListItem>()
 
     @FXML
     private fun initialize() {
-//        cipherList.setCellFactory {
-//            object : ListCell<CipherCard?>() {
-//                override fun updateItem(item: CipherCard?, empty: Boolean) {
-//                    super.updateItem(item, empty)
-//                    graphic = item;
-//                }
-//            }
-//        }
+        cipherList.items = list
     }
 
     override fun onStart() {
@@ -40,12 +35,16 @@ open class DashboardController : Controller() {
         val ciphersResponse = cipherClient.getAll()
 
         for (cipher in ciphersResponse) {
-            println("Executed")
-            val card = CipherCard(Cipher(cipher, credentials.secretKey))
-            mainPanel.children.add(card)
-            // cipherList.items.add(card)
+            val cipherElement = Cipher(cipher, credentials.secretKey)
+
+            val item = CipherListItem(cipherElement)
+            list.add(item)
         }
 
         super.onStart()
+    }
+
+    override fun onStop() {
+        list.clear()
     }
 }

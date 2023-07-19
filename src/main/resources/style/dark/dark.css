@@ -38,6 +38,23 @@
     -fx-background-color: derive(-fx-accent,20%);
 }
 
+/*MenuBar*/
+.menu-bar {
+    -fx-background-color: #323232FF;
+}
+
+.context-menu {
+    -fx-background-color: #323232FF;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 7px;
+}
+
+.menu-bar .menu-item, .menu, .menu:showing {
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+
 /*Textfield*/
 .text-field {
     -fx-background-color: #464646;
@@ -76,4 +93,81 @@
 
 .toggle-switch .thumb .thumb-text {
     -fx-text-fill: black;
+}
+
+/* ListView */
+.list-view {
+    -fx-background-color: #232323;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #232323;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+}
+
+.list-view .list-cell:selected {
+    -fx-border-radius: 5px;
+}
+
+.list-view:focused {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+/* Klasa bazowa dla ScrollBar */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+/* Track - tło ScrollBar'a */
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: #262626; /* Kolor tła */
+}
+
+/* Thumb - "suwak" ScrollBar'a */
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #2f2f2f; /* Kolor suwaka */
+}
+
+/* Hover - najechanie kursorem na Thumb */
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #343434; /* Kolor suwaka po najechaniu */
+}
+
+/* Pressed - kliknięcie na Thumb */
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #424242; /* Kolor suwaka po kliknięciu */
+}
+
+/* ScrollBar z wartościami minimum i maksimum */
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:vertical .increment-button,
+.scroll-bar:horizontal .decrement-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+/* ScrollBar z wartościami minimum i maksimum - Hover */
+.scroll-bar:horizontal .increment-button:hover,
+.scroll-bar:vertical .increment-button:hover,
+.scroll-bar:horizontal .decrement-button:hover,
+.scroll-bar:vertical .decrement-button:hover {
+    -fx-background-color: #282828; /* Kolor przycisków po najechaniu */
+}
+
+/* ScrollBar z wartościami minimum i maksimum - Pressed */
+.scroll-bar:horizontal .increment-button:pressed,
+.scroll-bar:vertical .increment-button:pressed,
+.scroll-bar:horizontal .decrement-button:pressed,
+.scroll-bar:vertical .decrement-button:pressed {
+    -fx-background-color: #2a2a2a; /* Kolor przycisków po kliknięciu */
 }
