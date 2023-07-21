@@ -24,7 +24,10 @@ class CipherListItem(
     @FXML
     private lateinit var icon: ImageView
 
-    private var loader: FXMLLoader = FXMLLoader(CipherListItem::class.java.getResource("/fxml/components/cipherlistitem.fxml"))
+    companion object {
+        @JvmStatic
+        private var loader: FXMLLoader = FXMLLoader(CipherListItem::class.java.getResource("/fxml/components/cipherlistitem.fxml"))
+    }
 
     init {
         loader.setController(this)
