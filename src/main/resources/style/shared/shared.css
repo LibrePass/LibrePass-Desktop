@@ -1,0 +1,44 @@
+/*Button*/
+.button {
+    -fx-background-radius: 8px;
+    -fx-background-insets: 0px 0px 0px 0px;
+}
+
+/*Menu bar*/
+.context-menu {
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 7px;
+}
+.menu-bar .menu-item, .menu, .menu:showing {
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+/*Textfield*/
+.text-field {
+    -fx-border-radius: 3px;
+}
+
+.text-field:focused {
+    -fx-border-radius: 3px;
+}
+
+/** Switch */
+.toggle-switch .thumb {
+    -fx-border-radius: 10px;
+}
+
+
+.toggle-switch .track {
+    -fx-border-radius: 10px;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-radius: 7px;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}

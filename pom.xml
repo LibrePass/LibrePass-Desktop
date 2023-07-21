@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.1</junit.version>
 
-        <javafx.version>20.0.1</javafx.version>
+        <javafx.version>17.0.2</javafx.version>
         <librepass.api.version>0.1.0-SNAPSHOT-05</librepass.api.version>
         <kotlin.version>1.8.22</kotlin.version>
 
@@ -259,7 +259,7 @@
                 </executions>
                 <configuration>
                     <name>LibrePass</name>
-                    <appVersion>${project.version}</appVersion>
+                    <appVersion>1.0.0</appVersion>
                     <vendor>LibrePass Team</vendor>
                     <destination>target/dist</destination>
                     <module>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App</module>
@@ -303,7 +303,7 @@
                             <noHeaderFiles>true</noHeaderFiles>
                             <options>
                                 <option>-Xmx200M</option>
-                                <option>-XX:MaxRAM=500M</option>
+                                <option>-XX:MaxRAM=300M</option>
                                 <option>-Xms50M</option>
                                 <option>-XX:+UseCompressedOops</option>
                                 <option>-XX:+UseG1GC</option>

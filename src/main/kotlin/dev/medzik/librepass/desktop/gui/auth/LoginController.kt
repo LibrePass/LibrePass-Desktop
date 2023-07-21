@@ -67,6 +67,9 @@ class LoginController : Controller() {
                 passwordHash = passwordHash
             )
 
+            // Perform GC to flush a lot of memory allocated by argon2 generation
+            System.gc()
+
             val state = StateManager.getState(State.DASHBOARD)
             val controller = state.getController<DashboardController>()
             controller.credentials = credentials
