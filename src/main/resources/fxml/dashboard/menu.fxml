@@ -9,39 +9,39 @@
 
 <MenuBar maxWidth="1.7976931348623157E308" useSystemMenuBar="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.MenuController">
   <menus>
-    <Menu mnemonicParsing="false" text="File">
+    <Menu mnemonicParsing="false" text="%file">
       <items>
-            <MenuItem mnemonicParsing="false" onAction="#onLogout" text="Logout" />
-        <MenuItem fx:id="exit" onAction="#onExit" mnemonicParsing="false" text="Exit">
+            <MenuItem mnemonicParsing="false" onAction="#onLogout" text="%file.logout" />
+        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="%file.exit">
                <accelerator>
                   <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                </accelerator></MenuItem>
       </items>
     </Menu>
-      <Menu mnemonicParsing="false" text="Edit">
+      <Menu mnemonicParsing="false" text="%edit">
         <items>
-          <MenuItem fx:id="debug" mnemonicParsing="false" text="Add New Cipher" />
-            <MenuItem mnemonicParsing="false" text="Delete Cipher" />
-            <MenuItem mnemonicParsing="false" text="Edit Cipher" />
+          <MenuItem fx:id="debug" mnemonicParsing="false" text="%edit.add.cipher" />
+            <MenuItem mnemonicParsing="false" text="%edit.delete.cipher" />
+            <MenuItem mnemonicParsing="false" text="%edit.edit.cipher" />
         </items>
       </Menu>
-    <Menu mnemonicParsing="false" text="Settings">
+    <Menu mnemonicParsing="false" text="%settings">
          <items>
-            <Menu mnemonicParsing="false" text="Theme">
+            <Menu mnemonicParsing="false" text="%settings.theme">
                <items>
-                  <RadioMenuItem fx:id="themeLight" mnemonicParsing="false" onAction="#onThemeRadio" text="Light">
+                  <RadioMenuItem fx:id="themeLight" mnemonicParsing="false" onAction="#onThemeRadio" text="%light">
                      <toggleGroup>
                         <ToggleGroup fx:id="theme" />
                      </toggleGroup>
                   </RadioMenuItem>
-                  <RadioMenuItem fx:id="themeDark" mnemonicParsing="false" onAction="#onThemeRadio" text="Dark" toggleGroup="$theme" />
+                  <RadioMenuItem fx:id="themeDark" mnemonicParsing="false" onAction="#onThemeRadio" text="%dark" toggleGroup="$theme" />
                </items>
             </Menu>
          </items>
     </Menu>
-    <Menu mnemonicParsing="false" text="Help">
+    <Menu mnemonicParsing="false" text="%help">
       <items>
-        <MenuItem mnemonicParsing="false" text="About" />
+        <MenuItem mnemonicParsing="false" text="%help.about" />
       </items>
     </Menu>
   </menus>

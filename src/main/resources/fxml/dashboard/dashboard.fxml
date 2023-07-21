@@ -30,8 +30,8 @@
                   <Insets left="5.0" />
                </GridPane.margin>
                <children>
-                  <Button lineSpacing="1.0" mnemonicParsing="false" text="Add Cipher" />
-                  <Button mnemonicParsing="false" text="Delete Cipher" />
+                  <Button lineSpacing="1.0" mnemonicParsing="false" text="%add.cipher" />
+                  <Button mnemonicParsing="false" text="%delete.cipher" />
                </children>
             </HBox>
          </children>
