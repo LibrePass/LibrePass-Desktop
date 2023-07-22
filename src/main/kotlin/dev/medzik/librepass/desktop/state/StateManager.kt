@@ -37,8 +37,4 @@ object StateManager {
     fun setState(state: State) {
         applyState(getState(state))
     }
-
-    fun getCurrentState(): State {
-        return currentState!!
-    }
 }
