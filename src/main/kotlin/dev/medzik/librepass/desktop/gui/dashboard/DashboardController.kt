@@ -44,7 +44,6 @@ class DashboardController : Controller() {
         super.onStart()
     }
 
-    override fun onStop() {
+    override fun onStop() =
         list.clear()
-    }
 }
