@@ -40,9 +40,8 @@ class LoginController : Controller() {
     }
 
     @FXML
-    fun onBack() {
+    fun onBack() =
         StateManager.setState(State.WELCOME)
-    }
 
     @FXML
     fun onLogin() {

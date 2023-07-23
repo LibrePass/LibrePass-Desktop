@@ -37,12 +37,10 @@ class MenuController {
     }
 
     @FXML
-    fun onLogout() {
+    fun onLogout() =
         StateManager.applyState(State.WELCOME)
-    }
 
     @FXML
-    fun onExit() {
+    fun onExit() =
         Platform.exit()
-    }
 }

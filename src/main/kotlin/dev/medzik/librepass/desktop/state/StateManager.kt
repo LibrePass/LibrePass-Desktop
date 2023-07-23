@@ -34,7 +34,6 @@ object StateManager {
             controller.onStart()
     }
 
-    fun setState(state: State) {
+    fun setState(state: State) =
         applyState(getState(state))
-    }
 }
