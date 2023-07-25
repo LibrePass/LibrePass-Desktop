@@ -37,8 +37,15 @@
     -fx-background-radius: 7px;
 }
 
+.list-view .list-cell:selected {
+    -fx-background-color: -fx-accent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+}
+
 .list-view {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
+    -fx-border-radius: 0;
 }

@@ -38,9 +38,13 @@ class CipherListItem(
         username.text = cipher.loginData?.username
 
         CompletableFuture.runAsync {
-            val url = CipherClient.getFavicon(cipher.loginData?.uris?.get(0)!!)
-            val image = URL("https://librepass-api.medzik.dev$url").openStream()
-            Platform.runLater { icon.image = Image(image) }
+            val urls = cipher.loginData?.uris!!
+
+            if (urls.isNotEmpty()) {
+                val url = CipherClient.getFavicon(cipher.loginData?.uris?.get(0)!!)
+                val image = URL("https://librepass-api.medzik.dev$url").openStream()
+                Platform.runLater { icon.image = Image(image) }
+            }
         }
     }
 }

@@ -78,16 +78,17 @@
 }
 
 /* ListView */
-.list-view {
-    -fx-background-color: #232323;
-}
-
 .list-view .list-cell {
-    -fx-background-color: #232323;
+    -fx-background-color: #282828;
 }
 
 .list-view .list-cell:selected {
     -fx-background-color: -fx-accent;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }
 
 .list-view .list-cell .label {
