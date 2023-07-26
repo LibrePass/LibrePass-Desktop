@@ -8,7 +8,6 @@ import dev.medzik.librepass.types.cipher.Cipher
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
-import javafx.scene.layout.VBox
 
 class DashboardController : Controller() {
 
@@ -18,9 +17,6 @@ class DashboardController : Controller() {
 
     @FXML
     lateinit var cipherList: ListView<CipherListItem>
-
-    @FXML
-    lateinit var mainPanel: VBox
 
     private val list = FXCollections.observableArrayList<CipherListItem>()
 
