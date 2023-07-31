@@ -11,7 +11,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.9.1</junit.version>
 
         <javafx.version>17.0.2</javafx.version>
         <librepass.api.version>0.1.0-SNAPSHOT-05</librepass.api.version>
