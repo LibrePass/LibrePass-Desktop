@@ -1,5 +1,6 @@
 package dev.medzik.librepass.desktop.gui.dashboard
 
+import dev.medzik.librepass.desktop.gui.components.AboutDialog
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.style.Style
@@ -27,6 +28,13 @@ class MenuController {
     @FXML
     lateinit var themeLight: RadioMenuItem
 
+    private lateinit var aboutDialog: AboutDialog
+
+    @FXML
+    private fun initialize() {
+        aboutDialog = AboutDialog()
+    }
+
     @FXML
     fun onThemeRadio(event: ActionEvent) {
         val source = event.source
@@ -43,4 +51,7 @@ class MenuController {
     @FXML
     fun onExit() =
         Platform.exit()
+
+    @FXML
+    fun onAbout() = aboutDialog.show()
 }
