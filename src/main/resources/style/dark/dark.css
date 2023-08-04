@@ -1,8 +1,8 @@
 .root {
     -fx-accent: #fdb58c;
     -fx-focus-color: -fx-accent;
+    -fx-base: #1e1e1e;
     -fx-background-color: #1e1e1e;
-    -fx-base: #1e1e1e
 }
 
 /*Button*/
@@ -34,11 +34,11 @@
 
 /*MenuBar*/
 .menu-bar {
-    -fx-background-color: #323232FF;
+    -fx-background-color: #323232;
 }
 
 .context-menu {
-    -fx-background-color: #323232FF;
+    -fx-background-color: #323232;
 }
 
 /*Textfield*/
