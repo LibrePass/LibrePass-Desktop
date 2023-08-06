@@ -1,8 +1,8 @@
 .root {
     -fx-accent: #fdb58c;
-    -fx-focus-color: -fx-accent;
     -fx-base: #1e1e1e;
-    -fx-background-color: #1e1e1e;
+
+    -fx-text-fill: white;
 }
 
 /*Button*/
@@ -38,7 +38,7 @@
 }
 
 .context-menu {
-    -fx-background-color: #323232;
+    -fx-background-color: #4a4a4a;
 }
 
 /*Textfield*/
@@ -78,10 +78,6 @@
 }
 
 /* ListView */
-.list-view .list-cell {
-    -fx-background-color: #282828;
-}
-
 .list-view .list-cell:selected {
     -fx-background-color: -fx-accent;
 }

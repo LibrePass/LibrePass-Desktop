@@ -1,3 +1,8 @@
+.root {
+    -fx-background: -fx-base;
+    -fx-focus-color: -fx-accent;
+}
+
 /*Button*/
 .button {
     -fx-background-radius: 8px;
@@ -31,6 +36,11 @@
 
 .toggle-switch .track {
     -fx-border-radius: 10px;
+}
+
+/*List View*/
+.list-view .list-cell {
+    -fx-background-color: derive(-fx-base,10%);
 }
 
 .list-view .list-cell:selected {

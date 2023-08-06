@@ -1,6 +1,6 @@
 .root {
     -fx-accent: #9a4500;
-    -fx-focus-color: -fx-accent;
+    -fx-base: #f5f5f5;
 }
 
 /*Button*/
@@ -34,7 +34,7 @@
     -fx-background-color: #e6e6e6;
 }
 .context-menu {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #fefefe;
 }
 
 /*Textfield*/
@@ -72,7 +72,7 @@
 
 /*ListView*/
 .list-view .list-cell {
-    -fx-background-color: #ffffff;
+    -fx-background-color: derive(-fx-base,40%);
 }
 
 .list-view .list-cell:selected {
@@ -83,6 +83,14 @@
 .list-view {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
+}
+
+.list-view .list-cell .label {
+    -fx-text-fill: black;
+}
+
+.list-view .list-cell:selected .label {
+    -fx-text-fill: white;
 }
 
 /*ScrollBar */
