@@ -10,14 +10,17 @@ module dev.medzik.librepass.desktop {
     //fix ssl handshake error
     requires jdk.crypto.ec;
     requires jdk.crypto.cryptoki;
+    requires com.google.gson;
 
     exports dev.medzik.librepass.desktop;
+    exports dev.medzik.librepass.desktop.config;
     exports dev.medzik.librepass.desktop.gui;
     exports dev.medzik.librepass.desktop.gui.auth;
     exports dev.medzik.librepass.desktop.gui.dashboard;
     exports dev.medzik.librepass.desktop.gui.components;
 
     opens dev.medzik.librepass.desktop;
+    opens dev.medzik.librepass.desktop.config;
     opens dev.medzik.librepass.desktop.gui;
     opens dev.medzik.librepass.desktop.gui.auth;
     opens dev.medzik.librepass.desktop.gui.dashboard;

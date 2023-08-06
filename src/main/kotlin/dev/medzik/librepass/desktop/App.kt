@@ -1,5 +1,6 @@
 package dev.medzik.librepass.desktop
 
+import dev.medzik.librepass.desktop.config.Config
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.style.StyleManager
@@ -17,6 +18,8 @@ class App : Application() {
     }
 
     override fun start(stage: Stage) {
+        Config.init()
+
         val scene = Scene(Pane(), 1024.0, 576.0)
 
         stage.title = "LibrePass"

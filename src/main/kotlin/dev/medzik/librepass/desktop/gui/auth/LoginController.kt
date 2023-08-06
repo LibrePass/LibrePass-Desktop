@@ -2,7 +2,8 @@ package dev.medzik.librepass.desktop.gui.auth
 
 import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.client.errors.ApiException
-import dev.medzik.librepass.client.utils.Cryptography.computePasswordHash
+import dev.medzik.librepass.desktop.config.Config
+import dev.medzik.librepass.desktop.config.Credentials
 import dev.medzik.librepass.desktop.gui.Controller
 import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
 import dev.medzik.librepass.desktop.state.State
@@ -53,17 +54,24 @@ class LoginController : Controller() {
         try {
             val preLogin = authClient.preLogin(email)
 
-            // compute base password hash
-            val passwordHash = computePasswordHash(
-                password = password,
-                email = email,
-                argon2Function = preLogin.toArgon2()
-            )
-
             // authenticate user and get credentials
             val credentials = authClient.login(
                 email = email,
-                passwordHash = passwordHash
+                password = password
+            )
+
+            Config.writeObject(
+                "credentials",
+                Credentials(
+                    userId = credentials.userId,
+                    email = email,
+                    apiKey = credentials.apiKey,
+                    publicKey = credentials.keyPair.publicKey,
+                    // Argon2id parameters
+                    memory = preLogin.memory,
+                    iterations = preLogin.iterations,
+                    parallelism = preLogin.parallelism
+                )
             )
 
             // Perform GC to flush a lot of memory allocated by argon2 generation

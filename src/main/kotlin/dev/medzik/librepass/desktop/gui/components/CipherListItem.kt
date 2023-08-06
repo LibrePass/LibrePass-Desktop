@@ -1,10 +1,10 @@
 package dev.medzik.librepass.desktop.gui.components
 
 import dev.medzik.librepass.client.api.CipherClient
+import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
 import javafx.application.Platform
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
@@ -13,7 +13,7 @@ import java.net.URL
 import java.util.concurrent.CompletableFuture
 
 class CipherListItem(
-    cipher: Cipher
+    private val cipher: Cipher
 ) : AnchorPane() {
     @FXML
     private lateinit var name: Label
@@ -24,27 +24,22 @@ class CipherListItem(
     @FXML
     private lateinit var icon: ImageView
 
-    companion object {
-        @JvmStatic
-        private var loader: FXMLLoader = FXMLLoader(CipherListItem::class.java.getResource("/fxml/components/cipherlistitem.fxml"))
-    }
-
     init {
-        loader.setController(this)
-        loader.setRoot(this)
-        loader.load<AnchorPane>()
+        Fxml.load("/fxml/components/cipherlistitem.fxml", this)
 
         name.text = cipher.loginData?.name
         username.text = cipher.loginData?.username
 
-        CompletableFuture.runAsync {
-            val urls = cipher.loginData?.uris!!
+        updateIcon()
+    }
 
-            if (urls.isNotEmpty()) {
-                val url = CipherClient.getFavicon(cipher.loginData?.uris?.get(0)!!)
-                val image = URL("https://librepass-api.medzik.dev$url").openStream()
-                Platform.runLater { icon.image = Image(image) }
-            }
+    private fun updateIcon() = CompletableFuture.runAsync {
+        val urls = cipher.loginData?.uris!!
+
+        if (urls.isNotEmpty()) {
+            val url = CipherClient.getFavicon(cipher.loginData?.uris?.get(0)!!)
+            val image = URL("https://api.librepass.medzik.dev$url").openStream()
+            Platform.runLater { icon.image = Image(image) }
         }
     }
 }
