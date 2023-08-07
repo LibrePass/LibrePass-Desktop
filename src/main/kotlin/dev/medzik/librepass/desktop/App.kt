@@ -1,6 +1,8 @@
 package dev.medzik.librepass.desktop
 
 import dev.medzik.librepass.desktop.config.Config
+import dev.medzik.librepass.desktop.config.Settings
+import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.style.StyleManager
@@ -32,11 +34,20 @@ class App : Application() {
         StateManager.init(scene, resources)
         StyleManager.init()
         StyleManager.trackScene(scene)
+        StyleManager.setStyle(Config.readObject<Settings>("settings").theme)
         StyleManager.reloadStyle()
 
-        stage.show()
+        if (Config.isObjectExists("credentials") && Config.isObjectExists("user_secrets")) {
+            val state = StateManager.getState(State.DASHBOARD)
+            val controller = state.getController<DashboardController>()
+            controller.credentials = Config.readObject("credentials")
+            controller.userSecrets = Config.readObject("user_secrets")
+            StateManager.applyState(state)
+        } else {
+            StateManager.setState(State.WELCOME)
+        }
 
-        StateManager.setState(State.WELCOME)
+        stage.show()
     }
 }
 

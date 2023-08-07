@@ -1,17 +1,21 @@
 package dev.medzik.librepass.desktop.gui.dashboard
 
 import dev.medzik.librepass.client.api.CipherClient
-import dev.medzik.librepass.client.api.UserCredentials
+import dev.medzik.librepass.desktop.config.Credentials
+import dev.medzik.librepass.desktop.config.DataStoreUserSecrets
 import dev.medzik.librepass.desktop.gui.Controller
 import dev.medzik.librepass.desktop.gui.components.CipherListItem
 import dev.medzik.librepass.types.cipher.Cipher
+import javafx.application.Platform
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import java.util.concurrent.CompletableFuture
 
 class DashboardController : Controller() {
 
-    lateinit var credentials: UserCredentials
+    lateinit var credentials: Credentials
+    lateinit var userSecrets: DataStoreUserSecrets
 
     private lateinit var cipherClient: CipherClient
 
@@ -26,18 +30,20 @@ class DashboardController : Controller() {
     }
 
     override fun onStart() {
-        cipherClient = CipherClient(credentials.apiKey)
-
-        val ciphersResponse = cipherClient.getAll()
-
-        for (cipher in ciphersResponse) {
-            val cipherElement = Cipher(cipher, credentials.secretKey)
-
-            val item = CipherListItem(cipherElement)
-            list.add(item)
-        }
-
         super.onStart()
+
+        CompletableFuture.runAsync {
+            cipherClient = CipherClient(credentials.apiKey)
+
+            val ciphersResponse = cipherClient.getAll()
+
+            for (cipher in ciphersResponse) {
+                val cipherElement = Cipher(cipher, userSecrets.secretKey)
+
+                val item = CipherListItem(cipherElement)
+                Platform.runLater { list.add(item) }
+            }
+        }
     }
 
     override fun onStop() =

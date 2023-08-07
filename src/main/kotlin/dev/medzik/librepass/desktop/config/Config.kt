@@ -1,6 +1,7 @@
 package dev.medzik.librepass.desktop.config
 
 import com.google.gson.Gson
+import dev.medzik.librepass.desktop.style.Style
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -9,9 +10,21 @@ object Config {
     val workDir = File(getWorkDir("librepass"))
 
     fun init() {
-        if (!workDir.exists())
+        if (!workDir.exists()) {
             if (!workDir.mkdir())
                 throw RuntimeException("can't create work dir")
+        }
+
+        if (workDir.exists()) {
+            // write default settings
+            if (!isObjectExists("settings"))
+                writeObject(
+                    "settings",
+                    Settings(
+                        theme = Style.LIGHT
+                    )
+                )
+        }
     }
 
     private fun getWorkDir(name: String): String {
@@ -44,8 +57,17 @@ object Config {
         return Gson().fromJson(json, T::class.java)
     }
 
+    inline fun <reified T : Any> overrideObject(name: String, obj: (T) -> T) {
+        val readed = readObject<T>(name)
+        writeObject(name, obj.invoke(readed))
+    }
+
     fun isObjectExists(name: String): Boolean {
         return File(workDir, "$name.json").exists()
+    }
+
+    fun deleteObject(name: String) {
+        File(workDir, "$name.json").delete()
     }
 }
 
@@ -63,4 +85,13 @@ data class Credentials(
     val memory: Int,
     val iterations: Int,
     val parallelism: Int,
+)
+
+data class DataStoreUserSecrets(
+    val privateKey: String,
+    val secretKey: String
+)
+
+data class Settings(
+    var theme: Style
 )

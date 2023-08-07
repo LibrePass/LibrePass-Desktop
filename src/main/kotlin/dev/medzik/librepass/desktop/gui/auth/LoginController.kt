@@ -4,6 +4,7 @@ import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.client.errors.ApiException
 import dev.medzik.librepass.desktop.config.Config
 import dev.medzik.librepass.desktop.config.Credentials
+import dev.medzik.librepass.desktop.config.DataStoreUserSecrets
 import dev.medzik.librepass.desktop.gui.Controller
 import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
 import dev.medzik.librepass.desktop.state.State
@@ -55,24 +56,28 @@ class LoginController : Controller() {
             val preLogin = authClient.preLogin(email)
 
             // authenticate user and get credentials
-            val credentials = authClient.login(
+            val loginCredentials = authClient.login(
                 email = email,
                 password = password
             )
 
-            Config.writeObject(
-                "credentials",
-                Credentials(
-                    userId = credentials.userId,
-                    email = email,
-                    apiKey = credentials.apiKey,
-                    publicKey = credentials.keyPair.publicKey,
-                    // Argon2id parameters
-                    memory = preLogin.memory,
-                    iterations = preLogin.iterations,
-                    parallelism = preLogin.parallelism
-                )
+            val credentials = Credentials(
+                userId = loginCredentials.userId,
+                email = email,
+                apiKey = loginCredentials.apiKey,
+                publicKey = loginCredentials.keyPair.publicKey,
+                // Argon2id parameters
+                memory = preLogin.memory,
+                iterations = preLogin.iterations,
+                parallelism = preLogin.parallelism
             )
+            Config.writeObject("credentials", credentials)
+
+            val userSecrets = DataStoreUserSecrets(
+                privateKey = loginCredentials.keyPair.privateKey,
+                secretKey = loginCredentials.secretKey
+            )
+            Config.writeObject("user_secrets", userSecrets)
 
             // Perform GC to flush a lot of memory allocated by argon2 generation
             System.gc()
@@ -80,6 +85,7 @@ class LoginController : Controller() {
             val state = StateManager.getState(State.DASHBOARD)
             val controller = state.getController<DashboardController>()
             controller.credentials = credentials
+            controller.userSecrets = userSecrets
             StateManager.applyState(state)
         } catch (e: ApiException) {
             Utils.dialog("Error!", e.message, Alert.AlertType.ERROR)

@@ -18,6 +18,9 @@ module dev.medzik.librepass.desktop {
     exports dev.medzik.librepass.desktop.gui.auth;
     exports dev.medzik.librepass.desktop.gui.dashboard;
     exports dev.medzik.librepass.desktop.gui.components;
+    exports dev.medzik.librepass.desktop.state;
+    exports dev.medzik.librepass.desktop.style;
+    exports dev.medzik.librepass.desktop.utils;
 
     opens dev.medzik.librepass.desktop;
     opens dev.medzik.librepass.desktop.config;
@@ -26,4 +29,6 @@ module dev.medzik.librepass.desktop {
     opens dev.medzik.librepass.desktop.gui.dashboard;
     opens dev.medzik.librepass.desktop.gui.components;
     opens dev.medzik.librepass.desktop.state;
+    opens dev.medzik.librepass.desktop.style;
+    opens dev.medzik.librepass.desktop.utils;
 }
