@@ -20,7 +20,9 @@ class AboutDialog : Stage() {
         loader.setControllerFactory { this }
         val scene = Scene(loader.load())
         StyleManager.trackScene(scene)
+        StyleManager.trackStage(this)
 
+        initOwner(App.stage)
         initModality(Modality.APPLICATION_MODAL)
         isResizable = false
         icons.add(Image(AboutDialog::class.java.getResourceAsStream("/img/logo.png")))

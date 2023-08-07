@@ -17,6 +17,7 @@ import java.util.*
 class App : Application() {
     companion object {
         lateinit var hostServices: HostServices
+        lateinit var stage: Stage
     }
 
     override fun start(stage: Stage) {
@@ -28,14 +29,12 @@ class App : Application() {
         stage.scene = scene
         stage.icons.add(Image(App::class.java.getResourceAsStream("/img/logo.png")))
         App.hostServices = hostServices!!
+        App.stage = stage
 
         val resources: ResourceBundle = ResourceBundle.getBundle("/locales/locale", Locale.getDefault())
 
         StateManager.init(scene, resources)
         StyleManager.init()
-        StyleManager.trackScene(scene)
-        StyleManager.setStyle(Config.readObject<Settings>("settings").theme)
-        StyleManager.reloadStyle()
 
         if (Config.isObjectExists("credentials") && Config.isObjectExists("user_secrets")) {
             val state = StateManager.getState(State.DASHBOARD)
@@ -47,6 +46,10 @@ class App : Application() {
             StateManager.setState(State.WELCOME)
         }
 
+        StyleManager.trackScene(scene)
+        StyleManager.trackStage(stage)
+        StyleManager.setStyle(Config.readObject<Settings>("settings").theme)
+        StyleManager.reloadStyle()
         stage.show()
     }
 }

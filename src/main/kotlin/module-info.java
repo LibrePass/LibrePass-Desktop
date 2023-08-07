@@ -6,11 +6,13 @@ module dev.medzik.librepass.desktop {
     requires dev.medzik.librepass.shared;
     requires dev.medzik.libcrypto;
     requires org.controlsfx.controls;
+    requires com.sun.jna;
+    requires com.sun.jna.platform;
+    requires com.google.gson;
 
     //fix ssl handshake error
     requires jdk.crypto.ec;
     requires jdk.crypto.cryptoki;
-    requires com.google.gson;
 
     exports dev.medzik.librepass.desktop;
     exports dev.medzik.librepass.desktop.config;

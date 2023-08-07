@@ -2,12 +2,14 @@ package dev.medzik.librepass.desktop.style
 
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.stage.Stage
 import kotlin.collections.ArrayList
 
 object StyleManager {
     private lateinit var style: Style
 
     private var trackedScenes = ArrayList<Scene>()
+    private var trackedStages = ArrayList<Stage>()
 
     fun init() {
         setStyle(Style.LIGHT)
@@ -35,7 +37,12 @@ object StyleManager {
         trackedScenes.add(scene)
     }
 
+    fun trackStage(stage: Stage) {
+        trackedStages.add(stage)
+    }
+
     fun reloadStyle() {
         for (scene in trackedScenes) loadStyle(scene)
+        for (stage in trackedStages) style.invokeHook(stage)
     }
 }

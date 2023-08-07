@@ -57,6 +57,17 @@
             <artifactId>controlsfx</artifactId>
             <version>11.1.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>5.13.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>5.13.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -132,6 +143,9 @@
                                 annotations,
                                 okio-jvm,
                                 okhttp-jvm,
+                                totp,
+                                jna,
+                                jna-platform
                             </excludeArtifactIds>
                         </configuration>
                     </execution>
@@ -245,6 +259,41 @@
                                         open module totp {
                                             requires org.apache.commons.codec;
                                             exports de.taimos.totp;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>net.java.dev.jna</groupId>
+                                        <artifactId>jna</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module com.sun.jna {
+                                        requires java.logging;
+                                        requires java.desktop;
+
+                                        exports com.sun.jna;
+                                        exports com.sun.jna.internal;
+                                        exports com.sun.jna.ptr;
+                                        exports com.sun.jna.win32;
+                                        }
+                                    </moduleInfoSource>
+                                </module>
+                                <module>
+                                    <artifact>
+                                        <groupId>net.java.dev.jna</groupId>
+                                        <artifactId>jna-platform</artifactId>
+                                    </artifact>
+                                    <moduleInfoSource>
+                                        open module com.sun.jna.platform {
+                                        requires com.sun.jna;
+                                        requires java.logging;
+                                        requires java.desktop;
+
+                                        exports com.sun.jna.platform;
+                                        exports com.sun.jna.platform.win32;
+                                        exports com.sun.jna.platform.wince;
+                                        exports com.sun.jna.platform.dnd;
                                         }
                                     </moduleInfoSource>
                                 </module>
