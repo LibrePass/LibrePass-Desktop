@@ -4,7 +4,9 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.layout.Pane
 import java.util.*
 
-enum class State(private val fxml: String) {
+enum class State(
+    private val fxml: String
+) {
     WELCOME("/fxml/welcome.fxml"),
     LOGIN("/fxml/auth/login.fxml"),
     REGISTER("/fxml/auth/register.fxml"),

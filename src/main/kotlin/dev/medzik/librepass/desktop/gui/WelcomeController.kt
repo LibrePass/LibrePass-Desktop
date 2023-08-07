@@ -1,5 +1,7 @@
 package dev.medzik.librepass.desktop.gui
 
+import dev.medzik.librepass.desktop.config.Config
+import dev.medzik.librepass.desktop.config.Settings
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.style.Style
@@ -29,8 +31,17 @@ class WelcomeController : Controller(), Initializable {
             toValue = 1.0
         }
 
+        // reading theme
+        val theme = Config.readObject<Settings>("settings").theme
+        themeSwitch.isSelected = theme == Style.DARK
+        themeSwitch.text = if (theme == Style.DARK) resources.getString("dark") else resources.getString("light")
+
         themeSwitch.selectedProperty().addListener { _, _, _ ->
-            StyleManager.setStyle(if (themeSwitch.isSelected) Style.DARK else Style.LIGHT)
+            val style = if (themeSwitch.isSelected) Style.DARK else Style.LIGHT
+
+            Config.overrideObject<Settings>("settings") { theme -> theme.copy(theme = style) }
+
+            StyleManager.setStyle(style)
             themeSwitch.text = if (themeSwitch.isSelected) resources.getString("dark") else resources.getString("light")
             StyleManager.reloadStyle()
         }

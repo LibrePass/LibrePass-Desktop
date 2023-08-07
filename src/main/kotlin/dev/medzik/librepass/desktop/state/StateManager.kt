@@ -11,7 +11,7 @@ object StateManager {
 
     fun init(scene: Scene, resources: ResourceBundle) {
         StateManager.scene = scene
-        for (state in State.values())
+        for (state in State.entries)
             state.load(resources)
     }
 
@@ -35,5 +35,5 @@ object StateManager {
     }
 
     fun setState(state: State) =
-        applyState(getState(state))
+        applyState(state)
 }

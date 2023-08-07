@@ -1,5 +1,7 @@
 package dev.medzik.librepass.desktop.gui.dashboard
 
+import dev.medzik.librepass.desktop.config.Config
+import dev.medzik.librepass.desktop.config.Settings
 import dev.medzik.librepass.desktop.gui.components.AboutDialog
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
@@ -33,6 +35,11 @@ class MenuController {
     @FXML
     private fun initialize() {
         aboutDialog = AboutDialog()
+
+        // load theme settings
+        val theme = Config.readObject<Settings>("settings").theme
+        val radio = if (theme == Style.LIGHT) themeLight else themeDark
+        radio.isSelected = true
     }
 
     @FXML
@@ -40,13 +47,19 @@ class MenuController {
         val source = event.source
 
         val style: Style = if (source == themeDark) Style.DARK else Style.LIGHT
+
+        Config.overrideObject<Settings>("settings") { theme -> theme.copy(theme = style) }
+
         StyleManager.setStyle(style)
         StyleManager.reloadStyle()
     }
 
     @FXML
-    fun onLogout() =
+    fun onLogout() {
+        Config.deleteObject("credentials")
+        Config.deleteObject("user_secrets")
         StateManager.applyState(State.WELCOME)
+    }
 
     @FXML
     fun onExit() =
