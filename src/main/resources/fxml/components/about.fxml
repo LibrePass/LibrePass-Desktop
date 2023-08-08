@@ -35,7 +35,7 @@
                         <Insets />
                     </VBox.margin>
                 </Label>
-                <Label text="Copyright (C) 2023 by LibrePass Team">
+                <Label text="Copyright (C) 2023 LibrePass Team">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
@@ -43,7 +43,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label prefHeight="52.0" prefWidth="364.0" text="With LibrePass, convenience and security go hand in hand. Through LibrePass, your passwords are secure while you have easy access to them." wrapText="true">
+                <Label prefHeight="52.0" prefWidth="364.0" text="%about.description" wrapText="true">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
@@ -57,11 +57,11 @@
     <bottom>
         <FlowPane alignment="CENTER_LEFT" hgap="5.0" prefHeight="43.0" prefWidth="566.0" vgap="5.0" BorderPane.alignment="CENTER">
             <children>
-                <Button mnemonicParsing="false" onAction="#onWebsite" prefHeight="33.0" prefWidth="110.0" text="Website">
+                <Button minWidth="110.0" mnemonicParsing="false" onAction="#onWebsite" prefHeight="33.0" text="%about.website">
                     <FlowPane.margin>
                         <Insets />
                     </FlowPane.margin></Button>
-                <Button lineSpacing="5.0" mnemonicParsing="false" onAction="#onGithub" prefHeight="33.0" prefWidth="110.0" text="Github" />
+                <Button lineSpacing="5.0" minWidth="110.0" mnemonicParsing="false" onAction="#onGithub" prefHeight="33.0" text="%about.github" />
             </children>
          <padding>
             <Insets left="5.0" />

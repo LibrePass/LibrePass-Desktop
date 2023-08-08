@@ -3,6 +3,7 @@ package dev.medzik.librepass.desktop
 import dev.medzik.librepass.desktop.config.Config
 import dev.medzik.librepass.desktop.config.Settings
 import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
+import dev.medzik.librepass.desktop.locale.LangManager
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.style.StyleManager
@@ -29,7 +30,7 @@ class App : Application() {
         stage.icons.add(Image(App::class.java.getResourceAsStream("/img/logo.png")))
         App.hostServices = hostServices!!
 
-        val resources: ResourceBundle = ResourceBundle.getBundle("/locales/locale", Locale.getDefault())
+        val resources: ResourceBundle = LangManager.init()
 
         StateManager.init(scene, resources)
         StyleManager.init()

@@ -1,6 +1,8 @@
 package dev.medzik.librepass.desktop.gui.components
 
 import dev.medzik.librepass.desktop.App
+import dev.medzik.librepass.desktop.locale.LangManager
+import dev.medzik.librepass.desktop.locale.LangManager.tr
 import dev.medzik.librepass.desktop.style.StyleManager
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -14,10 +16,11 @@ const val WEBSITE_URL = "https://librepass.medzik.dev"
 
 class AboutDialog : Stage() {
     init {
-        title = "About"
+        title = tr("about.title")
 
         val loader = FXMLLoader(AboutDialog::class.java.getResource("/fxml/components/about.fxml"))
         loader.setControllerFactory { this }
+        loader.resources = LangManager.getLocale()
         val scene = Scene(loader.load())
         StyleManager.trackScene(scene)
 
