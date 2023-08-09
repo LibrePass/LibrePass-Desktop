@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <javafx.version>17.0.2</javafx.version>
-        <librepass.api.version>0.1.0-SNAPSHOT-06</librepass.api.version>
+        <librepass.api.version>0.1.0-SNAPSHOT-07</librepass.api.version>
         <kotlin.version>1.9.0</kotlin.version>
 
         <jmods.dir>${project.build.directory}/modules</jmods.dir>
