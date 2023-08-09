@@ -3,18 +3,16 @@ package dev.medzik.librepass.desktop.gui.components
 import dev.medzik.librepass.client.api.CipherClient
 import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
-import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.scene.control.Label
+import javafx.scene.control.ListCell
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import java.net.URL
 import java.util.concurrent.CompletableFuture
 
-class CipherListItem(
-    private val cipher: Cipher
-) : AnchorPane() {
+class CipherListItem : ListCell<Cipher>() {
     @FXML
     private lateinit var name: Label
 
@@ -24,22 +22,59 @@ class CipherListItem(
     @FXML
     private lateinit var icon: ImageView
 
-    init {
-        Fxml.load("/fxml/components/cipherlistitem.fxml", this)
+    private var root: AnchorPane = AnchorPane()
 
-        name.text = cipher.loginData?.name
-        username.text = cipher.loginData?.username
+    private var loaded = false
 
-        updateIcon()
+    private var currentCipher: Cipher? = null
+
+    companion object {
+        // icon cache to prevent calling api
+        private var iconsCache = HashMap<String, Image>()
+
+        fun getIcon(url: String): Image? {
+            return if (iconsCache.containsKey(url))
+                iconsCache[url]
+            else {
+                iconsCache.put(url, add(url))
+            }
+        }
+
+        private fun add(url: String): Image {
+            val image = URL(url).openStream()
+            return Image(image)
+        }
     }
 
-    private fun updateIcon() = CompletableFuture.runAsync {
+    override fun updateItem(cipher: Cipher?, empty: Boolean) {
+        super.updateItem(cipher, empty)
+        if (empty) {
+            graphic = null
+        } else if (currentCipher != cipher) {
+            if (!loaded) {
+                val loader = Fxml.getLoader("/fxml/components/cipherlistitem.fxml")
+                loader.setRoot(root)
+                loader.setController(this)
+                loader.load<AnchorPane>()
+
+                loaded = true
+            }
+            name.text = cipher!!.loginData?.name
+            username.text = cipher.loginData?.username
+
+            updateIcon(cipher)
+            graphic = root
+
+            currentCipher = cipher
+        }
+    }
+
+    private fun updateIcon(cipher: Cipher) = CompletableFuture.runAsync {
         val urls = cipher.loginData?.uris!!
 
         if (urls.isNotEmpty()) {
-            val url = CipherClient.getFavicon(cipher.loginData?.uris?.get(0)!!)
-            val image = URL("https://api.librepass.medzik.dev$url").openStream()
-            Platform.runLater { icon.image = Image(image) }
+            val url = CipherClient.getFavicon(domain = urls[0]).replace("//", "/").replace("https:/", "https://")
+            icon.image = getIcon(url)
         }
     }
 }
