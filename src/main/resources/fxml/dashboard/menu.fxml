@@ -4,6 +4,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.input.KeyCodeCombination?>
 
@@ -11,6 +12,11 @@
   <menus>
     <Menu mnemonicParsing="false" text="%file">
       <items>
+            <MenuItem fx:id="sync" mnemonicParsing="false" onAction="#onSync" text="%file.sync">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="F5" control="UP" meta="UP" shift="UP" shortcut="ANY" />
+               </accelerator></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#onLogout" text="%file.logout" />
         <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="%file.exit">
                <accelerator>

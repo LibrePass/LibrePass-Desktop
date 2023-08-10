@@ -50,6 +50,7 @@ class CipherListItem : ListCell<Cipher>() {
         super.updateItem(cipher, empty)
         if (empty) {
             graphic = null
+            return
         } else if (currentCipher != cipher) {
             if (!loaded) {
                 val loader = Fxml.getLoader("/fxml/components/cipherlistitem.fxml")
@@ -59,21 +60,21 @@ class CipherListItem : ListCell<Cipher>() {
 
                 loaded = true
             }
-            name.text = cipher!!.loginData?.name
-            username.text = cipher.loginData?.username
-
-            updateIcon(cipher)
-            graphic = root
-
-            currentCipher = cipher
         }
+        name.text = cipher!!.loginData?.name
+        username.text = cipher.loginData?.username
+
+        updateIcon(cipher)
+        graphic = root
+
+        currentCipher = cipher
     }
 
     private fun updateIcon(cipher: Cipher) = CompletableFuture.runAsync {
         val urls = cipher.loginData?.uris!!
 
         if (urls.isNotEmpty()) {
-            val url = CipherClient.getFavicon(domain = urls[0]).replace("//", "/").replace("https:/", "https://")
+            val url = CipherClient.getFavicon(domain = urls[0])
             icon.image = getIcon(url)
         }
     }
