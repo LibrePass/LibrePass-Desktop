@@ -1,7 +1,9 @@
 package dev.medzik.librepass.desktop.config
 
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dev.medzik.librepass.desktop.style.Style
+import dev.medzik.librepass.types.cipher.EncryptedCipher
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -43,23 +45,26 @@ object Config {
         return ""
     }
 
-    fun writeObject(name: String, obj: Any) {
+    fun writeObject(name: String, obj: Any): Any {
         val file = File(workDir, "$name.json")
         val serialized = Gson().toJson(obj)
 
         Files.writeString(file.toPath(), serialized)
+        return obj
     }
 
     inline fun <reified T> readObject(name: String): T {
         val file = File(workDir, "$name.json")
         val json = Files.readString(file.toPath())
 
-        return Gson().fromJson(json, T::class.java)
+        return Gson().fromJson(json, object : TypeToken<T>() {}.type)
     }
 
-    inline fun <reified T : Any> overrideObject(name: String, obj: (T) -> T) {
+    inline fun <reified T : Any> overrideObject(name: String, obj: (T) -> T): T {
         val readed = readObject<T>(name)
-        writeObject(name, obj.invoke(readed))
+        val ret = obj.invoke(readed)
+        writeObject(name, ret)
+        return ret
     }
 
     fun isObjectExists(name: String): Boolean {
@@ -87,11 +92,16 @@ data class Credentials(
     val parallelism: Int,
 )
 
-data class DataStoreUserSecrets(
+data class UserSecrets(
     val privateKey: String,
     val secretKey: String
 )
 
 data class Settings(
     var theme: Style
+)
+
+data class StoreCipher(
+    val owner: UUID,
+    var encryptedCipher: EncryptedCipher
 )

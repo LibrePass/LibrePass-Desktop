@@ -32,6 +32,8 @@ class MenuController {
 
     private lateinit var aboutDialog: AboutDialog
 
+    lateinit var dashboard: DashboardController
+
     @FXML
     private fun initialize() {
         aboutDialog = AboutDialog()
@@ -67,4 +69,7 @@ class MenuController {
 
     @FXML
     fun onAbout() = aboutDialog.show()
+
+    @FXML
+    fun onSync() = dashboard.updateCiphers()
 }

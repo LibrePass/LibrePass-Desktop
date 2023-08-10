@@ -4,7 +4,7 @@ import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.client.errors.ApiException
 import dev.medzik.librepass.desktop.config.Config
 import dev.medzik.librepass.desktop.config.Credentials
-import dev.medzik.librepass.desktop.config.DataStoreUserSecrets
+import dev.medzik.librepass.desktop.config.UserSecrets
 import dev.medzik.librepass.desktop.gui.Controller
 import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
 import dev.medzik.librepass.desktop.state.State
@@ -73,7 +73,7 @@ class LoginController : Controller() {
             )
             Config.writeObject("credentials", credentials)
 
-            val userSecrets = DataStoreUserSecrets(
+            val userSecrets = UserSecrets(
                 privateKey = loginCredentials.keyPair.privateKey,
                 secretKey = loginCredentials.secretKey
             )
