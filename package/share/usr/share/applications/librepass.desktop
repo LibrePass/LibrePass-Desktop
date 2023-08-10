@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=LibrePass
+Comment=Secure your passwords
+Exec=librepass
+Icon=librepass
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Network;Java;
+StartupWMClass=dev.medzik.librepass.desktop.App

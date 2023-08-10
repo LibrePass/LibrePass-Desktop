@@ -7,7 +7,7 @@
     <groupId>dev.medzik.librepass</groupId>
     <artifactId>desktop</artifactId>
     <version>1.0.0-alpha1</version>
-    <name>desktop</name>
+    <name>LibrePass Desktop</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -255,47 +255,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.panteleyev</groupId>
-                <artifactId>jpackage-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <!-- Execution for Linux-->
-                    <execution>
-                        <id>jpackage-linux</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jpackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <name>LibrePass</name>
-                    <appVersion>1.0.0</appVersion>
-                    <vendor>LibrePass Team</vendor>
-                    <destination>target/dist</destination>
-                    <module>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App</module>
-                    <type>APP_IMAGE</type>
-
-                    <modulePaths>
-                        <modulePath>${jmods.dir}</modulePath>
-                    </modulePaths>
-
-                    <addModules>
-                        <module>dev.medzik.librepass.desktop</module>
-                    </addModules>
-
-                    <javaOptions>
-                        <option>-Dfile.encoding=UTF-8</option>
-                        <option>-Xmx200M</option>
-                        <option>-XX:MaxRAM=300M</option>
-                        <option>-Xms50M</option>
-                        <option>-XX:+UseCompressedOops</option>
-                        <option>-XX:+UseG1GC</option>
-                    </javaOptions>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
@@ -324,6 +283,124 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <name>librepass</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>LibrePass Team</vendor>
+                    <destination>${project.build.directory}</destination>
+                    <module>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App</module>
+
+                    <modulePaths>
+                        <modulePath>${jmods.dir}</modulePath>
+                    </modulePaths>
+
+                    <addModules>
+                        <module>dev.medzik.librepass.desktop</module>
+                    </addModules>
+
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                        <option>-Xmx200M</option>
+                        <option>-XX:MaxRAM=300M</option>
+                        <option>-Xms50M</option>
+                        <option>-XX:+UseCompressedOops</option>
+                        <option>-XX:+UseG1GC</option>
+                    </javaOptions>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>nsis</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.panteleyev</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <name>librepass</name>
+                            <type>APP_IMAGE</type>
+                            <destination>${project.build.directory}</destination>
+                            <icon>${project.basedir}/package/windows/icon.ico</icon>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>jpackage-nsis</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.digitalmediaserver</groupId>
+                        <artifactId>nsis-maven-plugin</artifactId>
+                        <version>1.0.3</version>
+                        <configuration>
+                            <compression>lzma</compression>
+                            <compressionIsFinal>true</compressionIsFinal>
+                            <compressionDictSize>64</compressionDictSize>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build-windows-installer</id>
+                                <configuration>
+                                    <scriptFile>${basedir}/package/windows/installer.nsi</scriptFile>
+                                    <outputFile>${basedir}/target/dist/librepass-${project.version}-setup.exe</outputFile>
+                                </configuration>
+                                <goals>
+                                    <goal>generate-headerfile</goal>
+                                    <goal>make</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>portable</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.panteleyev</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <destination>${project.build.directory}/dist</destination>
+                            <type>APP_IMAGE</type>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>jpackage-portable</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+    </profiles>
 </project>
