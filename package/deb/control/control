@@ -2,8 +2,8 @@ Package: librepass
 Version: [[version]]
 Section: Internet
 Priority: optional
-Architecture: all
+Architecture: [[os.arch]]
 Homepage: https://librepass.medzik.dev
 Depends: openjdk-17-jre
-Maintainer: WPKG Team <librepass@medzik.dev>
+Maintainer: LibrePass Team <librepass@medzik.dev>
 Description: [[description]]

@@ -1,5 +1,6 @@
 .idea
 target
+wine-prefix
 
 # Compiled class file
 *.class
