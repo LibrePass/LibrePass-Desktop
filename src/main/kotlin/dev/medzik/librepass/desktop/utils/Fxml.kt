@@ -13,4 +13,11 @@ object Fxml {
         loader.setRoot(rootNode)
         loader.load<Any>()
     }
+
+    fun loadComponent(path: String, controller: Any?, rootNode: Any? = controller) {
+        val loader = FXMLLoader(CipherListItem::class.java.getResource(path))
+        loader.setControllerFactory { controller }
+        loader.setRoot(rootNode)
+        loader.load<Any>()
+    }
 }

@@ -10,6 +10,7 @@ import dev.medzik.librepass.desktop.config.UserSecrets
 import dev.medzik.librepass.desktop.gui.Controller
 import dev.medzik.librepass.desktop.gui.components.CipherListItem
 import dev.medzik.librepass.desktop.locale.LangManager.tr
+import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
 import dev.medzik.librepass.types.cipher.CipherType
 import dev.medzik.librepass.types.cipher.data.CipherLoginData
@@ -17,6 +18,8 @@ import javafx.application.Platform
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.VBox
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
@@ -33,7 +36,13 @@ class DashboardController : Controller() {
     @FXML
     lateinit var statusLabel: Label
 
+    @FXML
+    lateinit var rootBorderPane: BorderPane
+
     private val list = FXCollections.observableArrayList<Cipher>()
+
+    private val cipherView = CipherView()
+    private val emptyView = loadEmptyView()
 
     @FXML
     private fun initialize() {
@@ -41,6 +50,19 @@ class DashboardController : Controller() {
 
         cipherList.items = list
         cipherList.setCellFactory { CipherListItem() }
+        cipherList.selectionModel.selectedItemProperty().addListener { _, _, cipher ->
+            rootBorderPane.center = if (cipher != null) {
+                cipherView.setCipher(cipher)
+                cipherView
+            } else emptyView
+        }
+
+        rootBorderPane.center = emptyView
+    }
+
+    private fun loadEmptyView(): VBox {
+        val loader = Fxml.getLoader("/fxml/dashboard/emptyview.fxml")
+        return loader.load()
     }
 
     // get ciphers from local repository and update UI

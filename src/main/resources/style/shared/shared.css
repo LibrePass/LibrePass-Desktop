@@ -4,7 +4,7 @@
 }
 
 /*Button*/
-.button {
+.button, .toggle-button{
     -fx-background-radius: 8px;
     -fx-background-insets: 0px 0px 0px 0px;
 }
@@ -54,6 +54,14 @@
 }
 
 .list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+}
+
+/*Scroll pane*/
+.scroll-pane {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;

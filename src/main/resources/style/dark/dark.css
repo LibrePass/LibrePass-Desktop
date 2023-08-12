@@ -6,16 +6,16 @@
 }
 
 /*Button*/
-.button {
+.button, .toggle-button {
     -fx-background-color: #343434;
     -fx-text-fill: white;
 }
 
-.button:hover {
+.button:hover, .toggle-button:hover, .toggle-button:selected {
     -fx-background-color: #5b5b5b;
 }
 
-.button:pressed {
+.button:pressed, .toggle-button:pressed {
     -fx-background-color: #464646;
     -fx-text-fill: #e1e1e1;
 }
@@ -138,4 +138,9 @@
 .scroll-bar:horizontal .decrement-button:pressed,
 .scroll-bar:vertical .decrement-button:pressed {
     -fx-background-color: #2a2a2a;
+}
+
+/*Cipher*/
+.cipher-info {
+    -fx-background-color: derive(-fx-base,5%);
 }
