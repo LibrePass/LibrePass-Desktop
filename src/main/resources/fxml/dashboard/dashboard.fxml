@@ -4,14 +4,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
+<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="590.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
    <top>
       <fx:include fx:id="menu" source="menu.fxml" />
    </top>
@@ -31,16 +31,16 @@
                   <Insets left="5.0" />
                </GridPane.margin>
                <children>
-                  <Button lineSpacing="1.0" mnemonicParsing="false" text="%add.cipher" />
-                  <Button mnemonicParsing="false" text="%delete.cipher" />
+                  <TextField prefHeight="33.0" prefWidth="198.0" promptText="Type to search" />
+                  <Button lineSpacing="1.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" text="+" />
                </children>
+               <padding>
+                  <Insets top="2.0" />
+               </padding>
             </HBox>
          </children>
       </GridPane>
    </left>
-   <center>
-      <VBox fx:id="mainPanel" prefHeight="455.0" prefWidth="509.0" BorderPane.alignment="CENTER" />
-   </center>
    <bottom>
       <Label fx:id="statusLabel" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
