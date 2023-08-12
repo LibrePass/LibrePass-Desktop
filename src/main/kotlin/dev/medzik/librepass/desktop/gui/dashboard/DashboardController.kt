@@ -9,6 +9,7 @@ import dev.medzik.librepass.desktop.config.StoreCipher
 import dev.medzik.librepass.desktop.config.UserSecrets
 import dev.medzik.librepass.desktop.gui.Controller
 import dev.medzik.librepass.desktop.gui.components.CipherListItem
+import dev.medzik.librepass.desktop.locale.LangManager
 import dev.medzik.librepass.desktop.locale.LangManager.tr
 import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
@@ -62,6 +63,7 @@ class DashboardController : Controller() {
 
     private fun loadEmptyView(): VBox {
         val loader = Fxml.getLoader("/fxml/dashboard/emptyview.fxml")
+        loader.resources = LangManager.getLocale()
         return loader.load()
     }
 

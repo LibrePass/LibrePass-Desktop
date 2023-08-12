@@ -13,7 +13,7 @@
             <Image url="@../../img/dashboard/stars.png" />
          </image>
       </ImageView>
-      <Label text="No cipher selected">
+      <Label text="%dashboard.cipherempty.title">
          <font>
             <Font size="21.0" />
          </font>

@@ -17,14 +17,14 @@
          <content>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
-                  <Label alignment="CENTER" text="Item infromation">
+                  <Label alignment="CENTER" text="%dashboard.cipher.info">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-radius: 20px;" styleClass="cipher-info">
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" styleClass="cipher-info">
                      <children>
-                        <Label text="Name" textFill="#9c9c9c97" />
+                        <Label text="%dashboard.cipher.name" textFill="#9c9c9c97" />
                         <Label fx:id="name" text="Name">
                            <font>
                               <Font size="16.0" />
@@ -32,13 +32,13 @@
                         </Label>
                         <AnchorPane>
                            <children>
-                              <Label text="Username" textFill="#9c9c9c97" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Label text="%dashboard.cipher.username" textFill="#9c9c9c97" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                               <Label fx:id="username" layoutY="21.0" text="Username" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="21.0">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="45.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button mnemonicParsing="false" onAction="#onUsernameCopy" prefHeight="44.0" prefWidth="45.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <graphic>
                                     <ImageView fitHeight="27.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -50,13 +50,13 @@
                         </AnchorPane>
                         <AnchorPane layoutX="25.0" layoutY="71.0">
                            <children>
-                              <Label text="Password" textFill="#9c9c9c97" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Label text="%dashboard.cipher.password" textFill="#9c9c9c97" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                               <Label fx:id="password" layoutY="21.0" text="Password" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="21.0">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button mnemonicParsing="false" onAction="#onPasswordCopy" prefHeight="45.0" prefWidth="45.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <graphic>
                                     <ImageView fitHeight="27.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -64,7 +64,14 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
-                              <ToggleButton fx:id="passwordToggleShow" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="SW" AnchorPane.rightAnchor="50.0" />
+                              <ToggleButton fx:id="passwordToggleShow" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" AnchorPane.rightAnchor="50.0">
+                                 <graphic>
+                                    <ImageView fx:id="passwordToggleIcon" fitHeight="27.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/dashboard/visibility_off.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></ToggleButton>
                            </children>
                         </AnchorPane>
                      </children>
@@ -78,6 +85,13 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="81.0" text="Edit" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Button mnemonicParsing="false" prefHeight="42.0" text="%dashboard.cipher.edit" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/dashboard/edit.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </fx:root>

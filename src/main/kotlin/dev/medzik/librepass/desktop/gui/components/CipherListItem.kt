@@ -29,6 +29,8 @@ class CipherListItem : ListCell<Cipher>() {
     private var currentCipher: Cipher? = null
 
     companion object {
+        private val userIcon = Image(CipherListItem::class.java.getResourceAsStream("/img/dashboard/user.png"))
+
         // icon cache to prevent calling api
         private var iconsCache = HashMap<String, Image>()
 
@@ -61,21 +63,24 @@ class CipherListItem : ListCell<Cipher>() {
                 loaded = true
             }
         }
-        name.text = cipher!!.loginData?.name
+        updateIcon(cipher!!)
+
+        name.text = cipher.loginData?.name
         username.text = cipher.loginData?.username
 
-        updateIcon(cipher)
         graphic = root
 
         currentCipher = cipher
     }
 
     private fun updateIcon(cipher: Cipher) = CompletableFuture.runAsync {
-        val urls = cipher.loginData?.uris!!
+        val urls = cipher.loginData?.uris
 
-        if (urls.isNotEmpty()) {
+        if (!urls.isNullOrEmpty()) {
             val url = CipherClient.getFavicon(domain = urls[0])
             icon.image = getIcon(url)
+        } else {
+            icon.image = userIcon
         }
     }
 }

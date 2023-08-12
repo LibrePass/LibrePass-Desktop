@@ -67,3 +67,7 @@
     -fx-border-width: 0;
     -fx-border-radius: 0;
 }
+
+.cipher-info {
+    -fx-background-radius: 10px;
+}
