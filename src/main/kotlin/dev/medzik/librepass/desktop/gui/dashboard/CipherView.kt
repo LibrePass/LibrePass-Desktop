@@ -12,6 +12,8 @@ import javafx.scene.input.ClipboardContent
 import javafx.scene.layout.AnchorPane
 
 private const val BULLET = '\u2022'
+
+// TODO: Split into components
 class CipherView : AnchorPane() {
 
     @FXML
@@ -25,6 +27,9 @@ class CipherView : AnchorPane() {
 
     @FXML
     private lateinit var username: Label
+
+    @FXML
+    private lateinit var notes: Label
 
     private lateinit var cipher: Cipher
 
@@ -48,6 +53,7 @@ class CipherView : AnchorPane() {
 
         name.text = cipher.loginData?.name
         username.text = cipher.loginData?.username
+        notes.text = cipher.loginData?.notes
 
         setPassword(cipher.loginData?.password!!, true)
         passwordToggleShow.isSelected = false
@@ -66,6 +72,9 @@ class CipherView : AnchorPane() {
 
     @FXML
     fun onPasswordCopy() = copy(cipher.loginData?.password!!)
+
+    @FXML
+    fun onNotesCopy() = copy(notes.text)
 
     fun copy(text: String) {
         val clipboard = Clipboard.getSystemClipboard()
