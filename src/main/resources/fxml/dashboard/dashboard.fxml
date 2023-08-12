@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -21,23 +23,30 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints fillHeight="false" maxHeight="39.0" minHeight="10.0" prefHeight="39.0" />
+            <RowConstraints vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ListView fx:id="cipherList" cacheShape="false" centerShape="false" prefHeight="445.0" prefWidth="250.0" scaleShape="false" />
-            <HBox spacing="5.0" GridPane.rowIndex="1">
+            <HBox spacing="5.0">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
                <children>
-                  <TextField prefHeight="33.0" prefWidth="198.0" promptText="Type to search" />
-                  <Button lineSpacing="1.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0" text="+" />
+                  <TextField prefHeight="33.0" prefWidth="198.0" promptText="%dashboard.search" />
+                  <Button lineSpacing="1.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="34.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../img/dashboard/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
                <padding>
                   <Insets top="2.0" />
                </padding>
             </HBox>
+            <ListView fx:id="cipherList" cacheShape="false" centerShape="false" prefHeight="445.0" prefWidth="250.0" scaleShape="false" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </left>

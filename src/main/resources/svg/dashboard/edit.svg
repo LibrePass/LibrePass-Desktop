@@ -13,7 +13,7 @@
    fill="#000000"
    version="1.1"
    id="svg6"
-   sodipodi:docname="copy.svg"
+   sodipodi:docname="edit.svg"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <metadata
      id="metadata12">
@@ -49,11 +49,11 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg6" />
   <path
-     d="M0 0h24v24H0V0z"
+     d="M0 0h24v24H0z"
      fill="none"
      id="path2" />
   <path
-     d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+     d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
      id="path4"
      style="fill:#999999" />
 </svg>
