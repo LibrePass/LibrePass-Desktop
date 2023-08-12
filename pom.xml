@@ -7,7 +7,8 @@
     <groupId>dev.medzik.librepass</groupId>
     <artifactId>desktop</artifactId>
     <version>1.0.0-alpha1</version>
-    <name>desktop</name>
+    <name>LibrePass Desktop</name>
+    <description>Official LibrePass client</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,6 +16,7 @@
         <javafx.version>17.0.2</javafx.version>
         <librepass.api.version>0.1.0-SNAPSHOT-08</librepass.api.version>
         <kotlin.version>1.9.0</kotlin.version>
+        <controlsfx.version>11.1.2</controlsfx.version>
 
         <jmods.dir>${project.build.directory}/modules</jmods.dir>
     </properties>
@@ -55,7 +57,7 @@
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
-            <version>11.1.2</version>
+            <version>${controlsfx.version}</version>
         </dependency>
     </dependencies>
 
@@ -255,47 +257,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.panteleyev</groupId>
-                <artifactId>jpackage-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <!-- Execution for Linux-->
-                    <execution>
-                        <id>jpackage-linux</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jpackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <name>LibrePass</name>
-                    <appVersion>1.0.0</appVersion>
-                    <vendor>LibrePass Team</vendor>
-                    <destination>target/dist</destination>
-                    <module>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App</module>
-                    <type>APP_IMAGE</type>
-
-                    <modulePaths>
-                        <modulePath>${jmods.dir}</modulePath>
-                    </modulePaths>
-
-                    <addModules>
-                        <module>dev.medzik.librepass.desktop</module>
-                    </addModules>
-
-                    <javaOptions>
-                        <option>-Dfile.encoding=UTF-8</option>
-                        <option>-Xmx200M</option>
-                        <option>-XX:MaxRAM=300M</option>
-                        <option>-Xms50M</option>
-                        <option>-XX:+UseCompressedOops</option>
-                        <option>-XX:+UseG1GC</option>
-                    </javaOptions>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
@@ -324,6 +285,316 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <name>librepass</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>LibrePass Team</vendor>
+                    <destination>${project.build.directory}/dist</destination>
+                    <module>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App</module>
+
+                    <modulePaths>
+                        <modulePath>${jmods.dir}</modulePath>
+                    </modulePaths>
+
+                    <addModules>
+                        <module>dev.medzik.librepass.desktop</module>
+                    </addModules>
+
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                        <option>-Xmx200M</option>
+                        <option>-XX:MaxRAM=300M</option>
+                        <option>-Xms50M</option>
+                        <option>-XX:+UseCompressedOops</option>
+                        <option>-XX:+UseG1GC</option>
+                    </javaOptions>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>nsis</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.panteleyev</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <name>librepass</name>
+                            <type>APP_IMAGE</type>
+                            <destination>${project.build.directory}</destination>
+                            <icon>${project.basedir}/package/windows/icon.ico</icon>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>jpackage-nsis</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.digitalmediaserver</groupId>
+                        <artifactId>nsis-maven-plugin</artifactId>
+                        <version>1.0.3</version>
+                        <configuration>
+                            <compression>lzma</compression>
+                            <compressionIsFinal>true</compressionIsFinal>
+                            <compressionDictSize>64</compressionDictSize>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build-windows-installer</id>
+                                <configuration>
+                                    <scriptFile>${basedir}/package/windows/installer.nsi</scriptFile>
+                                    <outputFile>${basedir}/target/dist/librepass-${project.version}-${os.arch}-setup.exe</outputFile>
+                                </configuration>
+                                <goals>
+                                    <goal>generate-headerfile</goal>
+                                    <goal>make</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>deb</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>jdeb</artifactId>
+                        <groupId>org.vafer</groupId>
+                        <version>1.10</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jdeb</goal>
+                                </goals>
+                                <configuration>
+                                    <deb>${project.build.directory}/dist/librepass_${project.version}_${os.arch}.deb</deb>
+                                    <verbose>true</verbose>
+                                    <snapshotExpand>true</snapshotExpand>
+                                    <snapshotEnv>USER</snapshotEnv>
+                                    <controlDir>${basedir}/package/deb/control/</controlDir>
+                                    <dataSet>
+                                        <!-- /usr/lib/librepass -->
+                                        <data>
+                                            <src>${project.build.directory}/modules</src>
+                                            <type>directory</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/lib/librepass</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                                <filemode>777</filemode>
+                                            </mapper>
+                                        </data>
+                                        <!-- /usr/bin/librepass-->
+                                        <data>
+                                            <src>${basedir}/package/deb/usr/bin/librepass</src>
+                                            <dst>librepass</dst>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/bin</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                                <filemode>777</filemode>
+                                            </mapper>
+                                        </data>
+                                        <!-- /usr/share/applications/librepass.desktop-->
+                                        <data>
+                                            <src>${basedir}/package/share/usr/share/applications/librepass.desktop</src>
+                                            <dst>librepass.desktop</dst>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/share/applications</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                                <filemode>777</filemode>
+                                            </mapper>
+                                        </data>
+                                        <!-- /usr/share/icons/hicolor/scalable/apps/librepass.svg-->
+                                        <data>
+                                            <src>${basedir}/package/share/usr/share/icons/hicolor/scalable/apps/librepass.svg</src>
+                                            <dst>librepass.svg</dst>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/share/icons/hicolor/scalable/apps/</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                                <filemode>777</filemode>
+                                            </mapper>
+                                        </data>
+                                    </dataSet>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>rpm</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>rpm-maven-plugin</artifactId>
+                        <version>2.2.0</version>
+                        <configuration>
+                            <name>librepass</name>
+                            <version>${project.version}</version>
+                            <release>1</release>
+                            <group>Applications/Internet</group>
+                            <summary>${project.description}</summary>
+                            <description>${project.description}</description>
+                            <needarch>true</needarch>
+                            <license>GPL (C) 2023</license>
+
+                            <requires>
+                                <require>jre-17</require>
+                            </requires>
+                            <mappings>
+                                <!-- /usr/lib/librepass -->
+                                <mapping>
+                                    <directory>/usr/lib/librepass</directory>
+                                    <filemode>777</filemode>
+                                    <sources>
+                                        <source>
+                                            <location>${project.build.directory}/modules</location>
+                                        </source>
+                                    </sources>
+                                </mapping>
+                                <!-- /usr/bin/librepass-->
+                                <mapping>
+                                    <directory>/usr/bin</directory>
+                                    <directoryIncluded>false</directoryIncluded>
+                                    <filemode>777</filemode>
+                                    <sources>
+                                        <source>
+                                            <location>${basedir}/package/rpm/usr/bin/librepass</location>
+                                            <destination>librepass</destination>
+                                        </source>
+                                    </sources>
+                                </mapping>
+                                <!-- /usr/share/applications/librepass.desktop-->
+                                <!-- /usr/share/icons/hicolor/scalable/apps/librepass.svg-->
+                                <mapping>
+                                    <directory>/usr/share</directory>
+                                    <directoryIncluded>false</directoryIncluded>
+                                    <filemode>777</filemode>
+                                    <sources>
+                                        <source>
+                                            <location>${basedir}/package/share/usr/share/applications/librepass.desktop</location>
+                                            <destination>applications/librepass.desktop</destination>
+                                        </source>
+                                        <source>
+                                            <location>${basedir}/package/share/usr/share/icons/hicolor/scalable/apps/librepass.svg</location>
+                                            <destination>icons/hicolor/scalable/apps/librepass.svg</destination>
+                                        </source>
+                                    </sources>
+                                </mapping>
+                            </mappings>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>generate-rpm</id>
+                                <goals>
+                                    <goal>rpm</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>mac</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.panteleyev</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <!-- Execution for mac-->
+                            <execution>
+                                <id>jpackage-mac</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                                <configuration>
+                                    <icon>${project.basedir}/package/osx/icon.icns</icon>
+
+                                    <macPackageName>LibrePass</macPackageName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>portable</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.panteleyev</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <destination>${project.build.directory}/dist</destination>
+                            <type>APP_IMAGE</type>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>jpackage-portable</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
