@@ -19,7 +19,7 @@
                <children>
                   <VBox minHeight="-Infinity" prefHeight="214.0" spacing="10.0">
                      <children>
-                        <Label alignment="CENTER" text="%dashboard.cipher.info">
+                        <Label alignment="CENTER" text="%dashboard.cipher.login">
                            <font>
                               <Font size="21.0" />
                            </font>
