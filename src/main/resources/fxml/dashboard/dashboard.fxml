@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="590.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
+<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="356.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
    <top>
       <fx:include fx:id="menu" source="menu.fxml" />
    </top>
@@ -23,7 +23,7 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints fillHeight="false" maxHeight="39.0" minHeight="10.0" prefHeight="39.0" />
+            <RowConstraints fillHeight="false" maxHeight="39.0" minHeight="39.0" prefHeight="39.0" />
             <RowConstraints vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
