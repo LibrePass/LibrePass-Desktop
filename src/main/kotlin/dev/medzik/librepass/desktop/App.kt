@@ -30,7 +30,7 @@ class App : Application() {
         stage.icons.add(Image(App::class.java.getResourceAsStream("/img/logo.png")))
         App.hostServices = hostServices!!
 
-        val resources: ResourceBundle = LangManager.init()
+        val resources = LangManager.init()
 
         StateManager.init(scene, resources)
         StyleManager.init()
