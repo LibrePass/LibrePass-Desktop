@@ -20,12 +20,9 @@
 }
 
 /*Textfield*/
-.text-field {
+.text-field .text-field:focused {
     -fx-border-radius: 3px;
-}
-
-.text-field:focused {
-    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
 }
 
 /** Switch */
@@ -70,4 +67,9 @@
 
 .cipher-info {
     -fx-background-radius: 10px;
+}
+
+.search-text-field, .search-text-field:focused {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
 }
