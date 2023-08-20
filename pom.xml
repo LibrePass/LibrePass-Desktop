@@ -279,7 +279,6 @@
                                 <option>-XX:+UseCompressedOops</option>
                                 <option>-XX:+UseG1GC</option>
                             </options>
-
                             <jmodsPath>${jmods.dir}</jmodsPath>
                         </configuration>
                     </execution>
