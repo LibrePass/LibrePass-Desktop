@@ -76,11 +76,11 @@ class CipherListItem : ListCell<Cipher>() {
     private fun updateIcon(cipher: Cipher) = CompletableFuture.runAsync {
         val urls = cipher.loginData?.uris
 
-        if (!urls.isNullOrEmpty()) {
+        icon.image = if (!urls.isNullOrEmpty()) {
             val url = CipherClient.getFavicon(domain = urls[0])
-            icon.image = getIcon(url)
+            getIcon(url)
         } else {
-            icon.image = userIcon
+            userIcon
         }
     }
 }
