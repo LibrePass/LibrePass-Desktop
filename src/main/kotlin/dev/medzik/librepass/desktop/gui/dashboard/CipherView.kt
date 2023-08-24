@@ -76,7 +76,7 @@ class CipherView : AnchorPane() {
     @FXML
     fun onNotesCopy() = copy(notes.text)
 
-    fun copy(text: String) {
+    private fun copy(text: String) {
         val clipboard = Clipboard.getSystemClipboard()
         val content = ClipboardContent()
         content.putString(text)
