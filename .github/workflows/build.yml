@@ -1,0 +1,68 @@
+name: Build binaries
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os:
+          - debian
+          - fedora
+          - osx
+          - windows
+
+        include:
+          - os: debian
+            runner: ubuntu-latest
+            cmd: mvn clean package -P deb
+            path: target/dist/*.deb
+            ext: deb
+
+          - os: fedora
+            runner: ubuntu-latest
+            cmd: mvn clean package -P rpm
+            path: target/rpm/librepass/RPMS/x86_64/*.rpm
+            ext: rpm
+
+          - os: osx
+            runner: macos-latest
+            cmd: mvn clean package -P mac
+            path: target/dist/*.dmg
+            ext: dmg
+
+          - os: windows
+            runner: windows-latest
+            cmd: mvn clean package -P nsis
+            path: target/dist/*.exe
+            ext: exe
+
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build
+        run: ${{ matrix.cmd }}
+
+      - name: Prepare artifact
+        run: mv ${{ matrix.path }} librepass.${{ matrix.ext }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: librepass-${{ matrix.os }}
+          path: ./librepass.${{ matrix.ext }}
