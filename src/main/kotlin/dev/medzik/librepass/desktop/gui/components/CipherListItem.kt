@@ -10,7 +10,6 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import java.net.URL
-import java.util.concurrent.CompletableFuture
 
 class CipherListItem : ListCell<Cipher>() {
     @FXML
@@ -35,14 +34,16 @@ class CipherListItem : ListCell<Cipher>() {
         private var iconsCache = HashMap<String, Image>()
 
         fun getIcon(url: String): Image? {
-            return if (iconsCache.containsKey(url))
+            return if (iconsCache.containsKey(url)) {
                 iconsCache[url]
-            else {
-                iconsCache.put(url, add(url))
+            } else {
+                val icon = get(url)
+                iconsCache[url] = icon
+                icon
             }
         }
 
-        private fun add(url: String): Image {
+        private fun get(url: String): Image {
             val image = URL(url).openStream()
             return Image(image)
         }
@@ -63,21 +64,22 @@ class CipherListItem : ListCell<Cipher>() {
                 loaded = true
             }
         }
+
+        currentCipher = cipher
         updateIcon(cipher!!)
 
         name.text = cipher.loginData?.name
         username.text = cipher.loginData?.username
 
         graphic = root
-
-        currentCipher = cipher
     }
 
-    private fun updateIcon(cipher: Cipher) = CompletableFuture.runAsync {
+    private fun updateIcon(cipher: Cipher) {
         val urls = cipher.loginData?.uris
 
         icon.image = if (!urls.isNullOrEmpty())
             getIcon(CipherClient.getFavicon(domain = urls[0]))
-        else userIcon
+        else
+            userIcon
     }
 }
