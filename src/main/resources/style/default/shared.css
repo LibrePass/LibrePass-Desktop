@@ -20,7 +20,7 @@
 }
 
 /*Textfield*/
-.text-field .text-field:focused {
+.text-field, .text-field:focused {
     -fx-border-radius: 3px;
     -fx-background-radius: 3px;
 }
