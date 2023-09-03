@@ -97,7 +97,7 @@
 
 /*ScrollBar */
 .scroll-bar {
-    -fx-background-color: transparent;
+    -fx-background-color: #262626;
 }
 
 .scroll-bar:horizontal .track,
@@ -120,25 +120,6 @@
     -fx-background-color: #424242;
 }
 
-.scroll-bar:horizontal .increment-button,
-.scroll-bar:vertical .increment-button,
-.scroll-bar:horizontal .decrement-button,
-.scroll-bar:vertical .decrement-button {
-    -fx-background-color: transparent;
-}
-
-.scroll-bar:horizontal .increment-button:hover,
-.scroll-bar:vertical .increment-button:hover,
-.scroll-bar:horizontal .decrement-button:hover,
-.scroll-bar:vertical .decrement-button:hover {
-}
-
-.scroll-bar:horizontal .increment-button:pressed,
-.scroll-bar:vertical .increment-button:pressed,
-.scroll-bar:horizontal .decrement-button:pressed,
-.scroll-bar:vertical .decrement-button:pressed {
-    -fx-background-color: #2a2a2a;
-}
 
 /*Cipher*/
 .cipher-info {
