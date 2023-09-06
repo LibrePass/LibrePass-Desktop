@@ -1,2 +1,2 @@
-# LibrePass-Desktop
+# LibrePass Desktop
 LibrePass desktop app
