@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox minHeight="-Infinity" prefHeight="278.0" prefWidth="432.0" spacing="10.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.components.cipher.CipherSection">
+   <children>
+      <Label alignment="CENTER" text="Name">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <VBox minHeight="-Infinity" spacing="5.0" styleClass="cipher-info">
+         <children>
+            <Label text="%dashboard.cipher.name" textFill="#9c9c9c97" />
+            <Label text="Name">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <AnchorPane>
+               <children>
+                  <Label text="%dashboard.cipher.username" textFill="#9c9c9c97" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="username" layoutY="21.0" text="Username" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="21.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="45.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/dashboard/copy.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="25.0" layoutY="71.0">
+               <children>
+                  <Label text="%dashboard.cipher.password" textFill="#9c9c9c97" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="password" layoutY="21.0" text="Password" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="21.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/dashboard/copy.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ToggleButton fx:id="passwordToggleShow" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" AnchorPane.rightAnchor="50.0">
+                     <graphic>
+                        <ImageView fx:id="passwordToggleIcon" fitHeight="27.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/dashboard/visibility_off.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </VBox>
+   </children>
+</VBox>
