@@ -64,8 +64,7 @@ class MenuController {
     }
 
     @FXML
-    fun onExit() =
-        Platform.exit()
+    fun onExit() = Platform.exit()
 
     @FXML
     fun onAbout() = aboutDialog.show()
