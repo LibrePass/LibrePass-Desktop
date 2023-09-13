@@ -36,8 +36,12 @@
 }
 
 /*List View*/
-.list-view .list-cell {
+.list-view {
     -fx-background-color: derive(-fx-base,10%);
+}
+
+.list-view .list-cell {
+    -fx-background-color: transparent;
 }
 
 .list-view .list-cell:selected {

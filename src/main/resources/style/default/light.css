@@ -76,13 +76,7 @@
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: -fx-accent;
     -fx-text-fill: white;
-}
-
-.list-view {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
 }
 
 .list-view .list-cell .label {

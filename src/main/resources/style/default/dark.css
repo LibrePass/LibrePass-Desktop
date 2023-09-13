@@ -78,15 +78,6 @@
 }
 
 /* ListView */
-.list-view .list-cell:selected {
-    -fx-background-color: -fx-accent;
-}
-
-.list-view {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
 .list-view .list-cell .label {
     -fx-text-fill: white;
 }
