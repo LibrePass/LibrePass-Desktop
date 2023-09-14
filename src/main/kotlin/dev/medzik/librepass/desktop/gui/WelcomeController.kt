@@ -46,14 +46,11 @@ class WelcomeController : Controller() {
         }
     }
 
-    override fun onStart() =
-        fadeInTransition.play()
+    override fun onStart() = fadeInTransition.play()
 
     @FXML
-    fun onLogin() =
-        StateManager.setState(State.LOGIN)
+    fun onLogin() = StateManager.setState(State.LOGIN)
 
     @FXML
-    fun onRegister() =
-        StateManager.setState(State.REGISTER)
+    fun onRegister() = StateManager.setState(State.REGISTER)
 }
