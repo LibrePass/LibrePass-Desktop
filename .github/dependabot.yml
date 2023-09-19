@@ -12,3 +12,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # Ignore major version of javafx
+      - dependency-name: "*javafx*"
+        update-types: ["version-update:semver-major"]
