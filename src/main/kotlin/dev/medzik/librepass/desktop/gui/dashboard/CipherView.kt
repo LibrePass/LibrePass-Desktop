@@ -44,7 +44,7 @@ class CipherView : AnchorPane() {
 
         passwordToggleShow.selectedProperty().addListener { _, _, selected ->
             passwordToggleIcon.image = if (selected) visibleImage else visibleOffImage
-            setPassword(cipher.loginData?.password!!, !selected)
+            setPassword(cipher.loginData?.password, !selected)
         }
     }
 
@@ -55,16 +55,19 @@ class CipherView : AnchorPane() {
         username.text = cipher.loginData?.username
         notes.text = cipher.loginData?.notes
 
-        setPassword(cipher.loginData?.password!!, true)
+        setPassword(cipher.loginData?.password, true)
+
         passwordToggleShow.isSelected = false
     }
 
-    private fun setPassword(text: String, mask: Boolean) {
+    private fun setPassword(text: String?, mask: Boolean) {
         password.text = ""
-        if (mask) {
-            for (i in text)
-                password.text += BULLET
-        } else password.text = text
+        if (!text.isNullOrEmpty()) {
+            if (mask) {
+                for (i in text)
+                    password.text += BULLET
+            } else password.text = text
+        }
     }
 
     @FXML
