@@ -102,6 +102,7 @@ data class Settings(
 )
 
 data class StoreCipher(
+    val id: UUID,
     val owner: UUID,
     var encryptedCipher: EncryptedCipher
 )
