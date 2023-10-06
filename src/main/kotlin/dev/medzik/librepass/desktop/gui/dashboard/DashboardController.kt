@@ -110,11 +110,11 @@ class DashboardController : Controller() {
                 val lastSync = credentials.lastSync
 
                 if (lastSync != null) {
-                    // update last sync date
-                    credentials = Config.overrideObject("credentials") { credentials.copy(lastSync = Date().time / 1000) }
-
                     // get ciphers from API
                     val syncResponse = CipherClient(credentials.apiKey).sync(Date(lastSync * 1000))
+
+                    // update last sync date
+                    credentials = Config.overrideObject("credentials") { credentials.copy(lastSync = Date().time / 1000) }
 
                     // delete ciphers from the local database that are not in API response
                     for (i in 0..<cachedCiphers.size) {
@@ -125,14 +125,13 @@ class DashboardController : Controller() {
 
                     // add ciphers from response
                     for (cipher in syncResponse.ciphers) {
-                        if (!cachedCiphers.any { it.encryptedCipher.id == cipher.id }) {
-                            cachedCiphers.add(
-                                StoreCipher(
-                                    owner = cipher.owner,
-                                    encryptedCipher = cipher
-                                )
+                        cachedCiphers.add(
+                            StoreCipher(
+                                id = cipher.id,
+                                owner = cipher.owner,
+                                encryptedCipher = cipher
                             )
-                        }
+                        )
                     }
 
                     Config.writeObject("ciphers", cachedCiphers)
@@ -147,6 +146,7 @@ class DashboardController : Controller() {
                     for (cipher in ciphersResponse) {
                         ciphers.add(
                             StoreCipher(
+                                id = cipher.id,
                                 owner = cipher.owner,
                                 encryptedCipher = cipher
                             )
