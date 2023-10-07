@@ -160,7 +160,7 @@ class DashboardController : Controller() {
                     setStatus(tr("status.error.network"))
                 else {
                     setStatus("Error: ${e.message}")
-                    e.printStackTrace()
+                    throw RuntimeException(e)
                 }
             } finally {
                 // get cipher from local repository and update UI
