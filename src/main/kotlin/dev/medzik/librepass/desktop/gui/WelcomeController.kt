@@ -12,7 +12,6 @@ import javafx.fxml.FXML
 import javafx.scene.image.ImageView
 import javafx.util.Duration
 import org.controlsfx.control.ToggleSwitch
-import java.util.*
 
 class WelcomeController : Controller() {
     @FXML
