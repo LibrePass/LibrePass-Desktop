@@ -300,7 +300,6 @@
                     <modulePaths>
                         <modulePath>${jmods.dir}</modulePath>
                     </modulePaths>
-
                     <addModules>
                         <module>dev.medzik.librepass.desktop</module>
                     </addModules>
