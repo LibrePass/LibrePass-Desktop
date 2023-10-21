@@ -21,15 +21,6 @@
         <jmods.dir>${project.build.directory}/modules</jmods.dir>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>medzik</id>
-            <name>Medzik's Maven Repository</name>
-            <url>https://maven.medzik.dev/snapshots</url>
-        </repository>
-    </repositories>
-
-
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
