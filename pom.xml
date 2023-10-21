@@ -6,7 +6,7 @@
 
     <groupId>dev.medzik.librepass</groupId>
     <artifactId>desktop</artifactId>
-    <version>1.0.0-alpha1</version>
+    <version>1.0.0-alpha2</version >
     <name>LibrePass Desktop</name>
     <description>Official LibrePass client</description>
 
