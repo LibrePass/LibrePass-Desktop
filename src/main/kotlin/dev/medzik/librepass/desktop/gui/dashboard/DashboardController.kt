@@ -1,6 +1,5 @@
 package dev.medzik.librepass.desktop.gui.dashboard
 
-import dev.medzik.libcrypto.EncryptException
 import dev.medzik.librepass.client.api.CipherClient
 import dev.medzik.librepass.client.errors.ClientException
 import dev.medzik.librepass.desktop.config.Config
@@ -81,7 +80,7 @@ class DashboardController : Controller() {
         val decryptedCiphers = ciphers.map {
             try {
                 Cipher(it.encryptedCipher, userSecrets.secretKey)
-            } catch (e: EncryptException) {
+            } catch (e: Exception) { // TODO
                 Cipher(
                     id = it.encryptedCipher.id,
                     owner = it.owner,

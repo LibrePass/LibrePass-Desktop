@@ -1,5 +1,6 @@
 package dev.medzik.librepass.desktop.gui.auth
 
+import dev.medzik.libcrypto.Hex
 import dev.medzik.librepass.client.api.AuthClient
 import dev.medzik.librepass.client.errors.ApiException
 import dev.medzik.librepass.desktop.config.Config
@@ -65,7 +66,7 @@ class LoginController : Controller() {
                 userId = loginCredentials.userId,
                 email = email,
                 apiKey = loginCredentials.apiKey,
-                publicKey = loginCredentials.keyPair.publicKey,
+                publicKey = Hex.encode(loginCredentials.publicKey),
                 // Argon2id parameters
                 memory = preLogin.memory,
                 iterations = preLogin.iterations,
@@ -74,7 +75,7 @@ class LoginController : Controller() {
             Config.writeObject("credentials", credentials)
 
             val userSecrets = UserSecrets(
-                privateKey = loginCredentials.keyPair.privateKey,
+                privateKey = Hex.encode(loginCredentials.privateKey),
                 secretKey = loginCredentials.secretKey
             )
             Config.writeObject("user_secrets", userSecrets)
