@@ -6,7 +6,7 @@
 
     <groupId>dev.medzik.librepass</groupId>
     <artifactId>desktop</artifactId>
-    <version>1.0.0-alpha2</version >
+    <version>1.0.0-alpha2</version>
     <name>LibrePass Desktop</name>
     <description>Official LibrePass client</description>
 
@@ -126,6 +126,7 @@
                                 annotations,
                                 okio-jvm,
                                 okhttp-jvm,
+                                otp-java
                             </excludeArtifactIds>
                         </configuration>
                     </execution>
@@ -227,7 +228,7 @@
                                     <moduleInfoSource>
                                         open module otp.java {
                                             requires org.apache.commons.codec;
-                                            exports com.github.bastiaanjansen;
+                                            exports com.bastiaanjansen.otp;
                                         }
                                     </moduleInfoSource>
                                 </module>
