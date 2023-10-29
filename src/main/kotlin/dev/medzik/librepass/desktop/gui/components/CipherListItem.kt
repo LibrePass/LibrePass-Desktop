@@ -49,7 +49,10 @@ class CipherListItem : ListCell<Cipher>() {
         }
     }
 
-    override fun updateItem(cipher: Cipher?, empty: Boolean) {
+    override fun updateItem(
+        cipher: Cipher?,
+        empty: Boolean
+    ) {
         super.updateItem(cipher, empty)
         if (empty) {
             graphic = null
@@ -77,9 +80,10 @@ class CipherListItem : ListCell<Cipher>() {
     private fun updateIcon(cipher: Cipher) {
         val urls = cipher.loginData?.uris
 
-        icon.image = if (!urls.isNullOrEmpty())
-            getIcon(CipherClient.getFavicon(domain = urls[0]))
-        else
-            userIcon
+        icon.image =
+            if (!urls.isNullOrEmpty())
+                getIcon(CipherClient.getFavicon(domain = urls[0]))
+            else
+                userIcon
     }
 }

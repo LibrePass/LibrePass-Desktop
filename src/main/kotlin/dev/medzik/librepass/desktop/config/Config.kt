@@ -8,6 +8,7 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
+
 object Config {
     val workDir = File(getWorkDir("librepass"))
 
@@ -31,21 +32,27 @@ object Config {
 
     private fun getWorkDir(name: String): String {
         val osname = System.getProperty("os.name").lowercase(Locale.getDefault())
-        if (osname.startsWith("windows")) return Paths.get(System.getenv("APPDATA"), name)
-            .toString() else if (osname.contains("nux") || osname.contains("freebsd")) return Paths.get(
-            System.getProperty("user.home"),
-            ".config",
-            name
-        ).toString() else if (osname.contains("mac") || osname.contains("darwin")) return Paths.get(
-            System.getProperty("user.home"),
-            "Library",
-            "Application Support",
-            name
-        ).toString()
+        if (osname.startsWith("windows"))
+            return Paths.get(System.getenv("APPDATA"), name)
+                .toString() else if (osname.contains("nux") || osname.contains("freebsd"))
+            return Paths.get(
+                System.getProperty("user.home"),
+                ".config",
+                name
+            ).toString() else if (osname.contains("mac") || osname.contains("darwin"))
+            return Paths.get(
+                System.getProperty("user.home"),
+                "Library",
+                "Application Support",
+                name
+            ).toString()
         return ""
     }
 
-    fun writeObject(name: String, obj: Any): Any {
+    fun writeObject(
+        name: String,
+        obj: Any
+    ): Any {
         val file = File(workDir, "$name.json")
         val serialized = Gson().toJson(obj)
 
@@ -60,7 +67,10 @@ object Config {
         return Gson().fromJson(json, object : TypeToken<T>() {}.type)
     }
 
-    inline fun <reified T : Any> overrideObject(name: String, obj: (T) -> T): T {
+    inline fun <reified T : Any> overrideObject(
+        name: String,
+        obj: (T) -> T
+    ): T {
         val readed = readObject<T>(name)
         val ret = obj.invoke(readed)
         writeObject(name, ret)
@@ -79,13 +89,10 @@ object Config {
 data class Credentials(
     val userId: UUID,
     val email: String,
-
     val apiUrl: String? = null,
     val apiKey: String,
     val publicKey: String,
-
     val lastSync: Long? = null,
-
     // argon2id parameters
     val memory: Int,
     val iterations: Int,

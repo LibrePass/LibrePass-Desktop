@@ -15,7 +15,6 @@ private const val BULLET = '\u2022'
 
 // TODO: Split into components
 class CipherView : AnchorPane() {
-
     @FXML
     private lateinit var name: Label
 
@@ -60,13 +59,18 @@ class CipherView : AnchorPane() {
         passwordToggleShow.isSelected = false
     }
 
-    private fun setPassword(text: String?, mask: Boolean) {
+    private fun setPassword(
+        text: String?,
+        mask: Boolean
+    ) {
         password.text = ""
         if (!text.isNullOrEmpty()) {
             if (mask) {
                 for (i in text)
                     password.text += BULLET
-            } else password.text = text
+            } else {
+                password.text = text
+            }
         }
     }
 

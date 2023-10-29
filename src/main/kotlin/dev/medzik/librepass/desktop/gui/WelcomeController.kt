@@ -24,10 +24,11 @@ class WelcomeController : Controller() {
 
     @FXML
     private fun initialize() {
-        fadeInTransition = FadeTransition(Duration.seconds(1.6), logo).apply {
-            fromValue = 0.0
-            toValue = 1.0
-        }
+        fadeInTransition =
+            FadeTransition(Duration.seconds(1.6), logo).apply {
+                fromValue = 0.0
+                toValue = 1.0
+            }
 
         // reading theme
         val theme = Config.readObject<Settings>("settings").theme
