@@ -99,80 +99,80 @@ class DashboardController : Controller() {
     }
 
     fun updateCiphers() {
-        CompletableFuture.runAsync {
-            try {
-                setStatus(tr("status.sync"))
+        try {
+            setStatus(tr("status.sync"))
 
-                val cachedCiphers = Config.readObject<MutableList<StoreCipher>>("ciphers")
-                cachedCiphers.map { if (it.owner != credentials.userId) cachedCiphers.remove(it) }
+            val cachedCiphers = Config.readObject<MutableList<StoreCipher>>("ciphers")
+            cachedCiphers.map { if (it.owner != credentials.userId) cachedCiphers.remove(it) }
 
-                val lastSync = credentials.lastSync
+            val lastSync = credentials.lastSync
 
-                if (lastSync != null) {
-                    // get ciphers from API
-                    val syncResponse = CipherClient(credentials.apiKey).sync(Date(lastSync * 1000))
+            if (lastSync != null) {
+                // get ciphers from API
+                val syncResponse = CipherClient(credentials.apiKey).sync(Date(lastSync * 1000))
 
-                    // update last sync date
-                    credentials = Config.overrideObject("credentials") { credentials.copy(lastSync = Date().time / 1000) }
+                // update last sync date
+                credentials = Config.overrideObject("credentials") { credentials.copy(lastSync = Date().time / 1000) }
 
-                    // delete ciphers from the local database that are not in API response
-                    for (i in 0..<cachedCiphers.size) {
-                        if (cachedCiphers[i].encryptedCipher.id !in syncResponse.ids) {
-                            cachedCiphers.remove(cachedCiphers[i])
-                        }
+                // delete ciphers from the local database that are not in API response
+                for (i in 0..<cachedCiphers.size) {
+                    if (cachedCiphers[i].encryptedCipher.id !in syncResponse.ids) {
+                        cachedCiphers.remove(cachedCiphers[i])
                     }
-
-                    // add ciphers from response
-                    for (cipher in syncResponse.ciphers) {
-                        cachedCiphers.add(
-                            StoreCipher(
-                                id = cipher.id,
-                                owner = cipher.owner,
-                                encryptedCipher = cipher
-                            )
-                        )
-                    }
-
-                    Config.writeObject("ciphers", cachedCiphers)
-                } else {
-                    // update last sync date
-                    credentials = Config.overrideObject("credentials") { credentials.copy(lastSync = Date().time / 1000) }
-
-                    // get all ciphers from API
-                    val ciphersResponse = CipherClient(credentials.apiKey).getAll()
-
-                    val ciphers = mutableListOf<StoreCipher>()
-                    for (cipher in ciphersResponse) {
-                        ciphers.add(
-                            StoreCipher(
-                                id = cipher.id,
-                                owner = cipher.owner,
-                                encryptedCipher = cipher
-                            )
-                        )
-                    }
-                    Config.writeObject("ciphers", ciphers)
                 }
-                resetStatus()
-            } catch (e: Exception) {
-                if (e is ClientException)
-                    setStatus(tr("status.error.network"))
-                else {
-                    setStatus("Error: ${e.message}")
-                    throw RuntimeException(e)
+
+                // add ciphers from response
+                for (cipher in syncResponse.ciphers) {
+                    cachedCiphers.add(
+                        StoreCipher(
+                            id = cipher.id,
+                            owner = cipher.owner,
+                            encryptedCipher = cipher
+                        )
+                    )
                 }
-            } finally {
-                // get cipher from local repository and update UI
-                updateLocalCiphers()
+
+                Config.writeObject("ciphers", cachedCiphers)
+            } else {
+                // update last sync date
+                credentials = Config.overrideObject("credentials") { credentials.copy(lastSync = Date().time / 1000) }
+
+                // get all ciphers from API
+                val ciphersResponse = CipherClient(credentials.apiKey).getAll()
+
+                val ciphers = mutableListOf<StoreCipher>()
+                for (cipher in ciphersResponse) {
+                    ciphers.add(
+                        StoreCipher(
+                            id = cipher.id,
+                            owner = cipher.owner,
+                            encryptedCipher = cipher
+                        )
+                    )
+                }
+                Config.writeObject("ciphers", ciphers)
             }
+            resetStatus()
+        } catch (e: Exception) {
+            if (e is ClientException)
+                setStatus(tr("status.error.network"))
+            else {
+                setStatus("Error: ${e.message}")
+                throw RuntimeException(e)
+            }
+        } finally {
+            // get cipher from local repository and update UI
+            updateLocalCiphers()
         }
     }
 
     override fun onStart() {
         super.onStart()
 
-        updateLocalCiphers()
-        updateCiphers()
+        CompletableFuture.runAsync {
+            updateLocalCiphers()
+            updateCiphers()
+        }
     }
 
     override fun onStop() = list.clear()
