@@ -51,10 +51,13 @@ class DashboardController : Controller() {
         cipherList.items = list
         cipherList.setCellFactory { CipherListItem() }
         cipherList.selectionModel.selectedItemProperty().addListener { _, _, cipher ->
-            rootBorderPane.center = if (cipher != null) {
-                cipherView.setCipher(cipher)
-                cipherView
-            } else emptyView
+            rootBorderPane.center =
+                if (cipher != null) {
+                    cipherView.setCipher(cipher)
+                    cipherView
+                } else {
+                    emptyView
+                }
         }
 
         rootBorderPane.center = emptyView
@@ -69,28 +72,32 @@ class DashboardController : Controller() {
     // get ciphers from local repository and update UI
     // TODO: Add more database like storage
     private fun updateLocalCiphers() {
-        val ciphers = if (Config.isObjectExists("ciphers"))
-            Config.readObject<List<StoreCipher>>("ciphers")
-        else {
-            val list = mutableListOf<StoreCipher>()
-            Config.writeObject("ciphers", list)
-            list
-        }
-
-        val decryptedCiphers = ciphers.map {
-            try {
-                Cipher(it.encryptedCipher, userSecrets.secretKey)
-            } catch (e: Exception) { // TODO
-                Cipher(
-                    id = it.encryptedCipher.id,
-                    owner = it.owner,
-                    type = CipherType.Login,
-                    loginData = CipherLoginData(
-                        name = "Encryption error"
-                    )
-                )
+        val ciphers =
+            if (Config.isObjectExists("ciphers")) {
+                Config.readObject<List<StoreCipher>>("ciphers")
+            } else {
+                val list = mutableListOf<StoreCipher>()
+                Config.writeObject("ciphers", list)
+                list
             }
-        }
+
+        val decryptedCiphers =
+            ciphers.map {
+                try {
+                    Cipher(it.encryptedCipher, userSecrets.secretKey)
+                } catch (e: Exception) {
+                    // TODO
+                    Cipher(
+                        id = it.encryptedCipher.id,
+                        owner = it.owner,
+                        type = CipherType.Login,
+                        loginData =
+                        CipherLoginData(
+                            name = "Encryption error"
+                        )
+                    )
+                }
+            }
         Platform.runLater {
             list.clear()
             // sort ciphers by name and update UI

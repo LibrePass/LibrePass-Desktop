@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <javafx.version>17.0.8</javafx.version>
+        <javafx.version>17.0.9</javafx.version>
         <librepass.api.version>0.1.0-SNAPSHOT-10</librepass.api.version>
         <kotlin.version>1.9.10</kotlin.version>
         <controlsfx.version>11.1.2</controlsfx.version>

@@ -9,7 +9,10 @@ object StateManager {
     private lateinit var scene: Scene
     private var currentState: State? = null
 
-    fun init(scene: Scene, resources: ResourceBundle) {
+    fun init(
+        scene: Scene,
+        resources: ResourceBundle
+    ) {
         StateManager.scene = scene
         for (state in State.entries)
             state.load(resources)
@@ -19,21 +22,21 @@ object StateManager {
         return state
     }
 
-    fun applyState(state: State) = Platform.runLater {
-        if (currentState != null) {
-            val currentController = currentState!!.getController<Any>()
-            if (currentController is Controller)
-                currentController.onStop()
+    fun applyState(state: State) =
+        Platform.runLater {
+            if (currentState != null) {
+                val currentController = currentState!!.getController<Any>()
+                if (currentController is Controller)
+                    currentController.onStop()
+            }
+
+            currentState = state
+            scene.root = state.rootPane
+
+            val controller = state.getController<Any>()
+            if (controller is Controller)
+                controller.onStart()
         }
 
-        currentState = state
-        scene.root = state.rootPane
-
-        val controller = state.getController<Any>()
-        if (controller is Controller)
-            controller.onStart()
-    }
-
-    fun setState(state: State) =
-        applyState(state)
+    fun setState(state: State) = applyState(state)
 }
