@@ -13,7 +13,6 @@ import javafx.scene.control.TextField
 import java.util.concurrent.CompletableFuture
 
 class RegisterController {
-
     @FXML
     private lateinit var email: TextField
 
@@ -33,9 +32,10 @@ class RegisterController {
 
     @FXML
     private fun initialize() {
-        val listener = ChangeListener<String> { _, _, _ ->
-            register.isDisable = !email.text.contains("@") || password.text.isEmpty() || password.text != retypePassword.text
-        }
+        val listener =
+            ChangeListener<String> { _, _, _ ->
+                register.isDisable = !email.text.contains("@") || password.text.isEmpty() || password.text != retypePassword.text
+            }
         email.textProperty().addListener(listener)
         password.textProperty().addListener(listener)
         retypePassword.textProperty().addListener(listener)
@@ -52,7 +52,11 @@ class RegisterController {
         hint.clear()
     }
 
-    private fun submit(email: String, password: String, passwordHint: String) {
+    private fun submit(
+        email: String,
+        password: String,
+        passwordHint: String
+    ) {
         CompletableFuture.runAsync {
             authClient.register(email, password, passwordHint)
             Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION)

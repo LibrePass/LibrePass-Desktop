@@ -20,7 +20,6 @@ import javafx.scene.control.TextField
 import java.util.concurrent.CompletableFuture
 
 class LoginController : Controller() {
-
     @FXML
     private lateinit var email: TextField
 
@@ -34,50 +33,56 @@ class LoginController : Controller() {
 
     @FXML
     private fun initialize() {
-        val listener = ChangeListener<String> { _, _, _ ->
-            login.isDisable = !email.text.contains("@") || password.text.isEmpty()
-        }
+        val listener =
+            ChangeListener<String> { _, _, _ ->
+                login.isDisable = !email.text.contains("@") || password.text.isEmpty()
+            }
         email.textProperty().addListener(listener)
         password.textProperty().addListener(listener)
         login.isDisable = true
     }
 
     @FXML
-    fun onBack() =
-        StateManager.setState(State.WELCOME)
+    fun onBack() = StateManager.setState(State.WELCOME)
 
     @FXML
     fun onLogin() {
         submit(email.text, password.text)
     }
 
-    private fun submit(email: String, password: String) = CompletableFuture.runAsync {
+    private fun submit(
+        email: String,
+        password: String
+    ) = CompletableFuture.runAsync {
         login.isDisable = true
         try {
             val preLogin = authClient.preLogin(email)
 
             // authenticate user and get credentials
-            val loginCredentials = authClient.login(
-                email = email,
-                password = password
-            )
+            val loginCredentials =
+                authClient.login(
+                    email = email,
+                    password = password
+                )
 
-            val credentials = Credentials(
-                userId = loginCredentials.userId,
-                email = email,
-                apiKey = loginCredentials.apiKey,
-                publicKey = Hex.encode(loginCredentials.publicKey),
-                // Argon2id parameters
-                memory = preLogin.memory,
-                iterations = preLogin.iterations,
-                parallelism = preLogin.parallelism
-            )
+            val credentials =
+                Credentials(
+                    userId = loginCredentials.userId,
+                    email = email,
+                    apiKey = loginCredentials.apiKey,
+                    publicKey = Hex.encode(loginCredentials.publicKey),
+                    // Argon2id parameters
+                    memory = preLogin.memory,
+                    iterations = preLogin.iterations,
+                    parallelism = preLogin.parallelism
+                )
             Config.writeObject("credentials", credentials)
 
-            val userSecrets = UserSecrets(
-                privateKey = Hex.encode(loginCredentials.privateKey),
-                secretKey = loginCredentials.secretKey
-            )
+            val userSecrets =
+                UserSecrets(
+                    privateKey = Hex.encode(loginCredentials.privateKey),
+                    secretKey = loginCredentials.secretKey
+                )
             Config.writeObject("user_secrets", userSecrets)
 
             // Perform GC to flush a lot of memory allocated by argon2 generation

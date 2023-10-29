@@ -3,7 +3,6 @@ package dev.medzik.librepass.desktop.locale
 import java.util.*
 
 object LangManager {
-
     private lateinit var currentLocale: ResourceBundle
 
     fun init(): ResourceBundle {
