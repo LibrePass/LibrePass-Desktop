@@ -14,7 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <javafx.version>17.0.9</javafx.version>
-        <librepass.api.version>0.1.0</librepass.api.version>
+
+        <librepass.api.version>1.0.0</librepass.api.version>
         <kotlin.version>1.9.20</kotlin.version>
         <controlsfx.version>11.1.2</controlsfx.version>
 
@@ -119,9 +120,7 @@
                             <includeScope>runtime</includeScope>
                             <outputDirectory>${jmods.dir}</outputDirectory>
                             <excludeArtifactIds>
-                                password4j,
                                 commons-codec,
-                                x25519,
                                 kotlin-stdlib-common,
                                 annotations,
                                 okio-jvm,
@@ -148,20 +147,6 @@
                             <overwriteExistingFiles>true</overwriteExistingFiles>
                             <outputDirectory>${jmods.dir}</outputDirectory>
                             <modules>
-                                <module>
-                                    <artifact>
-                                        <groupId>com.password4j</groupId>
-                                        <artifactId>password4j</artifactId>
-                                    </artifact>
-                                    <moduleInfoSource>
-                                        open module password4j {
-                                            requires org.slf4j;
-
-                                            exports com.password4j;
-                                            exports com.password4j.types;
-                                        }
-                                    </moduleInfoSource>
-                                </module>
                                 <module>
                                     <artifact>
                                         <groupId>commons-codec</groupId>
@@ -277,6 +262,10 @@
                     <vendor>LibrePass Team</vendor>
                     <destination>${project.build.directory}/dist</destination>
                     <module>dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App</module>
+
+                    <jLinkOptions>
+                        <jLinkOption>--ignore-signing-information</jLinkOption>
+                    </jLinkOptions>
 
                     <modulePaths>
                         <modulePath>${jmods.dir}</modulePath>
