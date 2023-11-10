@@ -11,6 +11,7 @@ import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
+import dev.medzik.librepass.utils.fromHexString
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
@@ -70,7 +71,7 @@ class LoginController : Controller() {
                     userId = loginCredentials.userId,
                     email = email,
                     apiKey = loginCredentials.apiKey,
-                    publicKey = Hex.encode(loginCredentials.publicKey),
+                    publicKey = Hex.encode(loginCredentials.publicKey.fromHexString()),
                     // Argon2id parameters
                     memory = preLogin.memory,
                     iterations = preLogin.iterations,
@@ -80,7 +81,7 @@ class LoginController : Controller() {
 
             val userSecrets =
                 UserSecrets(
-                    privateKey = Hex.encode(loginCredentials.privateKey),
+                    privateKey = Hex.encode(loginCredentials.privateKey.fromHexString()),
                     secretKey = loginCredentials.secretKey
                 )
             Config.writeObject("user_secrets", userSecrets)
