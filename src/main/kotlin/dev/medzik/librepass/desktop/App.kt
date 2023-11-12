@@ -1,5 +1,6 @@
 package dev.medzik.librepass.desktop
 
+import dev.medzik.librepass.desktop.config.Cache
 import dev.medzik.librepass.desktop.config.Config
 import dev.medzik.librepass.desktop.config.Settings
 import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
@@ -21,6 +22,7 @@ class App : Application() {
 
     override fun start(stage: Stage) {
         Config.init()
+        Cache.init()
 
         val scene = Scene(Pane(), 1024.0, 576.0)
 
