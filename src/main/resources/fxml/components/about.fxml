@@ -43,7 +43,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label prefHeight="52.0" prefWidth="364.0" text="%about.description" wrapText="true">
+                <Label prefWidth="364.0" text="%about.description" wrapText="true">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
