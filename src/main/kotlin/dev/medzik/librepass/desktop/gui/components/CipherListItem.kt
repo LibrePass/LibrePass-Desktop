@@ -70,7 +70,7 @@ class CipherListItem : ListCell<Cipher>() {
                     val fis = FileInputStream(Cache.getCached(urls[0],"png"))
                     Image(fis)
                 } else {
-                    val urlStream = URI(CipherClient.getFavicon(domain = urls[0])).toURL().openStream();
+                    val urlStream = URI(CipherClient.getFavicon(domain = urls[0])).toURL().openStream()
                     Cache.addCache(urlStream.readAllBytes()!!,urls[0],"png")
                     Image(urlStream)
                 }
