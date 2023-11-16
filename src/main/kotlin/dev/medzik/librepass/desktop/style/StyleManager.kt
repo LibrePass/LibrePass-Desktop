@@ -2,6 +2,7 @@ package dev.medzik.librepass.desktop.style
 
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.stage.Stage
 import kotlin.collections.ArrayList
 
 object StyleManager {
@@ -18,6 +19,7 @@ object StyleManager {
     }
 
     fun loadStyle(scene: Scene) {
+        style.onSet.invoke(scene)
         scene.stylesheets.clear()
         for (stylesheet in style.styles) scene.stylesheets.add(
             StyleManager::class.java.getResource(stylesheet)!!.toExternalForm()

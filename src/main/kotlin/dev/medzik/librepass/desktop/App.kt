@@ -7,12 +7,14 @@ import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
 import dev.medzik.librepass.desktop.locale.LangManager
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
+import dev.medzik.librepass.desktop.style.Style
 import dev.medzik.librepass.desktop.style.StyleManager
 import javafx.application.Application
 import javafx.application.HostServices
 import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
+import javafx.scene.paint.Color
 import javafx.stage.Stage
 
 class App : Application() {
