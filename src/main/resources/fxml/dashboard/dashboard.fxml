@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="356.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
+<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="478.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
    <top>
       <fx:include fx:id="menu" source="menu.fxml" />
    </top>
@@ -23,13 +23,13 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints fillHeight="false" maxHeight="52.0" minHeight="39.0" prefHeight="52.0" />
+            <RowConstraints fillHeight="false" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" />
             <RowConstraints vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <HBox spacing="7.0">
                <GridPane.margin>
-                  <Insets left="5.0" />
+                  <Insets left="10.0" />
                </GridPane.margin>
                <children>
                   <TextField prefHeight="28.0" prefWidth="202.0" promptText="%dashboard.search" styleClass="search-text-field" />
@@ -42,9 +42,6 @@
                         </ImageView>
                      </graphic></Button>
                </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
             </HBox>
             <ListView fx:id="cipherList" cacheShape="false" centerShape="false" prefHeight="445.0" prefWidth="250.0" scaleShape="false" GridPane.rowIndex="1" />
          </children>
