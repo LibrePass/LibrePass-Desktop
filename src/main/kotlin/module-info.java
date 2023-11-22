@@ -28,6 +28,7 @@ module dev.medzik.librepass.desktop {
     opens dev.medzik.librepass.desktop.gui.auth;
     opens dev.medzik.librepass.desktop.gui.dashboard;
     opens dev.medzik.librepass.desktop.gui.components;
+    opens dev.medzik.librepass.desktop.gui.components.cipher;
     opens dev.medzik.librepass.desktop.state;
     opens dev.medzik.librepass.desktop.style;
     opens dev.medzik.librepass.desktop.utils;

@@ -1,92 +1,43 @@
 package dev.medzik.librepass.desktop.gui.dashboard
 
+import dev.medzik.librepass.desktop.gui.components.cipher.LoginDataSection
+import dev.medzik.librepass.desktop.gui.components.cipher.OtherSection
+import dev.medzik.librepass.desktop.gui.components.cipher.WebsiteSection
 import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
 import javafx.fxml.FXML
-import javafx.scene.control.Label
-import javafx.scene.control.ToggleButton
-import javafx.scene.image.Image
-import javafx.scene.image.ImageView
-import javafx.scene.input.Clipboard
-import javafx.scene.input.ClipboardContent
 import javafx.scene.layout.AnchorPane
+import javafx.scene.layout.VBox
 
-private const val BULLET = '\u2022'
-
-// TODO: Split into components
 class CipherView : AnchorPane() {
-    @FXML
-    private lateinit var name: Label
 
     @FXML
-    private lateinit var passwordToggleIcon: ImageView
+    private lateinit var sections: VBox
 
-    @FXML
-    private lateinit var password: Label
-
-    @FXML
-    private lateinit var username: Label
-
-    @FXML
-    private lateinit var notes: Label
-
-    private lateinit var cipher: Cipher
-
-    @FXML
-    private lateinit var passwordToggleShow: ToggleButton
-
-    private val visibleImage = Image(CipherView::class.java.getResourceAsStream("/img/dashboard/visibility.png"))
-    private val visibleOffImage = Image(CipherView::class.java.getResourceAsStream("/img/dashboard/visibility_off.png"))
+    private val loginDataSection = LoginDataSection()
+    private val websiteSection = WebsiteSection()
+    private val otherSection = OtherSection()
 
     init {
         Fxml.loadComponent("/fxml/dashboard/cipherview.fxml", this)
 
-        passwordToggleShow.selectedProperty().addListener { _, _, selected ->
-            passwordToggleIcon.image = if (selected) visibleImage else visibleOffImage
-            setPassword(cipher.loginData?.password, !selected)
-        }
     }
 
     fun setCipher(cipher: Cipher) {
-        this.cipher = cipher
+        sections.children.clear()
 
-        name.text = cipher.loginData?.name
-        username.text = cipher.loginData?.username
-        notes.text = cipher.loginData?.notes
+        sections.children.add(loginDataSection)
+        loginDataSection.setCipher(cipher)
 
-        setPassword(cipher.loginData?.password, true)
-
-        passwordToggleShow.isSelected = false
-    }
-
-    private fun setPassword(
-        text: String?,
-        mask: Boolean
-    ) {
-        password.text = ""
-        if (!text.isNullOrEmpty()) {
-            if (mask) {
-                for (i in text)
-                    password.text += BULLET
-            } else {
-                password.text = text
-            }
+        if (!cipher.loginData?.uris.isNullOrEmpty()) {
+            sections.children.add(websiteSection)
+            websiteSection.setCipher(cipher)
         }
-    }
 
-    @FXML
-    fun onUsernameCopy() = copy(username.text)
 
-    @FXML
-    fun onPasswordCopy() = copy(cipher.loginData?.password!!)
-
-    @FXML
-    fun onNotesCopy() = copy(notes.text)
-
-    private fun copy(text: String) {
-        val clipboard = Clipboard.getSystemClipboard()
-        val content = ClipboardContent()
-        content.putString(text)
-        clipboard.setContent(content)
+        if (!cipher.loginData?.notes.isNullOrEmpty()) {
+            sections.children.add(otherSection)
+            otherSection.setCipher(cipher)
+        }
     }
 }
