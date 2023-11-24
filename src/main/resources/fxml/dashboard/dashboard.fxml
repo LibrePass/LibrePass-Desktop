@@ -32,7 +32,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
                <children>
-                  <TextField prefHeight="28.0" prefWidth="202.0" promptText="%dashboard.search" styleClass="search-text-field" />
+                  <TextField fx:id="search" prefHeight="28.0" prefWidth="202.0" promptText="%dashboard.search" styleClass="search-text-field" />
                   <Button lineSpacing="1.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="34.0">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

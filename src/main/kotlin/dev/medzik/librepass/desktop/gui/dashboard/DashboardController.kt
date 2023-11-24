@@ -38,9 +38,14 @@ class DashboardController : Controller() {
     lateinit var statusLabel: Label
 
     @FXML
+    lateinit var search: TextField
+
+    @FXML
     lateinit var rootBorderPane: BorderPane
 
     private val list = FXCollections.observableArrayList<Cipher>()
+
+    private val searchList = FXCollections.observableArrayList<Cipher>()
 
     private val cipherView = CipherView()
     private val emptyView = loadEmptyView()
@@ -61,7 +66,29 @@ class DashboardController : Controller() {
                 }
         }
 
+        search.textProperty().addListener { _, _, searchPhrase -> searchFieldEdited(searchPhrase) }
+
         rootBorderPane.center = emptyView
+    }
+
+    private fun searchFieldEdited(searchText: String) {
+        if (searchText.isNotBlank()) {
+            searchList.clear()
+
+            val filteredCiphers =
+                list.filter {
+                    it.loginData!!.name.lowercase().contains(searchText) || it.loginData!!.username?.lowercase()
+                        ?.contains(searchText) ?: false
+                }
+
+            for (cipher in filteredCiphers)
+                searchList.add(cipher)
+
+            cipherList.items = searchList
+        } else {
+            cipherList.items = list
+            searchList.clear()
+        }
     }
 
     private fun loadEmptyView(): VBox {
