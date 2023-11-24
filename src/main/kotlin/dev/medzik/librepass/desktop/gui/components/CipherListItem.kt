@@ -53,29 +53,21 @@ class CipherListItem : ListCell<Cipher>() {
         }
 
         currentCipher = cipher
-        updateIcon(cipher!!)
 
-        name.text = cipher.loginData?.name
+        name.text = cipher!!.loginData?.name
         username.text = cipher.loginData?.username
 
+        updateIcon(cipher)
         graphic = root
     }
 
     private fun updateIcon(cipher: Cipher) {
         val urls = cipher.loginData?.uris
 
-        icon.image =
-            if (!urls.isNullOrEmpty()) {
-                if (Cache.cacheExists(urls[0],"png")) {
-                    val fis = FileInputStream(Cache.getCached(urls[0],"png"))
-                    Image(fis)
-                } else {
-                    val urlStream = URI(CipherClient.getFavicon(domain = urls[0])).toURL().openStream()
-                    Cache.addCache(urlStream.readAllBytes()!!,urls[0],"png")
-                    Image(urlStream)
-                }
-            }
-            else
-                userIcon
+        if (!urls.isNullOrEmpty()) {
+            Cache.cacheIcon(urls[0],icon)
+        }
+        else
+            icon.image = userIcon
     }
 }

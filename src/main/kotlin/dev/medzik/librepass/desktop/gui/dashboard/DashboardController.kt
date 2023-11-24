@@ -100,9 +100,13 @@ class DashboardController : Controller() {
                 }
             }
         Platform.runLater {
+            cipherList.items = null
+
             list.clear()
             // sort ciphers by name and update UI
             decryptedCiphers.sortedBy { it.loginData!!.name }.forEach { list.add(it) }
+
+            cipherList.items = list
         }
     }
 
