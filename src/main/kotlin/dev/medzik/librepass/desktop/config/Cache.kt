@@ -1,7 +1,14 @@
 package dev.medzik.librepass.desktop.config
 
+import dev.medzik.librepass.client.api.CipherClient
+import javafx.application.Platform
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import java.io.File
+import java.io.FileInputStream
+import java.net.URI
 import java.nio.file.Files
+import java.util.concurrent.CompletableFuture
 
 object Cache {
     private val cacheDir = File(Config.workDir,"cache");
@@ -28,5 +35,25 @@ object Cache {
 
     fun getCached(name: String,ext: String): File {
         return File(cacheDir, processName("$name.$ext"))
+    }
+
+    fun cacheIcon(url: String, imageView: ImageView) {
+        CompletableFuture.runAsync {
+            synchronized(Cache) {
+                if (cacheExists(url, "png")) {
+                    val fis = FileInputStream(getCached(url, "png"))
+                    Platform.runLater {
+                        imageView.image = Image(fis)
+                    }
+                } else {
+                    val urlStream = URI(CipherClient.getFavicon(domain = url)).toURL().openStream()
+                    addCache(urlStream.readAllBytes()!!, url, "png")
+                    val fis = FileInputStream(getCached(url, "png"))
+                    Platform.runLater {
+                        imageView.image = Image(fis)
+                    }
+                }
+            }
+        }
     }
 }
