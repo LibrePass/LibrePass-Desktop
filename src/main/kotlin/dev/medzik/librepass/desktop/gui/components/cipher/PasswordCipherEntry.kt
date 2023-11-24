@@ -41,6 +41,7 @@ class PasswordCipherEntry(name: String) : CopyCipherEntry(name) {
 
     fun setValue(text: String,mask: Boolean) {
         this.password = text
+        passwordToggleButton.isSelected = false
         setPassword(password, mask)
     }
 
