@@ -11,7 +11,7 @@ import java.nio.file.Files
 import java.util.concurrent.CompletableFuture
 
 object Cache {
-    private val cacheDir = File(Config.workDir,"cache");
+    private val cacheDir = File(Config.workDir,"cache")
     fun init() {
         if (!cacheDir.exists()) {
             if (!cacheDir.mkdir())
@@ -37,21 +37,29 @@ object Cache {
         return File(cacheDir, processName("$name.$ext"))
     }
 
+    private val iconCache: HashMap<String,Image> = HashMap()
+
     fun cacheIcon(url: String, imageView: ImageView) {
-        CompletableFuture.runAsync {
-            synchronized(Cache) {
-                if (cacheExists(url, "png")) {
-                    val fis = FileInputStream(getCached(url, "png"))
-                    Platform.runLater {
-                        imageView.image = Image(fis)
-                    }
-                } else {
-                    val urlStream = URI(CipherClient.getFavicon(domain = url)).toURL().openStream()
-                    addCache(urlStream.readAllBytes()!!, url, "png")
-                    val fis = FileInputStream(getCached(url, "png"))
-                    Platform.runLater {
-                        imageView.image = Image(fis)
-                    }
+        if (iconCache.containsKey(url)) {
+            imageView.image = iconCache[url]
+        }
+        else CompletableFuture.runAsync {
+            if (cacheExists(url, "png")) {
+                val image = Image(FileInputStream(getCached(url, "png")))
+                iconCache[url] = image
+
+                Platform.runLater {
+                    imageView.image = image
+                }
+            } else {
+                val urlStream = URI(CipherClient.getFavicon(domain = url)).toURL().openStream()
+                addCache(urlStream.readAllBytes()!!, url, "png")
+
+                val image = Image(FileInputStream(getCached(url, "png")))
+                iconCache[url] = image
+
+                Platform.runLater {
+                    imageView.image = image
                 }
             }
         }
