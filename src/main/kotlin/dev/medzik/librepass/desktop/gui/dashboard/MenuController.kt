@@ -58,6 +58,7 @@ class MenuController {
 
     @FXML
     fun onLogout() {
+        Config.deleteObject("ciphers")
         Config.deleteObject("credentials")
         Config.deleteObject("user_secrets")
         StateManager.applyState(State.WELCOME)
