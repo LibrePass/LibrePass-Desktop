@@ -33,6 +33,17 @@ class CipherListItem : ListCell<Cipher>() {
         private val userIcon = Image(CipherListItem::class.java.getResourceAsStream("/img/dashboard/user.png"))
     }
 
+    init {
+        if (!loaded) {
+            val loader = Fxml.getLoader("/fxml/components/cipherlistitem.fxml")
+            loader.setRoot(root)
+            loader.setController(this)
+            loader.load<AnchorPane>()
+
+            loaded = true
+        }
+    }
+
     override fun updateItem(
         cipher: Cipher?,
         empty: Boolean
@@ -40,25 +51,16 @@ class CipherListItem : ListCell<Cipher>() {
         super.updateItem(cipher, empty)
         if (empty) {
             graphic = null
-            return
-        } else if (currentCipher != cipher) {
-            if (!loaded) {
-                val loader = Fxml.getLoader("/fxml/components/cipherlistitem.fxml")
-                loader.setRoot(root)
-                loader.setController(this)
-                loader.load<AnchorPane>()
+            icon.image = null
+        } else {
+            currentCipher = cipher
 
-                loaded = true
-            }
+            name.text = cipher!!.loginData?.name
+            username.text = cipher.loginData?.username
+
+            updateIcon(cipher)
+            graphic = root
         }
-
-        currentCipher = cipher
-
-        name.text = cipher!!.loginData?.name
-        username.text = cipher.loginData?.username
-
-        updateIcon(cipher)
-        graphic = root
     }
 
     private fun updateIcon(cipher: Cipher) {
