@@ -1,0 +1,9 @@
+.cipher-info {
+    -fx-background-color: -color-base-125;
+    -fx-background-radius: 10px;
+}
+
+.search-text-field, .search-text-field:focused {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
