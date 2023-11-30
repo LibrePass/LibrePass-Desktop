@@ -1,0 +1,286 @@
+.root {
+    -fx-base: -color-base-100;
+    -fx-accent: -color-accent;
+
+    -fx-background: -fx-base;
+    -fx-focus-color: -fx-accent;
+}
+
+/*
+ * ===============================================
+ * Button
+ * ===============================================
+ */
+
+.button, .toggle-button {
+    -fx-background-radius: 8px;
+    -fx-background-insets: 0px 0px 0px 0px;
+    -fx-background-color: -color-base-200;
+    -fx-text-fill: -color-neutral;
+}
+
+.button:hover, .toggle-button:hover, .toggle-button:selected {
+    -fx-background-color: -color-base-400;
+}
+
+.button:pressed, .toggle-button:pressed {
+    -fx-background-color: -color-base-300;
+}
+
+.button:default {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+}
+.button:default:hover:pressed {
+    -fx-background-color: derive(-fx-accent,-10%);
+}
+/*
+ * ===============================================
+ * Menu bar
+ * ===============================================
+ */
+
+.context-menu {
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 7px;
+    -fx-background-color: -color-base-100;
+}
+.menu-bar {
+    -fx-background-radius: 0;
+    -fx-background-color: -color-base-125;
+}
+.menu-item, .menu, .menu:showing {
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+/*
+ * ===============================================
+ * Text Field
+ * ===============================================
+ */
+
+.text-field, .text-field:focused {
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.text-field {
+    -fx-background-color: -color-base-125;
+    -fx-border-color: -color-base-300;
+
+    -fx-text-fill: -color-neutral;
+    -fx-caret-color: -color-neutral;
+}
+
+.text-field:focused {
+    -fx-border-color: -fx-accent;
+}
+
+/*
+ * ===============================================
+ * Switch
+ * ===============================================
+ */
+
+.toggle-switch .thumb {
+    -fx-border-radius: 10px;
+    -fx-background-color: -color-base-125;
+    -fx-border-color: -color-base-200;
+}
+
+.toggle-switch .track {
+    -fx-border-radius: 10px;
+}
+
+.toggle-switch:selected .thumb-area {
+    -fx-background-color: -fx-accent;
+}
+
+.toggle-switch .track {
+    -fx-background-color: -color-base-200;
+    -fx-border-color: -color-base-500;
+}
+
+.toggle-switch .track:selected {
+    -fx-background-color: derive(-fx-accent, 20%);
+}
+
+.toggle-switch .thumb .thumb-text {
+    -fx-text-fill: -color-base-0;
+}
+
+/*
+ * ===============================================
+ * List View
+ * ===============================================
+ */
+
+.list-view .list-cell {
+    -fx-padding: 5px;
+    -fx-background-color: -color-base-100;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 7px;
+
+    -fx-background-color: -fx-accent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+}
+
+.list-view .list-cell .label {
+    -fx-text-fill: -color-neutral;
+}
+
+.list-view .list-cell:selected .label {
+    -fx-text-fill: -color-base-0;
+}
+
+/*
+ * ===============================================
+ * Scroll Pane
+ * ===============================================
+ */
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+}
+
+.scroll-bar {
+    -fx-background-color: -color-base-200;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: -color-base-200;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -color-base-300;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: -color-base-400;
+}
+
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: -color-base-500;
+}
+
+/*
+ * ===============================================
+ * Checkbox
+ * ===============================================
+ */
+
+.check-box .box {
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+
+    -fx-background-color: -fx-base;
+    -fx-border-color: -color-base-50;
+}
+
+.check-box:selected .box {
+    -fx-background-color: -fx-accent;
+    -fx-border-color: -fx-accent;
+}
+.check-box:selected .mark {
+    -fx-background-color: -color-neutral;
+}
+
+/*
+ * ===============================================
+ * Progress Bar
+ * ===============================================
+ */
+
+.progress-bar .bar {
+    -fx-background-radius: 5px;
+    -fx-background-color: -color-accent;
+}
+
+.progress-bar .track {
+    -fx-background-color: -color-base-50;
+}
+
+/*
+ * ===============================================
+ * Table
+ * ===============================================
+ */
+
+.table-view, .table-row-cell,.indexed-cell:even,.indexed-cell:odd  {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-style: none;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.table-row-cell:selected, .table-row-cell:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+.table-row-cell:empty {
+	-fx-background-color: transparent;
+}
+.table-view .table-row-cell:selected {
+    -fx-background-color: -fx-accent;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: -color-neutral;
+}
+
+.table-view .column-header {
+    -fx-background-color: -color-base-100;
+}
+
+.table-view {
+    -fx-background-color: -color-base-125;
+}
+
+/*
+ * ===============================================
+ * Tabbed Pane
+ * ===============================================
+ */
+
+.tab-pane {
+    -fx-background-color: -color-base-100;
+}
+.tab-pane .tab {
+    -fx-background-color: -color-base-50;
+}
+.tab-pane .tab:selected {
+    -fx-background-color: -color-base-100;
+}
+
+.tab-pane .tab {
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-border-radius: 5px 5px 0 0;
+    -fx-focus-color: transparent;
+}
+.tab-pane .tab:selected {
+    -fx-focus-color: transparent;
+}
