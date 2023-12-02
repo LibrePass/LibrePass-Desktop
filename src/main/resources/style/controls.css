@@ -160,27 +160,27 @@
 }
 
 .scroll-bar {
-    -fx-background-color: -color-base-200;
+    -fx-background-color: -color-base-125;
 }
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track {
-    -fx-background-color: -color-base-200;
+    -fx-background-color: -color-base-125;
 }
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: -color-base-300;
+    -fx-background-color: -color-base-200;
 }
 
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
-    -fx-background-color: -color-base-400;
+    -fx-background-color: -color-base-250;
 }
 
 .scroll-bar:horizontal .thumb:pressed,
 .scroll-bar:vertical .thumb:pressed {
-    -fx-background-color: -color-base-500;
+    -fx-background-color: -color-base-300;
 }
 
 /*
