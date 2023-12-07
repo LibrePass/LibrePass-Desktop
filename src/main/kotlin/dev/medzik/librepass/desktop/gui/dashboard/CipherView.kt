@@ -20,7 +20,6 @@ class CipherView : AnchorPane() {
 
     init {
         Fxml.loadComponent("/fxml/dashboard/cipherview.fxml", this)
-
     }
 
     fun setCipher(cipher: Cipher) {
