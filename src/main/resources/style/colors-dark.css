@@ -3,13 +3,13 @@
     -color-neutral: white;
 
     -color-base-0: black;
-    -color-base-25: #0a0a0a;
-    -color-base-50: #0f0f0f;
-    -color-base-100: #1e1e1e;
-    -color-base-125: #222222;
-    -color-base-200: #383838;
-    -color-base-250: #444444;
-    -color-base-300: #525252;
-    -color-base-400: #6c6c6c;
-    -color-base-500: #7c7c7c;
+    -color-base-25: derive(-color-base-100,-10%);
+    -color-base-50: derive(-color-base-100,-5%);
+    -color-base-100: #222222;
+    -color-base-125: derive(-color-base-100,5%);
+    -color-base-200: derive(-color-base-100,10%);
+    -color-base-250: derive(-color-base-100,15%);
+    -color-base-300: derive(-color-base-100,20%);
+    -color-base-400: derive(-color-base-100,25%);
+    -color-base-500: derive(-color-base-100,30%);
 }
