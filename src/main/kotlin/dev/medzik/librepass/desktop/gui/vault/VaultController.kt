@@ -1,4 +1,4 @@
-package dev.medzik.librepass.desktop.gui.dashboard
+package dev.medzik.librepass.desktop.gui.vault
 
 import dev.medzik.librepass.client.api.CipherClient
 import dev.medzik.librepass.client.errors.ClientException
@@ -24,7 +24,7 @@ import javafx.scene.layout.VBox
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-class DashboardController : Controller() {
+class VaultController : Controller() {
     lateinit var credentials: Credentials
     lateinit var userSecrets: UserSecrets
 
@@ -92,7 +92,7 @@ class DashboardController : Controller() {
     }
 
     private fun loadEmptyView(): VBox {
-        val loader = Fxml.getLoader("/fxml/dashboard/emptyview.fxml")
+        val loader = Fxml.getLoader("/fxml/vault/empty-view.fxml")
         loader.resources = LangManager.getLocale()
         return loader.load()
     }
@@ -203,6 +203,12 @@ class DashboardController : Controller() {
             // get cipher from local repository and update UI
             updateLocalCiphers()
         }
+    }
+
+    @FXML
+    fun onCreateNewCipher() {
+        val stage = CipherAddWindow()
+        stage.show()
     }
 
     override fun onStart() {

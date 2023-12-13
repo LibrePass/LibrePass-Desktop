@@ -1,11 +1,12 @@
-package dev.medzik.librepass.desktop.gui.components.cipher
+package dev.medzik.librepass.desktop.gui.components.cipher.entry
 
-import dev.medzik.librepass.desktop.gui.dashboard.CipherView
+import dev.medzik.librepass.desktop.gui.vault.CipherView
 import javafx.scene.control.ToggleButton
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 
 private const val BULLET = '\u2022'
+
 class PasswordCipherEntry(name: String) : CopyCipherEntry(name) {
     private val passwordToggleButton: ToggleButton = ToggleButton()
 

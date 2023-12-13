@@ -8,7 +8,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.input.KeyCodeCombination?>
 
-<MenuBar maxWidth="1.7976931348623157E308" useSystemMenuBar="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.MenuController">
+<MenuBar maxWidth="1.7976931348623157E308" useSystemMenuBar="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.vault.MenuController">
   <menus>
     <Menu mnemonicParsing="false" text="%file">
       <items>

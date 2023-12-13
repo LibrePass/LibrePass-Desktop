@@ -1,4 +1,4 @@
-package dev.medzik.librepass.desktop.gui.dashboard
+package dev.medzik.librepass.desktop.gui.vault
 
 import dev.medzik.librepass.desktop.config.Config
 import dev.medzik.librepass.desktop.config.Settings
@@ -32,7 +32,7 @@ class MenuController {
 
     private lateinit var aboutDialog: AboutDialog
 
-    lateinit var dashboard: DashboardController
+    lateinit var dashboard: VaultController
 
     @FXML
     private fun initialize() {

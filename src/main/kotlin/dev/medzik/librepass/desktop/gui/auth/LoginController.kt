@@ -7,7 +7,7 @@ import dev.medzik.librepass.desktop.config.Config
 import dev.medzik.librepass.desktop.config.Credentials
 import dev.medzik.librepass.desktop.config.UserSecrets
 import dev.medzik.librepass.desktop.gui.Controller
-import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
+import dev.medzik.librepass.desktop.gui.vault.VaultController
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
@@ -90,7 +90,7 @@ class LoginController : Controller() {
             System.gc()
 
             val state = StateManager.getState(State.DASHBOARD)
-            val controller = state.getController<DashboardController>()
+            val controller = state.getController<VaultController>()
             controller.credentials = credentials
             controller.userSecrets = userSecrets
             StateManager.applyState(state)

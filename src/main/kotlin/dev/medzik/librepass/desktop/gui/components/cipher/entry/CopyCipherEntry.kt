@@ -1,4 +1,4 @@
-package dev.medzik.librepass.desktop.gui.components.cipher
+package dev.medzik.librepass.desktop.gui.components.cipher.entry
 
 import javafx.scene.control.Button
 import javafx.scene.image.Image
