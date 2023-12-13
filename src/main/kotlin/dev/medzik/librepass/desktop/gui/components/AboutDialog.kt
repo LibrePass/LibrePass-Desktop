@@ -12,7 +12,7 @@ import javafx.stage.Modality
 import javafx.stage.Stage
 
 const val GITHUB_URL = "https://github.com/LibrePass"
-const val WEBSITE_URL = "https://librepass.medzik.dev"
+const val WEBSITE_URL = "https://librepass.org"
 
 class AboutDialog : Stage() {
     init {
