@@ -3,18 +3,16 @@ package dev.medzik.librepass.desktop
 import dev.medzik.librepass.desktop.config.Cache
 import dev.medzik.librepass.desktop.config.Config
 import dev.medzik.librepass.desktop.config.Settings
-import dev.medzik.librepass.desktop.gui.dashboard.DashboardController
+import dev.medzik.librepass.desktop.gui.vault.VaultController
 import dev.medzik.librepass.desktop.locale.LangManager
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
-import dev.medzik.librepass.desktop.style.Style
 import dev.medzik.librepass.desktop.style.StyleManager
 import javafx.application.Application
 import javafx.application.HostServices
 import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
-import javafx.scene.paint.Color
 import javafx.stage.Stage
 
 class App : Application() {
@@ -43,7 +41,7 @@ class App : Application() {
 
         if (Config.isObjectExists("credentials") && Config.isObjectExists("user_secrets")) {
             val state = StateManager.getState(State.DASHBOARD)
-            val controller = state.getController<DashboardController>()
+            val controller = state.getController<VaultController>()
             controller.credentials = Config.readObject("credentials")
             controller.userSecrets = Config.readObject("user_secrets")
             StateManager.applyState(state)

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.components.cipher.CipherEntry">
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.components.cipher.entry.CipherEntry">
    <children>
       <VBox fx:id="labelsPane" alignment="CENTER_LEFT" layoutY="14.0" prefHeight="56.0" prefWidth="284.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
          <children>

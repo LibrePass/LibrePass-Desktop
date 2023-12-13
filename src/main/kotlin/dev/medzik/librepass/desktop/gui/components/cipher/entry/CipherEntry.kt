@@ -1,4 +1,4 @@
-package dev.medzik.librepass.desktop.gui.components.cipher
+package dev.medzik.librepass.desktop.gui.components.cipher.entry
 
 import dev.medzik.librepass.desktop.utils.Fxml
 import javafx.fxml.FXML
@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox
 
 open class CipherEntry(
     val name: String,
-    viewToLoad: String = "/fxml/dashboard/cipher/cipherentry.fxml"
+    viewToLoad: String = "/fxml/components/cipher/cipher-entry.fxml"
 ) : AnchorPane() {
 
     @FXML
@@ -19,7 +19,7 @@ open class CipherEntry(
     protected lateinit var buttonsPane: HBox
 
     @FXML
-    protected lateinit var value: Label;
+    protected lateinit var value: Label
     init {
         Fxml.loadComponent(viewToLoad,this,this)
     }

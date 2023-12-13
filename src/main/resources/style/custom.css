@@ -7,3 +7,11 @@
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
 }
+
+.scroll-bar {
+    -fx-opacity: 0;
+}
+
+.scroll-bar:hover {
+    -fx-opacity: 1;
+}

@@ -10,7 +10,7 @@ enum class State(
     WELCOME("/fxml/welcome.fxml"),
     LOGIN("/fxml/auth/login.fxml"),
     REGISTER("/fxml/auth/register.fxml"),
-    DASHBOARD("/fxml/dashboard/dashboard.fxml");
+    DASHBOARD("/fxml/vault/vault.fxml");
 
     private lateinit var fxmlLoader: FXMLLoader
     lateinit var rootPane: Pane

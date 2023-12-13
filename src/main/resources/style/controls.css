@@ -29,7 +29,7 @@
 
 .button:default {
     -fx-background-color: -fx-accent;
-    -fx-text-fill: white;
+    -fx-text-fill: -color-base-0;
 }
 .button:default:hover:pressed {
     -fx-background-color: derive(-fx-accent,-10%);
@@ -283,4 +283,60 @@
 }
 .tab-pane .tab:selected {
     -fx-focus-color: transparent;
+}
+
+/*
+ * ===============================================
+ * ComboBox
+ * ===============================================
+ */
+
+.combo-box  {
+    -fx-background-color: -color-base-200;
+    -fx-border-color: transparent;
+    -fx-faint-focus-color: -color-accent;
+    -fx-padding: 5px;
+}
+
+.combo-box:focused {
+    -fx-border-color: -color-accent;
+    -fx-border-radius: 3px;
+}
+
+.combo-box .list-cell:hover {
+    -fx-text-fill: -color-base-0;
+}
+
+.combo-box .list-view .list-cell {
+    -fx-text-fill: -color-neutral;
+    -fx-background-color: transparent;
+}
+
+.combo-box .list-view {
+    -fx-padding: 3px;
+    -fx-background-radius: 5px;
+    -fx-border-color: transparent;
+    -fx-background-color: -color-base-100;
+}
+
+.combo-box .list-view .list-cell {
+    -fx-padding: 3px;
+}
+
+.combo-box .list-view .list-cell:selected {
+    -fx-background-color: transparent;
+}
+
+.combo-box .list-view .list-cell:hover {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: -color-base-0;
+    -fx-background-radius: 5px;
+}
+
+.combo-box .list-view .list-cell .label {
+    -fx-padding: 3px;
+}
+
+.combo-box .list-view .list-cell:selected .label {
+    -fx-text-fill: -color-base-0;
 }

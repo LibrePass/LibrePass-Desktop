@@ -1,6 +1,5 @@
 package dev.medzik.librepass.desktop.gui.components
 
-import dev.medzik.librepass.client.api.CipherClient
 import dev.medzik.librepass.desktop.config.Cache
 import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
@@ -10,8 +9,6 @@ import javafx.scene.control.ListCell
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
-import java.io.FileInputStream
-import java.net.URI
 
 class CipherListItem : ListCell<Cipher>() {
     @FXML
@@ -35,7 +32,7 @@ class CipherListItem : ListCell<Cipher>() {
 
     init {
         if (!loaded) {
-            val loader = Fxml.getLoader("/fxml/components/cipherlistitem.fxml")
+            val loader = Fxml.getLoader("/fxml/components/cipher-list-item.fxml")
             loader.setRoot(root)
             loader.setController(this)
             loader.load<AnchorPane>()
@@ -67,9 +64,9 @@ class CipherListItem : ListCell<Cipher>() {
         val urls = cipher.loginData?.uris
 
         if (!urls.isNullOrEmpty()) {
-            Cache.cacheIcon(urls[0],icon)
-        }
-        else
+            Cache.cacheIcon(urls[0], icon)
+        } else {
             icon.image = userIcon
+        }
     }
 }

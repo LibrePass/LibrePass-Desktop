@@ -1,5 +1,6 @@
-package dev.medzik.librepass.desktop.gui.components.cipher
+package dev.medzik.librepass.desktop.gui.components.cipher.section
 
+import dev.medzik.librepass.desktop.gui.components.cipher.entry.CipherEntry
 import dev.medzik.librepass.desktop.utils.Fxml
 import javafx.fxml.FXML
 import javafx.scene.control.Label
@@ -16,7 +17,7 @@ open class CipherSection(
     private lateinit var entriesPane: VBox
 
     init {
-        Fxml.loadComponent("/fxml/dashboard/cipher/ciphersection.fxml", this, this)
+        Fxml.loadComponent("/fxml/components/cipher/cipher-section.fxml", this, this)
     }
 
     @FXML

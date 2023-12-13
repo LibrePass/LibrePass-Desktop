@@ -1,8 +1,8 @@
-package dev.medzik.librepass.desktop.gui.dashboard
+package dev.medzik.librepass.desktop.gui.vault
 
-import dev.medzik.librepass.desktop.gui.components.cipher.LoginDataSection
-import dev.medzik.librepass.desktop.gui.components.cipher.OtherSection
-import dev.medzik.librepass.desktop.gui.components.cipher.WebsiteSection
+import dev.medzik.librepass.desktop.gui.components.cipher.section.LoginDataSection
+import dev.medzik.librepass.desktop.gui.components.cipher.section.OtherSection
+import dev.medzik.librepass.desktop.gui.components.cipher.section.WebsiteSection
 import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
 import javafx.fxml.FXML
@@ -19,7 +19,7 @@ class CipherView : AnchorPane() {
     private val otherSection = OtherSection()
 
     init {
-        Fxml.loadComponent("/fxml/dashboard/cipherview.fxml", this)
+        Fxml.loadComponent("/fxml/vault/cipher-view.fxml", this)
     }
 
     fun setCipher(cipher: Cipher) {

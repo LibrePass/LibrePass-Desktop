@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="478.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.dashboard.DashboardController">
+<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="478.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.vault.VaultController">
    <top>
       <fx:include fx:id="menu" source="menu.fxml" />
    </top>
@@ -33,7 +33,7 @@
                </GridPane.margin>
                <children>
                   <TextField fx:id="search" prefHeight="28.0" prefWidth="202.0" promptText="%dashboard.search" styleClass="search-text-field" />
-                  <Button lineSpacing="1.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="34.0">
+                  <Button lineSpacing="1.0" mnemonicParsing="false" onAction="#onCreateNewCipher" prefHeight="28.0" prefWidth="34.0">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
