@@ -12,6 +12,6 @@
     -fx-opacity: 0;
 }
 
-.scroll-bar:hover {
+.scroll-bar:hover, .scroll-bar:pressed {
     -fx-opacity: 1;
 }
