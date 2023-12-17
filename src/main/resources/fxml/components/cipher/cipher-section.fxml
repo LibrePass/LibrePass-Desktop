@@ -12,6 +12,7 @@
             <Font size="21.0" />
          </font>
       </Label>
+      <VBox fx:id="beforePane" alignment="CENTER" />
       <VBox fx:id="entriesPane" minHeight="-Infinity" spacing="5.0" styleClass="cipher-info">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -1,15 +1,16 @@
 package dev.medzik.librepass.desktop.gui.components.cipher.section
 
-import dev.medzik.librepass.desktop.gui.components.cipher.entry.PasswordCipherEntry
 import dev.medzik.librepass.desktop.gui.components.cipher.entry.CipherEntry
 import dev.medzik.librepass.desktop.gui.components.cipher.entry.CopyCipherEntry
+import dev.medzik.librepass.desktop.gui.components.cipher.entry.PasswordCipherEntry
 import dev.medzik.librepass.desktop.locale.LangManager.tr
 import dev.medzik.librepass.types.cipher.Cipher
 
-class LoginDataSection : CipherSection(tr("dashboard.cipher.login")) {
-    private val nameEntry = CipherEntry(tr("dashboard.cipher.name"))
-    private val usernameEntry = CopyCipherEntry(tr("dashboard.cipher.username"))
-    private val passwordEntry = PasswordCipherEntry(tr("dashboard.cipher.password"))
+class LoginDataSection : CipherSection(tr("cipher.logindata.login")) {
+    private val nameEntry = CipherEntry(tr("cipher.logindata.name"))
+    private val usernameEntry = CopyCipherEntry(tr("cipher.logindata.username"))
+    private val passwordEntry = PasswordCipherEntry(tr("cipher.logindata.password"))
+
     init {
         addEntry(nameEntry)
         addEntry(usernameEntry)
@@ -31,7 +32,7 @@ class LoginDataSection : CipherSection(tr("dashboard.cipher.login")) {
 
         if (!cipher.loginData?.password.isNullOrEmpty()) {
             addEntry(passwordEntry)
-            passwordEntry.setValue(cipher.loginData?.password!!,true)
+            passwordEntry.setValue(cipher.loginData?.password!!, true)
         }
     }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="CENTER" type="VBox" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.components.cipher.section.CardBadgeController">
+   <children>
+      <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" pickOnBounds="false" prefHeight="177.0" prefWidth="333.0" styleClass="credit-card">
+         <children>
+            <Label text="%cipher.creditcard" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="cardNumber" text="1234 1234 1234 1234" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="expDate" text="02/22" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="cardholderName" text="Cardholder Name" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="40.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+               <image>
+                  <Image url="@../../../img/logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="178.0" fitWidth="190.0" focusTraversable="true" layoutX="128.0" opacity="0.11" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="0.0">
+               <image>
+                  <Image url="@../../../img/logo_transparent.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D height="600.0" minX="100.0" minY="50.0" width="650.0" />
+               </viewport>
+            </ImageView>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
+      </AnchorPane>
+   </children>
+</fx:root>
