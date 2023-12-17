@@ -15,17 +15,20 @@ class PasswordCipherEntry(name: String) : CopyCipherEntry(name) {
 
     private lateinit var password: String
 
+    var onToggle: () -> Unit = {}
+
     init {
         passwordToggleButton.apply {
-            setPrefSize(45.0,45.0)
-            setMinSize(45.0,45.0)
-            setMaxSize(45.0,45.0)
+            setPrefSize(45.0, 45.0)
+            setMinSize(45.0, 45.0)
+            setMaxSize(45.0, 45.0)
         }
-        passwordToggleButton.graphic = ImageView(visibleOffImage).apply {
-            isPreserveRatio = true
-            fitWidth = 48.0
-            fitHeight = 28.0
-        }
+        passwordToggleButton.graphic =
+            ImageView(visibleOffImage).apply {
+                isPreserveRatio = true
+                fitWidth = 48.0
+                fitHeight = 28.0
+            }
 
         buttonsPane.children.clear()
         buttonsPane.children.add(passwordToggleButton)
@@ -40,7 +43,14 @@ class PasswordCipherEntry(name: String) : CopyCipherEntry(name) {
         }
     }
 
-    fun setValue(text: String,mask: Boolean) {
+    fun isToggled(): Boolean {
+        return passwordToggleButton.isSelected
+    }
+
+    fun setValue(
+        text: String,
+        mask: Boolean
+    ) {
         this.password = text
         passwordToggleButton.isSelected = false
         setPassword(password, mask)
@@ -58,7 +68,7 @@ class PasswordCipherEntry(name: String) : CopyCipherEntry(name) {
             } else {
                 value.text = text
             }
+            onToggle.invoke()
         }
     }
-
 }

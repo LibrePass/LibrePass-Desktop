@@ -3,6 +3,7 @@ package dev.medzik.librepass.desktop.gui.components
 import dev.medzik.librepass.desktop.config.Cache
 import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
+import dev.medzik.librepass.types.cipher.CipherType
 import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.control.ListCell
@@ -28,6 +29,8 @@ class CipherListItem : ListCell<Cipher>() {
 
     companion object {
         private val userIcon = Image(CipherListItem::class.java.getResourceAsStream("/img/dashboard/user.png"))
+        private val notesIcon = Image(CipherListItem::class.java.getResourceAsStream("/img/dashboard/notes.png"))
+        private val creditCardIcon = Image(CipherListItem::class.java.getResourceAsStream("/img/dashboard/credit_card.png"))
     }
 
     init {
@@ -52,8 +55,20 @@ class CipherListItem : ListCell<Cipher>() {
         } else {
             currentCipher = cipher
 
-            name.text = cipher!!.loginData?.name
-            username.text = cipher.loginData?.username
+            name.text = ""
+            username.text = ""
+
+            when (cipher!!.type) {
+                CipherType.Login -> {
+                    name.text = cipher.loginData?.name
+                    username.text = cipher.loginData?.username
+                }
+                CipherType.SecureNote -> name.text = cipher.secureNoteData?.title
+                CipherType.Card -> {
+                    name.text = cipher.cardData?.name
+                    username.text = "•••• " + cipher.cardData!!.number.takeLast(4)
+                }
+            }
 
             updateIcon(cipher)
             graphic = root
@@ -61,12 +76,22 @@ class CipherListItem : ListCell<Cipher>() {
     }
 
     private fun updateIcon(cipher: Cipher) {
-        val urls = cipher.loginData?.uris
+        when (cipher.type) {
+            CipherType.Login -> {
+                val urls = cipher.loginData?.uris
 
-        if (!urls.isNullOrEmpty()) {
-            Cache.cacheIcon(urls[0], icon)
-        } else {
-            icon.image = userIcon
+                if (!urls.isNullOrEmpty()) {
+                    Cache.cacheIcon(urls[0], icon)
+                } else {
+                    icon.image = userIcon
+                }
+            }
+            CipherType.SecureNote -> {
+                icon.image = notesIcon
+            }
+            CipherType.Card -> {
+                icon.image = creditCardIcon
+            }
         }
     }
 }

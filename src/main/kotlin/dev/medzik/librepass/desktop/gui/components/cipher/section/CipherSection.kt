@@ -7,14 +7,16 @@ import javafx.scene.control.Label
 import javafx.scene.layout.VBox
 
 open class CipherSection(
-    val name: String
+    val name: String = ""
 ) : VBox() {
-
     @FXML
-    private lateinit var nameLabel: Label
+    protected lateinit var nameLabel: Label
 
     @FXML
     private lateinit var entriesPane: VBox
+
+    @FXML
+    protected lateinit var beforePane: VBox
 
     init {
         Fxml.loadComponent("/fxml/components/cipher/cipher-section.fxml", this, this)
@@ -22,7 +24,7 @@ open class CipherSection(
 
     @FXML
     fun initialize() {
-        nameLabel.text = name;
+        nameLabel.text = name
     }
 
     fun clearAllEntries() {

@@ -77,8 +77,18 @@ class VaultController : Controller() {
 
             val filteredCiphers =
                 list.filter {
-                    it.loginData!!.name.lowercase().contains(searchText) || it.loginData!!.username?.lowercase()
-                        ?.contains(searchText) ?: false
+                    when (it.type) {
+                        CipherType.Login -> {
+                            it.loginData!!.name.lowercase().contains(searchText) ||
+                                it.loginData!!.username?.lowercase()?.contains(searchText) ?: false
+                        }
+                        CipherType.SecureNote -> {
+                            it.secureNoteData!!.title.lowercase().contains(searchText)
+                        }
+                        CipherType.Card -> {
+                            it.cardData!!.cardholderName.lowercase().contains(searchText)
+                        }
+                    }
                 }
 
             for (cipher in filteredCiphers)
@@ -120,9 +130,9 @@ class VaultController : Controller() {
                         owner = it.owner,
                         type = CipherType.Login,
                         loginData =
-                        CipherLoginData(
-                            name = "Encryption error"
-                        )
+                            CipherLoginData(
+                                name = "Encryption error"
+                            )
                     )
                 }
             }
@@ -131,7 +141,19 @@ class VaultController : Controller() {
 
             list.clear()
             // sort ciphers by name and update UI
-            decryptedCiphers.sortedBy { it.loginData!!.name }.forEach { list.add(it) }
+            decryptedCiphers.sortedBy {
+                when (it.type) {
+                    CipherType.Login -> {
+                        it.loginData!!.name
+                    }
+                    CipherType.SecureNote -> {
+                        it.secureNoteData!!.title
+                    }
+                    CipherType.Card -> {
+                        it.cardData!!.name
+                    }
+                }
+            }.forEach { list.add(it) }
 
             cipherList.items = list
         }
@@ -193,9 +215,9 @@ class VaultController : Controller() {
             }
             resetStatus()
         } catch (e: Exception) {
-            if (e is ClientException)
+            if (e is ClientException) {
                 setStatus(tr("status.error.network"))
-            else {
+            } else {
                 setStatus("Error: ${e.message}")
                 throw RuntimeException(e)
             }

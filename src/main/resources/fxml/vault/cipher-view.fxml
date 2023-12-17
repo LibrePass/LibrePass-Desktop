@@ -19,7 +19,7 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Button mnemonicParsing="false" prefHeight="42.0" text="%dashboard.cipher.edit" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <Button mnemonicParsing="false" prefHeight="42.0" text="%cipher.logindata.edit" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
