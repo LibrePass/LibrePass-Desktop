@@ -3,6 +3,7 @@ package dev.medzik.librepass.desktop.gui.vault
 import dev.medzik.librepass.desktop.App
 import dev.medzik.librepass.desktop.gui.components.AboutDialog
 import dev.medzik.librepass.desktop.locale.LangManager
+import dev.medzik.librepass.desktop.locale.LangManager.tr
 import dev.medzik.librepass.desktop.style.StyleManager
 import dev.medzik.librepass.types.cipher.CipherType
 import javafx.fxml.FXML
@@ -44,9 +45,9 @@ class CipherAddWindow : Stage() {
             object : StringConverter<CipherType>() {
                 override fun toString(obj: CipherType): String {
                     return when (obj) {
-                        CipherType.Login -> "Login data"
-                        CipherType.SecureNote -> "Secure note"
-                        CipherType.Card -> "Credit card"
+                        CipherType.Login -> tr("cipher.add.logindata")
+                        CipherType.SecureNote -> tr("cipher.add.securenote")
+                        CipherType.Card -> tr("cipher.add.creditcard")
                     }
                 }
 
