@@ -115,8 +115,8 @@ class CreditCardSection : CipherSection() {
         cardBadgeController.cardNumber.text = BULLET.repeat(currentCipher.cardData?.number.toString().length).chunked(4).joinToString(" ")
         cardBadgeController.securityNumber.text = "CVV ${BULLET.repeat(currentCipher.cardData?.code!!.length)}"
 
-        val expMonth = cipher.cardData?.expMonth
-        val expYear = cipher.cardData?.expYear!!
+        val expMonth = cipher.cardData?.expMonth!!.toInt()
+        val expYear = cipher.cardData?.expYear!!.toInt()
         cardBadgeController.expDate.text = String.format("%02d/%02d", expMonth, expYear % 100)
     }
 
