@@ -81,8 +81,8 @@ class LoginController : Controller() {
 
             val userSecrets =
                 UserSecrets(
-                    privateKey = Hex.encode(loginCredentials.privateKey.fromHexString()),
-                    secretKey = loginCredentials.secretKey
+                    privateKey = loginCredentials.privateKey,
+                    secretKey = loginCredentials.aesKey
                 )
             Config.writeObject("user_secrets", userSecrets)
 
