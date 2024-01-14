@@ -62,7 +62,7 @@ jobs:
         run: mv ${{ matrix.path }} librepass.${{ matrix.ext }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: librepass-${{ matrix.os }}
           path: ./librepass.${{ matrix.ext }}
