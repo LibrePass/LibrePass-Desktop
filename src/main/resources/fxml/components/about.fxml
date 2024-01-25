@@ -35,7 +35,7 @@
                         <Insets />
                     </VBox.margin>
                 </Label>
-                <Label text="Copyright (C) 2023 LibrePass Team">
+                <Label text="Copyright (C) 2023-2024 LibrePass Team">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
