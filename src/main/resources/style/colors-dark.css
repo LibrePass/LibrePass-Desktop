@@ -6,7 +6,8 @@
     -color-base-25: derive(-color-base-100,-10%);
     -color-base-50: derive(-color-base-100,-5%);
     -color-base-100: #222222;
-    -color-base-125: derive(-color-base-100,5%);
+    -color-base-125: derive(-color-base-100,2.5%);
+    -color-base-150: derive(-color-base-100,5%);
     -color-base-200: derive(-color-base-100,10%);
     -color-base-250: derive(-color-base-100,15%);
     -color-base-300: derive(-color-base-100,20%);
