@@ -319,7 +319,7 @@
                     <plugin>
                         <groupId>org.digitalmediaserver</groupId>
                         <artifactId>nsis-maven-plugin</artifactId>
-                        <version>1.0.5</version>
+                        <version>1.0.6</version>
                         <configuration>
                             <compression>lzma</compression>
                             <compressionIsFinal>true</compressionIsFinal>
