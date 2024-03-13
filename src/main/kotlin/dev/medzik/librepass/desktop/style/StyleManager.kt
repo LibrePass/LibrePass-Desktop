@@ -2,7 +2,6 @@ package dev.medzik.librepass.desktop.style
 
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.stage.Stage
 import kotlin.collections.ArrayList
 
 object StyleManager {
