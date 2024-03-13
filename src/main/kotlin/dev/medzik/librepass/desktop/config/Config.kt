@@ -3,7 +3,6 @@ package dev.medzik.librepass.desktop.config
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dev.medzik.librepass.desktop.style.Style
-import dev.medzik.librepass.types.cipher.EncryptedCipher
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -85,5 +84,3 @@ object Config {
         File(workDir, "$name.json").delete()
     }
 }
-
-
