@@ -17,7 +17,7 @@
 
         <librepass.api.version>1.4.1</librepass.api.version>
         <kotlin.version>1.9.23</kotlin.version>
-        <controlsfx.version>11.2.0</controlsfx.version>
+        <controlsfx.version>11.2.1</controlsfx.version>
 
         <jmods.dir>${project.build.directory}/modules</jmods.dir>
     </properties>
