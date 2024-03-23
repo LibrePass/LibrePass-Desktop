@@ -14,7 +14,7 @@ import dev.medzik.librepass.desktop.utils.Fxml
 import dev.medzik.librepass.types.cipher.Cipher
 import dev.medzik.librepass.types.cipher.CipherType
 import dev.medzik.librepass.types.cipher.data.CipherLoginData
-import dev.medzik.librepass.utils.fromHexString
+import dev.medzik.librepass.utils.fromHex
 import javafx.application.Platform
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
@@ -122,7 +122,7 @@ class VaultController : Controller() {
         val decryptedCiphers =
             ciphers.map {
                 try {
-                    Cipher(it.encryptedCipher, userSecrets.secretKey.fromHexString())
+                    Cipher(it.encryptedCipher, userSecrets.secretKey.fromHex())
                 } catch (e: Exception) {
                     // TODO
                     Cipher(

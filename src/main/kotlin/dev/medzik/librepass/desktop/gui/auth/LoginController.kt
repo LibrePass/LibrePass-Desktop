@@ -11,7 +11,7 @@ import dev.medzik.librepass.desktop.gui.vault.VaultController
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
-import dev.medzik.librepass.utils.fromHexString
+import dev.medzik.librepass.utils.fromHex
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
@@ -71,7 +71,7 @@ class LoginController : Controller() {
                     userId = loginCredentials.userId,
                     email = email,
                     apiKey = loginCredentials.apiKey,
-                    publicKey = Hex.encode(loginCredentials.publicKey.fromHexString()),
+                    publicKey = Hex.encode(loginCredentials.publicKey.fromHex()),
                     // Argon2id parameters
                     memory = preLogin.memory,
                     iterations = preLogin.iterations,
