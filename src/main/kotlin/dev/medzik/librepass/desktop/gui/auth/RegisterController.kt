@@ -10,7 +10,9 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
-import java.util.concurrent.CompletableFuture
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class RegisterController {
     @FXML
@@ -27,6 +29,8 @@ class RegisterController {
 
     @FXML
     private lateinit var retypePassword: PasswordField
+
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     private val authClient = AuthClient()
 
@@ -56,11 +60,9 @@ class RegisterController {
         email: String,
         password: String,
         passwordHint: String
-    ) {
-        CompletableFuture.runAsync {
-            authClient.register(email, password, passwordHint)
-            Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION)
-        }
+    ) = coroutineScope.launch {
+        authClient.register(email, password, passwordHint)
+        Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION)
     }
 
     @FXML
