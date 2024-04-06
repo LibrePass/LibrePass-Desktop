@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.vault.CipherAddWindow">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.medzik.librepass.desktop.gui.vault.CipherAddWindow">
    <top>
       <FlowPane alignment="CENTER" prefHeight="58.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,7 +17,7 @@
    <bottom>
       <FlowPane alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" text="Done" />
+            <Button defaultButton="true" mnemonicParsing="false" text="%cipher.add.done" />
          </children>
          <padding>
             <Insets right="10.0" />
