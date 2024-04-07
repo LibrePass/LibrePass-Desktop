@@ -81,7 +81,10 @@ class CipherListItem : ListCell<Cipher>() {
                 val urls = cipher.loginData?.uris
 
                 if (!urls.isNullOrEmpty()) {
-                    Cache.cacheIcon(urls[0], icon)
+                    try {
+                        Cache.cacheIcon(urls[0], icon)
+                    } catch (_: Exception) {
+                    }
                 } else {
                     icon.image = userIcon
                 }
