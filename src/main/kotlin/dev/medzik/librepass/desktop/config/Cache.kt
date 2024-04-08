@@ -4,9 +4,7 @@ import dev.medzik.librepass.client.api.CipherClient
 import javafx.application.Platform
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileInputStream
 import java.net.URI
@@ -56,20 +54,20 @@ object Cache {
 
     fun cacheIcon(
         url: String,
-        imageView: ImageView
-    ) {
+        imageView: ImageView,
+    ): Deferred<Unit> {
         if (iconCache.containsKey(url)) {
             imageView.image = iconCache[url]
         } else {
-            coroutineScope.launch {
-                if (cacheExists(url, "png")) {
-                    val image = Image(FileInputStream(getCached(url, "png")))
-                    iconCache[url] = image
+            if (cacheExists(url, "png")) {
+                val image = Image(FileInputStream(getCached(url, "png")))
+                iconCache[url] = image
 
-                    Platform.runLater {
-                        imageView.image = image
-                    }
-                } else {
+                Platform.runLater {
+                    imageView.image = image
+                }
+            } else {
+                return coroutineScope.async(Dispatchers.IO) {
                     val urlStream = URI(CipherClient.getFavicon(domain = url)).toURL().openStream()
                     addCache(urlStream.readAllBytes()!!, url, "png")
 
@@ -82,5 +80,6 @@ object Cache {
                 }
             }
         }
+        return CompletableDeferred<Unit>().apply { complete(Unit) }
     }
 }
