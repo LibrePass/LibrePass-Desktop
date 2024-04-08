@@ -15,7 +15,7 @@
 
         <javafx.version>20.0.2</javafx.version>
 
-        <librepass.api.version>1.5.0</librepass.api.version>
+        <librepass.api.version>1.6.0</librepass.api.version>
         <kotlin.version>1.9.23</kotlin.version>
         <coroutines.version>1.8.0</coroutines.version>
         <controlsfx.version>11.2.1</controlsfx.version>
