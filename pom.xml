@@ -15,7 +15,7 @@
 
         <javafx.version>20.0.2</javafx.version>
 
-        <librepass.api.version>1.5.0</librepass.api.version>
+        <librepass.api.version>1.6.0</librepass.api.version>
         <kotlin.version>1.9.23</kotlin.version>
         <coroutines.version>1.8.0</coroutines.version>
         <controlsfx.version>11.2.1</controlsfx.version>
@@ -132,7 +132,6 @@
                             <includeScope>runtime</includeScope>
                             <outputDirectory>${jmods.dir}</outputDirectory>
                             <excludeArtifactIds>
-                                commons-codec,
                                 kotlin-stdlib-common,
                                 annotations,
                                 okio-jvm,
@@ -159,22 +158,6 @@
                             <overwriteExistingFiles>true</overwriteExistingFiles>
                             <outputDirectory>${jmods.dir}</outputDirectory>
                             <modules>
-                                <module>
-                                    <artifact>
-                                        <groupId>commons-codec</groupId>
-                                        <artifactId>commons-codec</artifactId>
-                                    </artifact>
-                                    <moduleInfoSource>
-                                        open module org.apache.commons.codec {
-                                            exports org.apache.commons.codec;
-                                            exports org.apache.commons.codec.binary;
-                                            exports org.apache.commons.codec.cli;
-                                            exports org.apache.commons.codec.digest;
-                                            exports org.apache.commons.codec.language;
-                                            exports org.apache.commons.codec.net;
-                                        }
-                                    </moduleInfoSource>
-                                </module>`
                                 <module>
                                     <artifact>
                                         <groupId>com.squareup.okio</groupId>
