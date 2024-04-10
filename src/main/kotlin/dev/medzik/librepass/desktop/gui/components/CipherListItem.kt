@@ -66,7 +66,7 @@ class CipherListItem : ListCell<Cipher>() {
                 CipherType.SecureNote -> name.text = cipher.secureNoteData?.title
                 CipherType.Card -> {
                     name.text = cipher.cardData?.name
-                    username.text = "•••• " + cipher.cardData!!.number.takeLast(4)
+                    username.text = "\u2022\u2022\u2022\u2022 " + cipher.cardData!!.number.takeLast(4)
                 }
             }
 
