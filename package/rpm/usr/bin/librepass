@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/lib/jvm/java-17-openjdk-*/bin/java -p "/usr/lib/librepass" -m dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App $@
+/usr/lib/jvm/java-17-openjdk-*/bin/java -Xmx200M -XX:MaxRAM=300M -Xms50M -XX:+UseCompressedOops -XX:+UseG1GC -p "/usr/lib/librepass" -m dev.medzik.librepass.desktop/dev.medzik.librepass.desktop.App $@
