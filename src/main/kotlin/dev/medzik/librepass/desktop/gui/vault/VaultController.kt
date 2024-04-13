@@ -124,7 +124,6 @@ class VaultController : Controller() {
                 try {
                     Cipher(it.encryptedCipher, userSecrets.secretKey.fromHex())
                 } catch (e: Exception) {
-                    // TODO
                     Cipher(
                         id = it.encryptedCipher.id,
                         owner = it.owner,
