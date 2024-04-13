@@ -21,10 +21,14 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
-import java.util.concurrent.CompletableFuture
 
 class VaultController : Controller() {
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
+
     lateinit var credentials: Credentials
     lateinit var userSecrets: UserSecrets
 
@@ -235,7 +239,7 @@ class VaultController : Controller() {
     override fun onStart() {
         super.onStart()
 
-        CompletableFuture.runAsync {
+        coroutineScope.launch(Dispatchers.IO) {
             updateLocalCiphers()
             updateCiphers()
         }
