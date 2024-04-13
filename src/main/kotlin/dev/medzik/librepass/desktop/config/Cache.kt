@@ -11,6 +11,8 @@ import java.net.URI
 import java.nio.file.Files
 
 object Cache {
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
+
     private val cacheDir = File(Config.workDir, "cache")
 
     fun init() {
@@ -49,8 +51,6 @@ object Cache {
     }
 
     private val iconCache: HashMap<String, Image> = HashMap()
-
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     fun cacheIcon(
         url: String,
