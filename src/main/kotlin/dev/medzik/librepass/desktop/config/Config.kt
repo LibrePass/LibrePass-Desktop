@@ -30,15 +30,15 @@ object Config {
     }
 
     private fun getWorkDir(name: String): String {
-        val osname = System.getProperty("os.name").lowercase(Locale.getDefault())
-        if (osname.startsWith("windows"))
+        val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
+        if (osName.startsWith("windows"))
             return Paths.get(System.getenv("APPDATA"), name)
-                .toString() else if (osname.contains("nux") || osname.contains("freebsd"))
+                .toString() else if (osName.contains("nux") || osName.contains("freebsd"))
             return Paths.get(
                 System.getProperty("user.home"),
                 ".config",
                 name
-            ).toString() else if (osname.contains("mac") || osname.contains("darwin"))
+            ).toString() else if (osName.contains("mac") || osName.contains("darwin"))
             return Paths.get(
                 System.getProperty("user.home"),
                 "Library",
@@ -70,8 +70,7 @@ object Config {
         name: String,
         obj: (T) -> T
     ): T {
-        val readed = readObject<T>(name)
-        val ret = obj.invoke(readed)
+        val ret = obj.invoke(readObject<T>(name))
         writeObject(name, ret)
         return ret
     }
