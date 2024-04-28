@@ -1,6 +1,7 @@
 package dev.medzik.librepass.desktop.gui.auth
 
 import dev.medzik.librepass.client.api.AuthClient
+import dev.medzik.librepass.client.errors.ApiException
 import dev.medzik.librepass.desktop.state.State
 import dev.medzik.librepass.desktop.state.StateManager
 import dev.medzik.librepass.desktop.utils.Utils
@@ -61,8 +62,14 @@ class RegisterController {
         password: String,
         passwordHint: String
     ) = coroutineScope.launch {
-        authClient.register(email, password, passwordHint)
-        Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION)
+        register.isDisable = true
+        try {
+            authClient.register(email, password, passwordHint)
+            Utils.dialog("Registered!", "Registered!", Alert.AlertType.INFORMATION)
+        } catch (e: ApiException) {
+            Utils.dialog("Error!", e.message, Alert.AlertType.ERROR)
+        }
+        register.isDisable = false
     }
 
     @FXML
