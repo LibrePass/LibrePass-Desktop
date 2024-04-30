@@ -3,7 +3,7 @@ Version: [[version]]
 Section: Internet
 Priority: optional
 Architecture: [[os.arch]]
-Homepage: https://librepass.medzik.dev
+Homepage: https://librepass.org
 Depends: openjdk-17-jre
 Maintainer: LibrePass Team <librepass@medzik.dev>
 Description: [[description]]
