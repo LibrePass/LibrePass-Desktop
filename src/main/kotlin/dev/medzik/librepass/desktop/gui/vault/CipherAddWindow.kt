@@ -56,4 +56,9 @@ class CipherAddWindow : Stage() {
         cipherType.items.addAll(CipherType.Login, CipherType.SecureNote, CipherType.Card)
         cipherType.selectionModel.selectFirst()
     }
+
+    @FXML
+    fun onDone() {
+        hide()
+    }
 }
