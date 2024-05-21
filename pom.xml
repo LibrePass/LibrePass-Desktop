@@ -132,11 +132,9 @@
                             <includeScope>runtime</includeScope>
                             <outputDirectory>${jmods.dir}</outputDirectory>
                             <excludeArtifactIds>
-                                kotlin-stdlib-common,
                                 annotations,
                                 okio-jvm,
-                                okhttp-jvm,
-                                otp-java
+                                okhttp
                             </excludeArtifactIds>
                         </configuration>
                     </execution>
@@ -176,7 +174,7 @@
                                 <module>
                                     <artifact>
                                         <groupId>com.squareup.okhttp3</groupId>
-                                        <artifactId>okhttp-jvm</artifactId>
+                                        <artifactId>okhttp</artifactId>
                                     </artifact>
                                     <moduleInfoSource>
                                         open module okhttp3 {
