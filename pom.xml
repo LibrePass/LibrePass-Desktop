@@ -236,7 +236,7 @@
             <plugin>
                 <groupId>org.panteleyev</groupId>
                 <artifactId>jpackage-maven-plugin</artifactId>
-                <version>1.6.3</version>
+                <version>1.6.4</version>
                 <configuration>
                     <name>librepass</name>
                     <appVersion>1.0.0</appVersion>
@@ -279,7 +279,7 @@
                     <plugin>
                         <groupId>org.panteleyev</groupId>
                         <artifactId>jpackage-maven-plugin</artifactId>
-                        <version>1.6.3</version>
+                        <version>1.6.4</version>
                         <configuration>
                             <name>librepass</name>
                             <type>APP_IMAGE</type>
@@ -497,7 +497,7 @@
                     <plugin>
                         <groupId>org.panteleyev</groupId>
                         <artifactId>jpackage-maven-plugin</artifactId>
-                        <version>1.6.3</version>
+                        <version>1.6.4</version>
                         <executions>
                             <!-- Execution for mac-->
                             <execution>
@@ -528,7 +528,7 @@
                     <plugin>
                         <groupId>org.panteleyev</groupId>
                         <artifactId>jpackage-maven-plugin</artifactId>
-                        <version>1.6.3</version>
+                        <version>1.6.4</version>
                         <configuration>
                             <destination>${project.build.directory}/dist</destination>
                             <type>APP_IMAGE</type>
